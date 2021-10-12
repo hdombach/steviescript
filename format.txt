@@ -1,1 +1,1 @@
-possible names: stevie_script, steviescript NOT stevieScript
+possible names: stevie_script, steviescript, stevieScript
