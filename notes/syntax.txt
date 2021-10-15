@@ -1,0 +1,68 @@
+CODE = BLOCK
+BLOCK = [STATEMENT]
+STATEMENT = IF | SET | WHILE | FOR | DEFFUNC | CALLFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT |
+
+DEFFUNC = "function" + functionName + "(" + [dataType + variableName] + ")" + ?("->" + dataType) + "{" + BLOCK + "}"
+/*	
+    function exampleFunction(type name, type name) -> returnType {
+		<code>
+	}
+*/
+ 
+IF = "if" + "(" + expression +  ")" + "{" + BLOCK + "}"
+/*  
+    if (boolean expression) {
+        <code>
+    }
+*/
+
+SET =  variableName + "=" + expression
+/*  
+    var = 0 
+*/
+
+WHILE = "while" + "(" + expression + ")" + "{" + BLOCK + "}"
+/*
+    while (boolean expression) {}
+*/
+
+FOR = "for" + "(" + CREATEVAR + "," + EXPRESSION + "," + STATEMENT + ")" + "(" + BLOCK + ")"
+/*
+    for(CREATEVAR, EXPRESSION, statement) {}
+*/
+
+
+CALLFUNC = functionName + "(" + [dataType + variableName] + ")"
+/*
+    myFunction(a, b, c)
+*/
+
+EXPRESSION = variableName | EXPRESSION + operator + EXPRESSION + ?[operator + EXPRESSION] | '(' + EXPRESSION +')' | value | CREATESTRUCT
+/*
+    
+*/
+
+CREATEVAR = DATATYPE + variableName + "=" + expression
+/*
+    int var = 0
+*/
+
+CREATECONST = "const" + DATATYPE + variableName + "=" + expression
+/*
+    const int var = 0
+*/
+
+DEFSTRUCT = "struct" + DATATYPE + "{" + [CREATECONST | CREATEVAR] + "}"
+/*
+    struct myStruct {
+    	int foo
+        String bar
+        boolean bat
+    }
+
+*/
+
+CREATESTRUCT = DATATYPE + "(" + [EXPRESSION] + ")"
+/*
+    StructName(property: value)
+*/

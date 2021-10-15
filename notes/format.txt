@@ -1,0 +1,53 @@
+possible names: stevie_script, steviescript, stevieScript
+
+
+Dynamic or static: Static w/ special dynamic type
+
+Objects? - We have no clue how objects are stored in memory
+    Might be able to jury-rig something with Dictionaries?
+    Maybe something with the heap?
+    In short: Pseudo-object oriented
+
+Compiled/Interpreted/Translated:
+    - Python translates to bytecode and then interprets
+
+Syntax:
+    - curly brackets to encapsulate code
+    - no semicolons, statements end with \n
+        - maybe escape character to override "new line new statement" 
+    - 
+
+Syntactic structure:
+    - "CODE = [statements]"
+    - "statement = IF(set)/While/Def/"
+    - IF = "if" + expression + "{" + statement + "}"
+    - expression = value/"(" + expression + ")"
+
+Compiler:
+    - if(thing) { print("hello") }
+    - Tokenize: key, (, thing, ), {, print, (, string, ), }
+    - Parser: takes tokenized thing & generates structure
+    - IF --> (expression --> variable) & (block of code --> statement)
+
+Parser:
+    var index;
+    var tokens = []
+    Code = { block }
+    def expectCode(index) {
+        var result = Code()
+        result.block = expectBlock()
+    }
+    
+    def expectBlock(index) {
+        var result = Block()
+        const beginning = index
+        var tempStatement = expectStatement() 
+        index = beginning
+        do {
+            result.statements.append(tempStatement)
+        } while(tempStatement)
+    }
+    
+    def statements
+        expect
+    

@@ -1,0 +1,1 @@
+We are going to write a computer language. It will be an interpreted curly brace language
