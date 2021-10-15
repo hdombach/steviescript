@@ -1,14 +1,9 @@
 import java.util.ArrayList;
 
-public class Hello{  
+public class Main{   
     public static void main(String[] args){
-      new Token(); new Token(); new Token(); new Token();
-      ArrayList<Token> blahh = Token.getTokenList();
-      for (Token tt: blahh){
-        System.out.println(tt);
-      }
+      Token.tokenize("if(bones yeet)");
+      System.out.println(Token.getTokenList());
     }
-    
-//  visibility static? dataType name
 }
 
