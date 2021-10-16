@@ -62,7 +62,9 @@ public class Token {
                 }
             }
         }
-        createToken(accumulator);
+        if (!accumulator.equals("")) {
+            createToken(accumulator);
+        }
     }
 
     private static void createToken(String tokenText) {
