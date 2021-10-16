@@ -7,7 +7,8 @@ public class Token {
         FOR,
         WORD
     }
-    
+
+    private static String doubles = "==&&||";
     private static String whites = " \t\n;";
     private static String specs = "(){}=.|><&";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
@@ -36,22 +37,30 @@ public class Token {
     *
     */
     public static void tokenize(String code) {
-        boolean isString = false;
+        boolean isSpecial = false;
         String accumulator = "";
         
         for(int i = 0; i < code.length(); i++) {
             String c = code.charAt(i) + "";
-            if (specs.contains(c)) {
+            if (specs.contains(c) && !isSpecial) {
                 createToken(accumulator);
-                accumulator = "";
-                createToken(c);
+                accumulator = c;
+                isSpecial = true;
             } else if (whites.contains(c)) {
                 createToken(accumulator);
                 accumulator = "";
+                isSpecial = false;
             } else {
-                accumulator += c;
+                if(specs.contains(c)) {
+                    accumulator += c;
+                } else if (isSpecial) {
+                    createToken(accumulator);
+                    accumulator = c;
+                    isSpecial = false;
+                } else {
+                    accumulator += c;
+                }
             }
-            
         }
     }
 
@@ -65,6 +74,8 @@ public class Token {
                     break;
                 case "for":
                     new Token(TokenType.FOR, null);
+                    break;
+                case "":
                     break;
                 default:
                     new Token(TokenType.WORD, tokenText);
