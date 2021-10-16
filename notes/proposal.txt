@@ -1,1 +1,3 @@
-We are going to write a computer language. It will be an interpreted curly brace language
+Ben, Steven, and Hezekiah are going to make a computer language. It will have syntax similar to c but will be a little more abstract. It will be statically typed and won't natively support objects. However, we are planning on creating a dictionary that behaves similarily to a class in javascript. The compiler will be written in java which Steven and Ben are already familiar with. 
+
+Currently, our plan is for the compiler to consist of three stages. Tokenizer, Parser, Generation. The tokenizer will create an array of tokens from a string. The Parser will create and abstract syntax tree using a handwritten recursive descent parser. The Generator will create bytecode that can then be read by a seperate program.
