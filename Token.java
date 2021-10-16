@@ -62,6 +62,7 @@ public class Token {
                 }
             }
         }
+        createToken(accumulator);
     }
 
     private static void createToken(String tokenText) {
