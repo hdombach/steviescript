@@ -142,8 +142,4 @@ public class Token {
                     break;
             }
     }
-    
-    private static void createToken(char tokenText) {
-        createToken(String.valueOf(tokenText));
-    }
 }
