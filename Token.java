@@ -9,7 +9,6 @@ public class Token {
         STRING
     }
 
-    private static String doubles = "==&&||";
     private static String whites = " \t\n;";
     private static String specs = "(){}=.|><&";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
@@ -54,9 +53,8 @@ public class Token {
                         isString = false;
                         createString(accumulator);
                         accumulator = "";
-                    } else if (c.equals("\\")) {
+                    } else if (c.equals("\\")) { //doesn't properly recognize "\n", "\t"
                         isBackSlash = true;
-                        accumulator += c;
                     } else {
                         accumulator += c;
                     }
