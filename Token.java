@@ -5,6 +5,7 @@ public class Token {
         IF,
         ELSE,
         FOR,
+	NUMBER,
         WORD,
         STRING,
         WHILE,
@@ -131,7 +132,13 @@ public class Token {
                 case "":
                     break;
                 default:
-                    new Token(TokenType.WORD, tokenText);
+                    try{
+                        Integer.parseInt(tokenText);
+                        Double.parseDouble(tokenText);
+                        new Token(TokenType.NUMBER, tokenText);
+                    } catch(Exception e) {
+                        new Token(TokenType.WORD, tokenText);
+                    }
                     break;
             }
     }
