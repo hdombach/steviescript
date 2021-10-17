@@ -5,7 +5,8 @@ public class Token {
         IF,
         ELSE,
         FOR,
-        WORD
+        WORD,
+        STRING
     }
 
     private static String doubles = "==&&||";
@@ -39,32 +40,62 @@ public class Token {
     public static void tokenize(String code) {
         boolean isSpecial = false;
         String accumulator = "";
-        
+        boolean isString = false;
+        boolean isBackSlash = false;
+
         for(int i = 0; i < code.length(); i++) {
             String c = code.charAt(i) + "";
-            if (specs.contains(c) && !isSpecial) {
-                createToken(accumulator);
-                accumulator = c;
-                isSpecial = true;
-            } else if (whites.contains(c)) {
-                createToken(accumulator);
-                accumulator = "";
-                isSpecial = false;
-            } else {
-                if(specs.contains(c)) {
+            if (isString) {
+                if (isBackSlash) {
                     accumulator += c;
-                } else if (isSpecial) {
+                    isBackSlash = false;
+                } else {
+                    if (c.equals("\"")) {
+                        isString = false;
+                        createString(accumulator);
+                        accumulator = "";
+                    } else if (c.equals("\\")) {
+                        isBackSlash = true;
+                        accumulator += c;
+                    } else {
+                        accumulator += c;
+                    }
+                }
+            } else {
+                if (c.equals("\"")) {
+                    isString = true;
+                    isBackSlash = false;
+                    createToken(accumulator);
+                    accumulator = "";
+                } else if (specs.contains(c) && !isSpecial) {
                     createToken(accumulator);
                     accumulator = c;
+                    isSpecial = true;
+                } else if (whites.contains(c)) {
+                    createToken(accumulator);
+                    accumulator = "";
                     isSpecial = false;
                 } else {
-                    accumulator += c;
+                    if(specs.contains(c)) {
+                        accumulator += c;
+                    } else if (isSpecial) {
+                        createToken(accumulator);
+                        accumulator = c;
+                        isSpecial = false;
+                    } else {
+                        accumulator += c;
+                    }
                 }
             }
+            
         }
         if (!accumulator.equals("")) {
             createToken(accumulator);
         }
+    }
+
+    private static void createString(String content) {
+        new Token(TokenType.STRING, content);
     }
 
     private static void createToken(String tokenText) {
