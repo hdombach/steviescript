@@ -6,11 +6,17 @@ public class Token {
         ELSE,
         FOR,
         WORD,
-        STRING
+        STRING,
+        WHILE,
+        FUNCTION,
+        STRUCT,
+        FALSE,
+        TRUE,
+
     }
 
     private static String whites = " \t\n;";
-    private static String specs = "(){}=.|><&";
+    private static String specs = "(){}=.|><&-";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
     private TokenType type;
     private String content;
@@ -106,6 +112,21 @@ public class Token {
                     break;
                 case "for":
                     new Token(TokenType.FOR, null);
+                    break;
+                case "while":
+                    new Token(TokenType.WHILE, null);
+                    break;
+                case "function":
+                    new Token(TokenType.FUNCTION, null);
+                    break;
+                case "struct":
+                    new Token(TokenType.STRUCT, null);
+                    break;
+                case "false":
+                    new Token(TokenType.FALSE, null);
+                    break;
+                case "true":
+                    new Token(TokenType.TRUE, null);
                     break;
                 case "":
                     break;
