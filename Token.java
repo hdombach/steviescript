@@ -5,7 +5,7 @@ public class Token {
         IF,
         ELSE,
         FOR,
-	NUMBER,
+	    NUMBER,
         WORD,
         STRING,
         WHILE,
@@ -13,6 +13,7 @@ public class Token {
         STRUCT,
         FALSE,
         TRUE,
+        VAR,
 
     }
 
@@ -36,7 +37,14 @@ public class Token {
     public static ArrayList<Token> getTokenList()   { return tokens; }
     public TokenType getType()                      { return type; }
     public String getContent()                      { return content; }
-    public String toString()                        { return "{" + type + ", " + content + "}"; }
+
+    public String toString() {
+        String asString = "{" + type;
+        if(!content.equals("")) {
+            return asString + ", " + content + "}";
+        }
+        return asString + "}"; 
+    }
 
     /** 
     *
@@ -106,28 +114,36 @@ public class Token {
     private static void createToken(String tokenText) {
         switch(tokenText) {
                 case "if":
-                    new Token(TokenType.IF, null);
+                    new Token(TokenType.IF, "");
                     break;
                 case "else":
-                    new Token(TokenType.ELSE, null);
+                    new Token(TokenType.ELSE, "");
                     break;
                 case "for":
-                    new Token(TokenType.FOR, null);
+                    new Token(TokenType.FOR, "");
                     break;
                 case "while":
-                    new Token(TokenType.WHILE, null);
+                    new Token(TokenType.WHILE, "");
                     break;
                 case "function":
-                    new Token(TokenType.FUNCTION, null);
+                    new Token(TokenType.FUNCTION, "");
                     break;
                 case "struct":
-                    new Token(TokenType.STRUCT, null);
+                    new Token(TokenType.STRUCT, "");
                     break;
                 case "false":
-                    new Token(TokenType.FALSE, null);
+                    new Token(TokenType.FALSE, "");
                     break;
                 case "true":
-                    new Token(TokenType.TRUE, null);
+                    new Token(TokenType.TRUE, "");
+                    break;
+                case "int":
+                case "float":
+                case "boolean":
+                case "char":
+                //add any other primitive data types here
+                case "var":
+                    new Token(TokenType.VAR, tokenText);
                     break;
                 case "":
                     break;

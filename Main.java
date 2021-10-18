@@ -14,6 +14,7 @@ public class Main{
         Scanner reader = new Scanner(new File(path));
         while(reader.hasNextLine()) {
           result = result + reader.nextLine();
+          result = result + "\n";
         }
         reader.close();
       }
