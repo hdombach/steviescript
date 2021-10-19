@@ -1,7 +1,7 @@
 possible names: stevie_script, steviescript, stevieScript
 
 
-Dynamic or static: Static w/ special dynamic type
+Dynamic or static: Static w/ special dynamic type.
 
 Objects? - We have no clue how objects are stored in memory
     Might be able to jury-rig something with Dictionaries?
