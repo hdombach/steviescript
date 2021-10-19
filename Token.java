@@ -152,6 +152,9 @@ public class Token {
                 case "<=":
                 case "!=":
                 case ">=":
+                case "&&":
+                case "||":
+                case "^^":
                 case "==":
                     new Token(TokenType.CONDITIONAL, tokenText, line);
                     break;
