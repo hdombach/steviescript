@@ -22,25 +22,27 @@ public class Token {
     private static ArrayList<Token> tokens = new ArrayList<Token>();
     private TokenType type;
     private String content;
+    private int line;
     
-    public Token(TokenType type){
+    public Token(TokenType type, int line){
         this.type = type;
+        this.line = line;
         tokens.add(this);
     }
 
-	public Token(TokenType type, String content){
-        this.type = type;
+	public Token(TokenType type, String content, int line){
+        this(type, line);
         this.content = content; 
-        tokens.add(this);
     }
 
     public static ArrayList<Token> getTokenList()   { return tokens; }
     public TokenType getType()                      { return type; }
     public String getContent()                      { return content; }
+    public int getLine()                            { return line; }
 
     public String toString() {
         String asString = "{" + type;
-        if(!content.equals("")) {
+        if(content != null) {
             return asString + ", " + content + "}";
         }
         return asString + "}"; 
@@ -51,7 +53,7 @@ public class Token {
     * @param code - A line of code, to convert into a token
     *
     */
-    public static void tokenize(String code) {
+    public static void tokenize(String code, int line) {
         boolean isSpecial = false;
         String accumulator = "";
         boolean isString = false;
@@ -66,7 +68,7 @@ public class Token {
                 } else {
                     if (c.equals("\"")) {
                         isString = false;
-                        createString(accumulator);
+                        createString(accumulator, line);
                         accumulator = "";
                     } else if (c.equals("\\")) { //doesn't properly recognize "\n", "\t"
                         isBackSlash = true;
@@ -78,21 +80,21 @@ public class Token {
                 if (c.equals("\"")) {
                     isString = true;
                     isBackSlash = false;
-                    createToken(accumulator);
+                    createToken(accumulator, line);
                     accumulator = "";
                 } else if (specs.contains(c) && !isSpecial) {
-                    createToken(accumulator);
+                    createToken(accumulator, line);
                     accumulator = c;
                     isSpecial = true;
                 } else if (whites.contains(c)) {
-                    createToken(accumulator);
+                    createToken(accumulator, line);
                     accumulator = "";
                     isSpecial = false;
                 } else {
                     if(specs.contains(c)) {
                         accumulator += c;
                     } else if (isSpecial) {
-                        createToken(accumulator);
+                        createToken(accumulator, line);
                         accumulator = c;
                         isSpecial = false;
                     } else {
@@ -103,39 +105,39 @@ public class Token {
             
         }
         if (!accumulator.equals("")) {
-            createToken(accumulator);
+            createToken(accumulator, line);
         }
     }
 
-    private static void createString(String content) {
-        new Token(TokenType.STRING, content);
+    private static void createString(String content, int line) {
+        new Token(TokenType.STRING, content, line);
     }
 
-    private static void createToken(String tokenText) {
+    private static void createToken(String tokenText, int line) {
         switch(tokenText) {
                 case "if":
-                    new Token(TokenType.IF, "");
+                    new Token(TokenType.IF, line);
                     break;
                 case "else":
-                    new Token(TokenType.ELSE, "");
+                    new Token(TokenType.ELSE, line);
                     break;
                 case "for":
-                    new Token(TokenType.FOR, "");
+                    new Token(TokenType.FOR, line);
                     break;
                 case "while":
-                    new Token(TokenType.WHILE, "");
+                    new Token(TokenType.WHILE, line);
                     break;
                 case "function":
-                    new Token(TokenType.FUNCTION, "");
+                    new Token(TokenType.FUNCTION, line);
                     break;
                 case "struct":
-                    new Token(TokenType.STRUCT, "");
+                    new Token(TokenType.STRUCT, line);
                     break;
                 case "false":
-                    new Token(TokenType.FALSE, "");
+                    new Token(TokenType.FALSE, line);
                     break;
                 case "true":
-                    new Token(TokenType.TRUE, "");
+                    new Token(TokenType.TRUE, line);
                     break;
                 case "int":
                 case "float":
@@ -143,7 +145,7 @@ public class Token {
                 case "char":
                 //add any other primitive data types here
                 case "var":
-                    new Token(TokenType.VAR, tokenText);
+                    new Token(TokenType.VAR, tokenText, line);
                     break;
                 case "":
                     break;
@@ -151,9 +153,9 @@ public class Token {
                     try{
                         Integer.parseInt(tokenText);
                         Double.parseDouble(tokenText);
-                        new Token(TokenType.NUMBER, tokenText);
+                        new Token(TokenType.NUMBER, tokenText, line);
                     } catch(Exception e) {
-                        new Token(TokenType.WORD, tokenText);
+                        new Token(TokenType.WORD, tokenText, line);
                     }
                     break;
             }

@@ -10,8 +10,10 @@ public class Main{
     public static void readFile(String path) {
       try {
         Scanner reader = new Scanner(new File(path));
+        int line = 1;
         while(reader.hasNextLine()) {
-          Token.tokenize(reader.nextLine());
+          Token.tokenize(reader.nextLine(), line);
+          line++;
         }
         reader.close();
       }
