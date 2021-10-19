@@ -1,1 +1,3 @@
 if( (int x  = 5) == y) { return true }
+boolean foo = TRUE
+char charToStore = 'd'

@@ -3,18 +3,15 @@ import java.util.Scanner;
 
 public class Main{   
     public static void main(String[] args){
-      String codeString = readFile("test.txt");
-      Token.tokenize(codeString);
+      readFile("test.txt");
       System.out.println(Token.getTokenList());
     }
 
-    public static String readFile(String path) {
-      String result = "";
+    public static void readFile(String path) {
       try {
         Scanner reader = new Scanner(new File(path));
         while(reader.hasNextLine()) {
-          result = result + reader.nextLine();
-          result = result + "\n";
+          Token.tokenize(reader.nextLine());
         }
         reader.close();
       }
@@ -22,7 +19,6 @@ public class Main{
         e.printStackTrace();
         System.exit(1);
       }
-      return result;
     }
 }
 
