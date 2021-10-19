@@ -14,7 +14,9 @@ public class Token {
         FALSE,
         TRUE,
         VAR,
-
+        CONDITIONAL,
+        MATH,
+        EQUALS,
     }
 
     private static String whites = " \t\n;";
@@ -147,6 +149,20 @@ public class Token {
                 case "var":
                     new Token(TokenType.VAR, tokenText, line);
                     break;
+                case "<=":
+                case "!=":
+                case ">=":
+                case "==":
+                    new Token(TokenType.CONDITIONAL, tokenText, line);
+                    break;
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    new Token(TokenType.MATH, tokenText, line);
+                    break;
+                case "=":
+                    new Token(TokenType.EQUALS, line);
                 case "":
                     break;
                 default:
