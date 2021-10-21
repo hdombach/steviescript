@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.Scanner;
 
+
 public class Main{   
     public static void main(String[] args){
       readFile("test.txt");
@@ -13,6 +14,7 @@ public class Main{
         int line = 1;
         while(reader.hasNextLine()) {
           Token.tokenize(reader.nextLine(), line);
+          new Token(Token.TokenType.ENDLN, line);
           line++;
         }
         reader.close();
