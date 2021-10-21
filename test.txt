@@ -1,6 +1,2 @@
-if( (int x  = 5) == y) { return true }
-boolean foo = TRUE
-print(x + y)
-char charToStore = 'd'
-
-(if true && true) { return true }
+thing = 2
+another = 3

@@ -50,6 +50,10 @@ public class Token {
         return asString + "}"; 
     }
 
+    public boolean equals(Token token) {
+        return type == token.getType() && content == token.getContent();
+    }
+
     /** 
     *
     * @param code - A line of code, to convert into a token
