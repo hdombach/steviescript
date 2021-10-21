@@ -39,7 +39,7 @@ abstract public class Node {
 			if (statement != null) {
 				result.statements.add(statement);
 			} else {
-				break;
+				throw new Error("Unexpected Token" + currentToken().toString());
 			}
 		}
 		return result;
