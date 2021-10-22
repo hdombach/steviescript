@@ -17,6 +17,7 @@ public class Token {
         CONDITIONAL,
         MATH,
         EQUALS,
+        RETURN,
         ENDLN,
         OPENCURLY,
         CLOSECURLY,
@@ -147,6 +148,9 @@ public class Token {
                 break;
             case "true":
                 new Token(TokenType.TRUE, line);
+                break;
+            case "return":
+                new Token(TokenType.RETURN, line);
                 break;
             case "int":
             case "float":
