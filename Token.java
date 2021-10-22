@@ -17,11 +17,17 @@ public class Token {
         CONDITIONAL,
         MATH,
         EQUALS,
-        ENDLN
+        ENDLN,
+        OPENCURLY,
+        CLOSECURLY,
+        OPENPARAN,
+        CLOSEPARAN,
+        OPENBRACK,
+        CLOSEBRACK
     }
 
     private static String whites = " \t\n;";
-    private static String specs = "(){}=.|><&-";
+    private static String specs = "(){}[]=.|><&-";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
     private TokenType type;
     private String content;
@@ -168,6 +174,24 @@ public class Token {
             case "=":
                 new Token(TokenType.EQUALS, line);
             case "":
+                break;
+            case "{":
+                new Token(TokenType.OPENCURLY, line);
+                break;
+            case "}":
+                new Token(TokenType.CLOSECURLY, line);
+                break;
+            case "(":
+                new Token(TokenType.OPENPARAN, line);
+                break;
+            case ")":
+                new Token(TokenType.CLOSEPARAN, line);
+                break;
+            case "[":
+                new Token(TokenType.OPENBRACK, line);
+                break;
+            case "]":
+                new Token(TokenType.CLOSEBRACK, line);
                 break;
             default:
                 try{
