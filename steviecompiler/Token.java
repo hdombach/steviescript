@@ -1,3 +1,5 @@
+package steviecompiler;
+
 import java.util.ArrayList;
 
 public class Token {
@@ -18,7 +20,7 @@ public class Token {
         MATH,
         EQUALS,
         RETURN,
-        ENDLN,
+        //ENDLN,
         OPENCURLY,
         CLOSECURLY,
         OPENPARAN,

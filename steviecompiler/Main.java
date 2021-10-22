@@ -1,9 +1,9 @@
-package compiler;
+package steviecompiler;
 
 import java.io.File;
 import java.util.Scanner;
 
-import steviescript.node.Node;
+import steviecompiler.node.Node;
 
 
 public class Main{   

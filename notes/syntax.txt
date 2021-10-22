@@ -37,10 +37,12 @@ CALLFUNC = functionName + "(" + [dataType + variableName] + ")"
     myFunction(a, b, c)
 */
 
-EXPRESSION = variableName | EXPRESSION + operator + EXPRESSION + ?[operator + EXPRESSION] | '(' + EXPRESSION +')' | value | CREATESTRUCT
+EXPRESSION = variableName | EQUATION | '(' + EXPRESSION +')' | value | CREATESTRUCT
 /*
     
 */
+
+EQUATION = EXPRESSION + operator + EXPRESSION
 
 CREATEVAR = DATATYPE + variableName + "=" + expression
 /*
