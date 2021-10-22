@@ -17,10 +17,18 @@ public class Token {
         CONDITIONAL,
         MATH,
         EQUALS,
+        RETURN,
+        ENDLN,
+        OPENCURLY,
+        CLOSECURLY,
+        OPENPARAN,
+        CLOSEPARAN,
+        OPENBRACK,
+        CLOSEBRACK
     }
 
     private static String whites = " \t\n;";
-    private static String specs = "(){}=.|><&-";
+    private static String specs = "(){}[]=.|><&-";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
     private TokenType type;
     private String content;
@@ -121,66 +129,86 @@ public class Token {
 
     private static void createToken(String tokenText, int line) {
         switch(tokenText) {
-                case "if":
-                    new Token(TokenType.IF, line);
-                    break;
-                case "else":
-                    new Token(TokenType.ELSE, line);
-                    break;
-                case "for":
-                    new Token(TokenType.FOR, line);
-                    break;
-                case "while":
-                    new Token(TokenType.WHILE, line);
-                    break;
-                case "function":
-                    new Token(TokenType.FUNCTION, line);
-                    break;
-                case "struct":
-                    new Token(TokenType.STRUCT, line);
-                    break;
-                case "false":
-                    new Token(TokenType.FALSE, line);
-                    break;
-                case "true":
-                    new Token(TokenType.TRUE, line);
-                    break;
-                case "int":
-                case "float":
-                case "boolean":
-                case "char":
-                //add any other primitive data types here
-                case "var":
-                    new Token(TokenType.VAR, tokenText, line);
-                    break;
-                case "<=":
-                case "!=":
-                case ">=":
-                case "&&":
-                case "||":
-                case "^^":
-                case "==":
-                    new Token(TokenType.CONDITIONAL, tokenText, line);
-                    break;
-                case "+":
-                case "-":
-                case "*":
-                case "/":
-                    new Token(TokenType.MATH, tokenText, line);
-                    break;
-                case "=":
-                    new Token(TokenType.EQUALS, line);
-                case "":
-                    break;
-                default:
-                    try{
-                        Integer.parseInt(tokenText);
-                        Double.parseDouble(tokenText);
-                        new Token(TokenType.NUMBER, tokenText, line);
-                    } catch(Exception e) {
-                        new Token(TokenType.WORD, tokenText, line);
-                    }
-                    break;
-            }
+            case "if":
+                new Token(TokenType.IF, line);
+                break;
+            case "else":
+                new Token(TokenType.ELSE, line);
+                break;
+            case "for":
+                new Token(TokenType.FOR, line);
+                break;
+            case "while":
+                new Token(TokenType.WHILE, line);
+                break;
+            case "function":
+                new Token(TokenType.FUNCTION, line);
+                break;
+            case "struct":
+                new Token(TokenType.STRUCT, line);
+                break;
+            case "false":
+                new Token(TokenType.FALSE, line);
+                break;
+            case "true":
+                new Token(TokenType.TRUE, line);
+                break;
+            case "return":
+                new Token(TokenType.RETURN, line);
+                break;
+            case "int":
+            case "float":
+            case "boolean":
+            case "char":
+            //add any other primitive data types here
+            case "var":
+                new Token(TokenType.VAR, tokenText, line);
+                break;
+            case "<=":
+            case "!=":
+            case ">=":
+            case "&&":
+            case "||":
+            case "^^":
+            case "==":
+                new Token(TokenType.CONDITIONAL, tokenText, line);
+                break;
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                new Token(TokenType.MATH, tokenText, line);
+                break;
+            case "=":
+                new Token(TokenType.EQUALS, line);
+            case "":
+                break;
+            case "{":
+                new Token(TokenType.OPENCURLY, line);
+                break;
+            case "}":
+                new Token(TokenType.CLOSECURLY, line);
+                break;
+            case "(":
+                new Token(TokenType.OPENPARAN, line);
+                break;
+            case ")":
+                new Token(TokenType.CLOSEPARAN, line);
+                break;
+            case "[":
+                new Token(TokenType.OPENBRACK, line);
+                break;
+            case "]":
+                new Token(TokenType.CLOSEBRACK, line);
+                break;
+            default:
+                try{
+                    Integer.parseInt(tokenText);
+                    Double.parseDouble(tokenText);
+                    new Token(TokenType.NUMBER, tokenText, line);
+                } catch(Exception e) {
+                    new Token(TokenType.WORD, tokenText, line);
+                }
+        }
     }
 }
