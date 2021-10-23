@@ -30,4 +30,7 @@ public class IntegerExpression extends NumericExpression {
     public int value() {
         return value;
     }
+    public String toString() {
+        return Node.indentStr() + "Int: " + value + "\n";
+    }
 }

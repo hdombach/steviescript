@@ -31,20 +31,18 @@ public class Operation extends Expression {
         }
     }
 
-    //THIS DOES NOT WORK YET
     public Operation() {
         int beggining = Node.index;
         isValid = true;
 
         while (Node.tokens.size() > Node.index) {
-            System.out.println(Node.currentToken());
             Expression expression = Expression.expectNonOperation();
             if (expression.isValid) {
                 outStack.add(expression);
             } else if (Node.currentToken().getType() == Token.TokenType.MATH) {
                 int precedenct = getPrecedence(Node.currentToken().getContent());
 
-                while (precedenct >= lastPrecedence()) {
+                while (precedenct <= lastPrecedence()) {
                     popOperator();
                 }
                 operatorStack.add(Node.currentToken().getContent());
@@ -54,11 +52,13 @@ public class Operation extends Expression {
                 break;
             }
         }
-        System.out.println("Stage 1 complete");
         while (operatorStack.size() > 0) {
             popOperator();
         }
-        System.out.println("Stage 2 complete");
+		Operation result = (Operation) outStack.get(0);
+		this.operator = result.operator;
+		this.left = result.left;
+		this.right = result.right;
     }
     Operation(String operator, Expression left, Expression right) {
         this.operator = operator;

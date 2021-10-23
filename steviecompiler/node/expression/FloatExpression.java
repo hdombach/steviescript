@@ -30,4 +30,7 @@ public class FloatExpression extends NumericExpression {
     public double value() {
         return value;
     }
+    public String toString() {
+        return Node.indentStr() + "Float: " + value + "\n";
+    }
 }

@@ -20,10 +20,12 @@ public abstract class Expression extends Node {
 		int beginIndex = Node.index;
 		Expression e;
 
-		/*e = new Operation();
-		if (expectOperation && e.isValid) {
-			return e;
-		}*/
+		if (expectOperation) {
+			e = new Operation();
+			if (e.isValid) {
+				return e;
+			}
+		}
 		Node.index = beginIndex;
 
 		e = new FloatExpression();
