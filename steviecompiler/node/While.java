@@ -9,55 +9,58 @@ public class While extends Statement {
 
 	public While() {
 		int beginIndex = Node.index;
-		isValid = true;
-
-		if (currentToken().getType() == TokenType.WHILE) {
+		if (Node.currentToken().getType() == TokenType.WHILE) {
 			Node.index++;
 		} else {
-			isValid = false;
+			Node.index = beginIndex;
+			return;
 		}
 
-		if (currentToken().getType() == TokenType.OPENPARAN) {
+		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
 			Node.index++;
 		} else {
-			isValid = false;
+			throw new Error("Expected ( not " + Node.currentToken());
 		}
 
 		condition = Expression.expect();
 		if(!condition.isValid) {
-			isValid = false;
-		} else {
-			Node.index++;
+			throw new Error("Expected expression not " + Node.currentToken());
 		}
 
-		if (currentToken().getType() == TokenType.CLOSEPARAN) {
+		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
 			Node.index++;
 		} else {
-			isValid = false;
+			throw new Error("Expected ) not " + Node.currentToken());
 		}
 
-		if (currentToken().getType() == TokenType.OPENBRACK) {
+		if (Node.currentToken().getType() == TokenType.OPENCURLY) {
 			Node.index++;
 		} else {
-			isValid = false;
+			throw new Error("Expected {  not " + Node.currentToken());
 		}
 
-		//loop = new Block();
+		loop = new Block();
 
-		if(currentToken().getType() == TokenType.CLOSEBRACK) {
+		if(Node.currentToken().getType() == TokenType.CLOSECURLY) {
 			Node.index++;
 		} else {
-			isValid = false;
+			throw new Error("Expected } not " + Node.currentToken());
 		}
-
-		if(!isValid) {
-			Node.index = beginIndex;
-		}
+		isValid = true;
 	}
 	
 	public String toString() {
 		String result = "";
-		//result +=
-		return null;
+		result += Node.indentStr() + "While: \n";
+		Node.indent++;
+		result += Node.indentStr() + "Condition: \n";
+		Node.indent++;
+		result += condition;
+		Node.indent--;
+		result += Node.indentStr() + "Content: \n";
+		Node.indent++;
+		result += loop;
+		Node.indent-= 2;
+		return result;
 	}
 }

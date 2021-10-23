@@ -16,11 +16,7 @@ public class Block extends Node {
 			if (statement.isValid){
 				statements.add(statement);
 			} else {
-				if (currentToken().getType() == Token.TokenType.END) {
-					break;
-				} else {
-					throw new Error("Unexpected Token " + Node.currentToken().toString());
-				}
+				return;
 			}
 		}
     }

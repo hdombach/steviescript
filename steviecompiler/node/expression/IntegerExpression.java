@@ -8,6 +8,7 @@ public class IntegerExpression extends NumericExpression {
     private int value;
 
     public IntegerExpression() {
+        int beginIndex = Node.index;
         isValid = true;
 
         for(int i = 0; i < 1; i++, Node.index++) {
@@ -15,14 +16,16 @@ public class IntegerExpression extends NumericExpression {
                 expressionText += currentToken().getContent();
             }
             else {
+                Node.index = beginIndex;
                 isValid = false;
-                break;
+                return;
             }
         }
         try {
             value = Integer.parseInt(expressionText);
         }
         catch(Exception e) {
+            Node.index = beginIndex;
             isValid = false;
         }
     }

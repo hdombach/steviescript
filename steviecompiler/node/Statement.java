@@ -9,7 +9,6 @@ public class Statement extends Node {
 		if (temp.isValid) {
 			return temp;
 		}
-		
 		temp = new While();
 		if (temp.isValid) {
 			return temp;

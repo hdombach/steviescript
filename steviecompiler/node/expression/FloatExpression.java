@@ -8,6 +8,7 @@ public class FloatExpression extends NumericExpression {
     private double value;
 
     public FloatExpression() {
+        int beginIndex = Node.index;
         isValid = true;
 
         for(int i = 0; i <= 2; i++, Node.index++) {
@@ -15,14 +16,16 @@ public class FloatExpression extends NumericExpression {
                 expressionText += currentToken().getContent();
             }
             else {
+                Node.index = beginIndex;
                 isValid = false;
-                break;
+                return;
             }
         }
         try {
             value = Double.parseDouble(expressionText);
         }
         catch(Exception e) {
+            Node.index = beginIndex;
             isValid = false;
         }
     }
