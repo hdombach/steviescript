@@ -3,9 +3,9 @@ package steviecompiler.node.expression;
 import steviecompiler.node.Node;
 import steviecompiler.Token.TokenType;
 
-public class FloatExpression extends Expression {
+public class FloatExpression extends NumericExpression {
     private static TokenType[] tokenSequence = {TokenType.NUMBER, TokenType.WORD /* period */, TokenType.NUMBER};
-
+    private double value;
 
     public FloatExpression() {
         isValid = true;
@@ -20,7 +20,7 @@ public class FloatExpression extends Expression {
             }
         }
         try {
-            Double.parseDouble(expressionText);
+            value = Double.parseDouble(expressionText);
         }
         catch(Exception e) {
             isValid = false;
