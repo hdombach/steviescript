@@ -14,7 +14,7 @@ public class Block extends Node {
 			if (statement.isValid){
 				statements.add(statement);
 			} else {
-				throw new Error("Unexpected Token" + Node.currentToken());
+				throw new Error("Unexpected Token " + Node.currentToken().toString());
 			}
 		}
     }

@@ -10,7 +10,7 @@ public class IntegerExpression extends NumericExpression {
     public IntegerExpression() {
         isValid = true;
 
-        for(int i = 0; i <= 1; i++, Node.index++) {
+        for(int i = 0; i < 1; i++, Node.index++) {
             if(currentToken().getType() == tokenSequence[i]) {
                 expressionText += currentToken().getContent();
             }

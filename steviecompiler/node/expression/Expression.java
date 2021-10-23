@@ -14,7 +14,11 @@ public abstract class Expression extends Node {
 
 		if (e.isValid) { return e; }
 		Node.index = beginIndex;
-		
+		e = new IntegerExpression();
+
+		if (e.isValid) { return e; }
+		Node.index = beginIndex;
+
 		return e;
 		
     }

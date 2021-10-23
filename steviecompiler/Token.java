@@ -55,9 +55,9 @@ public class Token {
     public String toString() {
         String asString = "{" + type;
         if(content != null) {
-            return asString + ", " + content + "}";
+            return asString + ", " + content + ", line " + line + "}";
         }
-        return asString + "}"; 
+        return asString + ", line " + line + "}"; 
     }
 
     public boolean equals(Token token) {
