@@ -26,4 +26,8 @@ public class IntegerExpression extends NumericExpression {
             isValid = false;
         }
     }
+
+    public int value() {
+        return value;
+    }
 }

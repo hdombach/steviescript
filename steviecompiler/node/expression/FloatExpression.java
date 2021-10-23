@@ -27,4 +27,8 @@ public class FloatExpression extends NumericExpression {
         }
         System.out.println(expressionText + ", " + isValid);
     }
+
+    public double value() {
+        return value;
+    }
 }
