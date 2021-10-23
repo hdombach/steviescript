@@ -2,6 +2,8 @@ package steviecompiler.node;
 
 import java.util.ArrayList;
 
+import steviecompiler.Token;
+
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();
 
@@ -14,7 +16,11 @@ public class Block extends Node {
 			if (statement.isValid){
 				statements.add(statement);
 			} else {
-				throw new Error("Unexpected Token " + Node.currentToken().toString());
+				if (currentToken().getType() == Token.TokenType.END) {
+					break;
+				} else {
+					throw new Error("Unexpected Token " + Node.currentToken().toString());
+				}
 			}
 		}
     }

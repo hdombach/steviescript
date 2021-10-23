@@ -55,10 +55,16 @@ public class Operation extends Expression {
         while (operatorStack.size() > 0) {
             popOperator();
         }
-		Operation result = (Operation) outStack.get(0);
-		this.operator = result.operator;
-		this.left = result.left;
-		this.right = result.right;
+		try {
+			Operation result = (Operation) outStack.get(0);
+			this.operator = result.operator;
+			this.left = result.left;
+			this.right = result.right;
+		} catch (Exception e) {
+			//means that current expression is actually a constant and not a equation
+			Node.index = beggining;
+			this.isValid = false;
+		}
     }
     Operation(String operator, Expression left, Expression right) {
         this.operator = operator;
