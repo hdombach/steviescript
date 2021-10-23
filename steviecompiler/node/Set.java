@@ -1,6 +1,5 @@
 package steviecompiler.node;
 
-import steviecompiler.Token;
 import steviecompiler.Token.TokenType;;
 
 public class Set extends Statement {
@@ -10,14 +9,14 @@ public class Set extends Statement {
 	public Set(){
 		int beginIndex = Node.index;
 		isValid = true;
-		if (currentToken().getType() == Token.TokenType.WORD) {
+		if (currentToken().getType() == TokenType.WORD) {
 			name = currentToken().getContent();
 			Node.index++;
 		} else {
 			isValid = false;
 		}
 
-		if (currentToken().getType() == Token.TokenType.EQUALS) {
+		if (currentToken().getType() == TokenType.EQUALS) {
 			Node.index++;
 		} else {
 			isValid = false;
@@ -27,7 +26,6 @@ public class Set extends Statement {
 		if (!expression.isValid) {
 			isValid = false;
 		}
-
 		if(!isValid) {
 			Node.index = beginIndex;
 		}
