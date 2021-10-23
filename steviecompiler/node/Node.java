@@ -28,13 +28,18 @@ abstract public class Node {
 			block = new Block();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
+			e.printStackTrace();
 		}
 	}
 	
 	public static Block getCode() {return block;};
 	
 	protected static Token currentToken() {
-		return tokens.get(index);
+		if (tokens.size() > index) {
+			return tokens.get(index);
+		} else {
+			return new Token(Token.TokenType.END, tokens.get(tokens.size() - 1).getLine());
+		}
 	}
 
 	private static Expression expectExpression() {
