@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.expression.Expression;
 
 public class While extends Statement {
 	public Expression condition;
@@ -41,7 +42,7 @@ public class While extends Statement {
 			isValid = false;
 		}
 
-		loop = new Block();
+		//loop = new Block();
 
 		if(currentToken().getType() == TokenType.CLOSEBRACK) {
 			Node.index++;

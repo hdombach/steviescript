@@ -1,6 +1,6 @@
 CODE = BLOCK
 BLOCK = [STATEMENT]
-STATEMENT = IF | SET | WHILE | FOR | DEFFUNC | CALLFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT |
+STATEMENT = IF | SET | WHILE | FOR | DEFFUNC | CALLFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT | EXPRESSION
 
 DEFFUNC = "function" + functionName + "(" + [dataType + variableName] + ")" + ?("->" + dataType) + "{" + BLOCK + "}"
 /*	
@@ -68,3 +68,6 @@ CREATESTRUCT = DATATYPE + "(" + [EXPRESSION] + ")"
 /*
     StructName(property: value)
 */
+
+
+EXPRESSION = NUMBER | BOOLEAN | 

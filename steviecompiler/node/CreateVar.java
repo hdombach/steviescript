@@ -1,5 +1,7 @@
 package steviecompiler.node;
 
+import steviecompiler.node.expression.*;
+
 public class CreateVar extends Statement {
 	public String name;
 	public DataType type;

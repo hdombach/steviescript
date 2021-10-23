@@ -1,5 +1,7 @@
 package steviecompiler.node;
 
+import steviecompiler.node.expression.Expression;
+
 class Operation extends Node {
 	public String operator;
 	public Expression left;

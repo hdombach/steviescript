@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.expression.Expression;
 
 abstract public class Node {
 	protected static int index = 0;

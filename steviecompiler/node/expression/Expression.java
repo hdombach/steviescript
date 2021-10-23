@@ -1,12 +1,22 @@
-package steviecompiler.node;
+package steviecompiler.node.expression;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.DataType;
+import steviecompiler.node.Node;
 
-abstract class Expression extends Node {
+public abstract class Expression extends Node {
 	public Node content;
+	protected String expressionText = "";
 
 	public static Expression expect() {
-        return null;
+		int beginIndex = Node.index;
+		Expression e = new FloatExpression();
+
+		if (e.isValid) { return e; }
+		Node.index = beginIndex;
+		
+		return e;
+		
     }
 
 	public String toString() {

@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
-import steviecompiler.Token.TokenType;;
+import steviecompiler.Token.TokenType;
+import steviecompiler.node.expression.Expression;;
 
 public class Set extends Statement {
 	public String name;

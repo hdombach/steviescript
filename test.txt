@@ -1,4 +1,4 @@
-thing = 2
-another = 3
+thing = 3.3
+another = 2
 
 while(a = 1) {}
