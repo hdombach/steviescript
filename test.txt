@@ -1,6 +1,6 @@
-//thing = 3.3 + 1 / 4.5 / 5 * 5 + 6.3
-another = 2
+thing = 3.3 + 1 / 4.5 / 5 * 5 + 6.3
+another = 2 + 1
 
-while (thing == another) {
+while (1 == 2) {
 	thing = 4
 }
