@@ -14,6 +14,11 @@ public abstract class Statement extends Node {
 			return temp;
 		}
 
+		temp = new If();
+		if (temp.isValid) {
+			return temp;
+		}
+
 		return new InvalidStatement();
 	}
 
