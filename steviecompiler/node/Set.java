@@ -9,27 +9,26 @@ public class Set extends Statement {
 
 	public Set(){
 		int beginIndex = Node.index;
-		isValid = true;
 		if (Node.currentToken().getType() == TokenType.WORD) {
 			name = currentToken().getContent();
 			Node.index++;
 		} else {
-			isValid = false;
+			Node.index = beginIndex;
+			return;
 		}
 
 		if (Node.currentToken().getType() == TokenType.EQUALS) {
 			Node.index++;
 		} else {
-			isValid = false;
+			Node.index = beginIndex;
+			return;
 		}
 
 		expression = Expression.expect();
 		if (!expression.isValid) {
 			isValid = false;
 		}
-		if(!isValid) {
-			Node.index = beginIndex;
-		}
+		isValid = true;
 	}
 
 	public String toString() {
