@@ -76,13 +76,14 @@ public class Token {
         boolean isString = false;
         boolean isBackSlash = false;
 
-        for(int i = 0; i < code.length(); i++) {
-            String c = code.charAt(i) + "";
-            if (isString) {
-                if (isBackSlash) {
-                    accumulator += c;
-                    isBackSlash = false;
-                } else {
+        if(code.length() > 2 && !code.substring(0, 2).equals("//")) {
+            for(int i = 0; i < code.length(); i++) {
+                String c = code.charAt(i) + "";
+                if (isString) {
+                    if (isBackSlash) {
+                        accumulator += c;
+                        isBackSlash = false;
+                    } else {
                     if (c.equals("\"")) {
                         isString = false;
                         createString(accumulator, line);
@@ -91,38 +92,39 @@ public class Token {
                         isBackSlash = true;
                     } else {
                         accumulator += c;
+                        }
                     }
-                }
-            } else {
-                if (c.equals("\"")) {
-                    isString = true;
-                    isBackSlash = false;
-                    createToken(accumulator, line);
-                    accumulator = "";
-                } else if (specs.contains(c) && !isSpecial) {
-                    createToken(accumulator, line);
-                    accumulator = c;
-                    isSpecial = true;
-                } else if (whites.contains(c)) {
-                    createToken(accumulator, line);
-                    accumulator = "";
-                    isSpecial = false;
                 } else {
-                    if(specs.contains(c)) {
-                        accumulator += c;
-                    } else if (isSpecial) {
+                    if (c.equals("\"")) {
+                        isString = true;
+                        isBackSlash = false;
+                        createToken(accumulator, line);
+                        accumulator = "";
+                    } else if (specs.contains(c) && !isSpecial) {
                         createToken(accumulator, line);
                         accumulator = c;
+                        isSpecial = true;
+                    } else if (whites.contains(c)) {
+                        createToken(accumulator, line);
+                        accumulator = "";
                         isSpecial = false;
                     } else {
-                        accumulator += c;
+                        if(specs.contains(c)) {
+                            accumulator += c;
+                        } else if (isSpecial) {
+                            createToken(accumulator, line);
+                            accumulator = c;
+                            isSpecial = false;
+                        } else {
+                            accumulator += c;
+                        }
                     }
                 }
-            }
             
-        }
-        if (!accumulator.equals("")) {
-            createToken(accumulator, line);
+            }
+            if (!accumulator.equals("")) {
+                createToken(accumulator, line);
+            }
         }
     }
 
