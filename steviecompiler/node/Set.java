@@ -10,14 +10,14 @@ public class Set extends Statement {
 	public Set(){
 		int beginIndex = Node.index;
 		isValid = true;
-		if (currentToken().getType() == TokenType.WORD) {
+		if (Node.currentToken().getType() == TokenType.WORD) {
 			name = currentToken().getContent();
 			Node.index++;
 		} else {
 			isValid = false;
 		}
 
-		if (currentToken().getType() == TokenType.EQUALS) {
+		if (Node.currentToken().getType() == TokenType.EQUALS) {
 			Node.index++;
 		} else {
 			isValid = false;

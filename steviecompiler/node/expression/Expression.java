@@ -3,7 +3,6 @@ package steviecompiler.node.expression;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
-import steviecompiler.node.Operation;
 
 public abstract class Expression extends Node {
 	public Node content;
