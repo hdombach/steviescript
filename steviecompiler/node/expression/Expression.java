@@ -8,6 +8,7 @@ import steviecompiler.node.Operation;
 public abstract class Expression extends Node {
 	public Node content;
 	protected String expressionText = "";
+	protected static int beginIndex;
 
 	public static Expression expect() {
 		return _expect(true);
@@ -17,7 +18,7 @@ public abstract class Expression extends Node {
 	}
 
 	private static Expression _expect(Boolean expectOperation) {
-		int beginIndex = Node.index;
+		beginIndex = Node.index;
 		Expression e;
 
 		if (expectOperation) {
@@ -32,6 +33,11 @@ public abstract class Expression extends Node {
 		if (e.isValid) { return e; }
 		Node.index = beginIndex;
 		e = new IntegerExpression();
+
+		if (e.isValid) { return e; }
+		Node.index = beginIndex;
+
+		e = new BooleanExpression();
 
 		if (e.isValid) { return e; }
 		Node.index = beginIndex;

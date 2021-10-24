@@ -4,7 +4,6 @@ import steviecompiler.node.expression.Expression;
 
 import java.util.ArrayList;
 
-import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
 
 public class Operation extends Expression {
@@ -32,17 +31,17 @@ public class Operation extends Expression {
     }
 
     public Operation() {
-        int beggining = Node.index;
+        int beginning = Node.index;
         isValid = true;
 
         while (Node.tokens.size() > Node.index) {
             Expression expression = Expression.expectNonOperation();
             if (expression.isValid) {
                 outStack.add(expression);
-            } else if (Node.currentToken().getType() == Token.TokenType.MATH) {
-                int precedenct = getPrecedence(Node.currentToken().getContent());
+            } else if (currentToken().getType() == TokenType.MATH || currentToken().getType() == TokenType.CONDITIONAL) {
+                int precedence = getPrecedence(Node.currentToken().getContent());
 
-                while (precedenct <= lastPrecedence()) {
+                while (precedence <= lastPrecedence()) {
                     popOperator();
                 }
                 operatorStack.add(Node.currentToken().getContent());
@@ -62,7 +61,7 @@ public class Operation extends Expression {
 			this.right = result.right;
 		} catch (Exception e) {
 			//means that current expression is actually a constant and not a equation
-			Node.index = beggining;
+			Node.index = beginning;
 			this.isValid = false;
 		}
     }
@@ -96,6 +95,14 @@ public class Operation extends Expression {
             case "+":
             case "-":
                 return 3;
+            case "!=":
+            case ">=":
+            case "<=":
+            case "&&":
+            case "||":
+            case "^^":
+            case "==":
+                return 2;
             default:
                 return 0;
         }

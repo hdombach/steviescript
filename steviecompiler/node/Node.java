@@ -3,7 +3,6 @@ package steviecompiler.node;
 import java.util.ArrayList;
 
 import steviecompiler.Token;
-import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
 
 abstract public class Node {
