@@ -7,8 +7,10 @@ import steviecompiler.node.Node;
 
 
 public class Main{   
+    public static String filePath;
     public static void main(String[] args){
-      readFile("test.txt");
+      filePath = args[0]; 
+      readFile(filePath);
       System.out.println(Token.getTokenList());
       Node.parse(Token.getTokenList());
       System.out.println(Node.getCode());
@@ -20,7 +22,6 @@ public class Main{
         int line = 1;
         while(reader.hasNextLine()) {
           Token.tokenize(reader.nextLine(), line);
-          //new Token(Token.TokenType.ENDLN, line);
           line++;
         }
         reader.close();

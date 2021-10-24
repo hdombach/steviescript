@@ -2,7 +2,9 @@ package steviecompiler.node;
 
 import java.util.ArrayList;
 
+import steviecompiler.Main;
 import steviecompiler.Token;
+import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
 
 abstract public class Node {
@@ -37,12 +39,21 @@ abstract public class Node {
 		if (tokens.size() > index) {
 			return tokens.get(index);
 		} else {
-			return new Token(Token.TokenType.END, tokens.get(tokens.size() - 1).getLine());
+			return new Token(TokenType.END, tokens.get(tokens.size() - 1).getLine());
 		}
 	}
 
 	private static Expression expectExpression() {
 		index++;
 		return Expression.expect();
+	}
+
+	public static void GenerateUnexpectedTokenError(TokenType t) {
+		UnexpectedTokenError(t, currentToken());
+	}
+
+	public static void UnexpectedTokenError (TokenType t, Token content) {
+		System.out.println("ERROR at " + Main.filePath + " line " + content.getLine() + ": Unexpected Token (Expected " + t.name() + " found " + content.getType() + ")");
+		System.exit(1);
 	}
 }

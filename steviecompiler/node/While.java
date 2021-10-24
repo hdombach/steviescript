@@ -19,7 +19,7 @@ public class While extends Statement {
 		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
 			Node.index++;
 		} else {
-			throw new Error("Expected ( not " + Node.currentToken());
+			Node.GenerateUnexpectedTokenError(TokenType.OPENPARAN);
 		}
 
 		condition = Expression.expect();
@@ -30,13 +30,13 @@ public class While extends Statement {
 		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
 			Node.index++;
 		} else {
-			throw new Error("Expected ) not " + Node.currentToken());
+			GenerateUnexpectedTokenError(TokenType.CLOSEPARAN);
 		}
 
 		if (Node.currentToken().getType() == TokenType.OPENCURLY) {
 			Node.index++;
 		} else {
-			throw new Error("Expected {  not " + Node.currentToken());
+			GenerateUnexpectedTokenError(TokenType.OPENCURLY);
 		}
 
 		loop = new Block();
@@ -44,7 +44,7 @@ public class While extends Statement {
 		if(Node.currentToken().getType() == TokenType.CLOSECURLY) {
 			Node.index++;
 		} else {
-			throw new Error("Expected } not " + Node.currentToken());
+			GenerateUnexpectedTokenError(TokenType.CLOSECURLY);
 		}
 		isValid = true;
 	}
