@@ -22,6 +22,8 @@ abstract public class Node {
 		}
 		return result;
 	}
+
+	public boolean isValid() { return isValid; }
 	
 	public static void parse(ArrayList<Token> tokensIn) {
 		tokens = tokensIn;

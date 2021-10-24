@@ -1,10 +1,9 @@
-package steviecompiler.node;
-
-import steviecompiler.node.expression.Expression;
+package steviecompiler.node.expression;
 
 import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.Node;
 
 public class Operation extends Expression {
     public String operator;
@@ -36,7 +35,7 @@ public class Operation extends Expression {
 
         while (Node.tokens.size() > Node.index) {
             Expression expression = Expression.expectNonOperation();
-            if (expression.isValid) {
+            if (expression.isValid()) {
                 outStack.add(expression);
             } else if (currentToken().getType() == TokenType.MATH || currentToken().getType() == TokenType.CONDITIONAL) {
                 int precedence = getPrecedence(Node.currentToken().getContent());
