@@ -1,6 +1,6 @@
 package steviecompiler.node;
 
-public class Statement extends Node {
+public abstract class Statement extends Node {
 
 	public static Statement expect() {
 		Statement temp;
@@ -14,6 +14,7 @@ public class Statement extends Node {
 			return temp;
 		}
 
-		return temp;
+		return new InvalidStatement();
 	}
+
 }
