@@ -30,7 +30,8 @@ public class Token {
     }
 
     private static String whites = " \t\n;";
-    private static String specs = "(){}[]=.|><&-";
+    private static String specs = "=.|><&-";
+    private static String enclosures = "(){}[]";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
     private TokenType type;
     private String content;
@@ -107,6 +108,11 @@ public class Token {
                     isSpecial = true;
                 } else if (whites.contains(c)) {
                     createToken(accumulator, line);
+                    accumulator = "";
+                    isSpecial = false;
+                } else if(enclosures.contains(c)) {
+                    createToken(accumulator, line);
+                    createToken(c, line);
                     accumulator = "";
                     isSpecial = false;
                 } else {

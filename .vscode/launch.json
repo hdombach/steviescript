@@ -6,6 +6,13 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "Launch Main",
+			"request": "launch",
+			"mainClass": "steviecompiler.Main",
+			"projectName": "steviescript_5ecba08b"
+		},
+		{
+			"type": "java",
 			"name": "Launch Current File",
 			"request": "launch",
 			"mainClass": "${file}"
