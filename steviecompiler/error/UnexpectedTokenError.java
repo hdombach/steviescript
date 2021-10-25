@@ -1,7 +1,6 @@
 package steviecompiler.error;
 
 import steviecompiler.Token;
-import steviecompiler.Token.TokenType;
 
 public class UnexpectedTokenError extends ErrorHandler {
     private String expected;

@@ -2,7 +2,6 @@ package steviecompiler.node;
 
 import java.util.ArrayList;
 
-import steviecompiler.Token;
 
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();

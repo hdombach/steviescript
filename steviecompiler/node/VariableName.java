@@ -1,7 +1,6 @@
 package steviecompiler.node;
 
 import steviecompiler.Token;
-import steviecompiler.Token.TokenType;
 
 public class VariableName extends Node {
 	public String name;

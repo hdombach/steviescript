@@ -1,7 +1,5 @@
 package steviecompiler.node.expression;
 
-import steviecompiler.Token.TokenType;
-import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 
 public abstract class Expression extends Node {

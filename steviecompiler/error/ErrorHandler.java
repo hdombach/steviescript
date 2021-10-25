@@ -2,7 +2,6 @@ package steviecompiler.error;
 
 import steviecompiler.Main;
 import steviecompiler.Token;
-import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
 
 public abstract class ErrorHandler {
