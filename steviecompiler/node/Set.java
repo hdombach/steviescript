@@ -4,24 +4,19 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;;
 
 public class Set extends Statement {
+	private static TokenType[] tokenSquence = {TokenType.WORD, TokenType.EQUALS};
 	public String name;
 	public Expression expression;
 
 	public Set(){
 		int beginIndex = Node.index;
-		if (Node.currentToken().getType() == TokenType.WORD) {
-			name = currentToken().getContent();
-			Node.index++;
-		} else {
-			Node.index = beginIndex;
-			return;
-		}
-
-		if (Node.currentToken().getType() == TokenType.EQUALS) {
-			Node.index++;
-		} else {
-			Node.index = beginIndex;
-			return;
+		for(int i = 0; i < 2; i++, Node.index++) {
+			if (Node.currentToken().getType() == tokenSquence[i]) {
+				name = currentToken().getContent();
+			} else {
+				Node.index = beginIndex;
+				return;
+			}
 		}
 
 		expression = Expression.expect();
