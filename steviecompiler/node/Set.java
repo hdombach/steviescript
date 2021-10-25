@@ -10,9 +10,9 @@ public class Set extends Statement {
 
 	public Set(){
 		int beginIndex = Node.index;
+		name = currentToken().getContent();
 		for(int i = 0; i < 2; i++, Node.index++) {
 			if (Node.currentToken().getType() == tokenSquence[i]) {
-				name = currentToken().getContent();
 			} else {
 				Node.index = beginIndex;
 				return;
