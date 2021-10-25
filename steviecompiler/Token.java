@@ -27,9 +27,6 @@ public class Token {
         OPENBRACK,
         CLOSEBRACK,
         END,
-
-        STATEMENT,
-        BLOCK,
     }
 
     private static String whites = " \t\n;";
