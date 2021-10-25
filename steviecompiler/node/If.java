@@ -5,55 +5,50 @@ import steviecompiler.node.expression.Expression;
 import steviecompiler.error.ErrorHandler;
 
 public class If extends Statement {
+	private static TokenType[] tokenSequence = {TokenType.IF, TokenType.OPENPARAN, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
 	public Expression condition;
 	public Block block;
 
 	public If() {
 		int beginIndex = Node.index;
-		if (Node.currentToken().getType() == TokenType.IF) {
+		int i;
+		if (Node.currentToken().getType() == tokenSequence[0]) {
 			Node.index++;
 		} else {
 			Node.index = beginIndex;
 			return;
 		}
 
-		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
-			Node.index++;
-		} else {
-			expectedToken = TokenType.OPENPARAN;
-			ErrorHandler.generate(001);
+		for(i = 1; i < 2; i++, Node.index++) {
+			if (Node.currentToken().getType() != tokenSequence[i]) {
+				Node.index = beginIndex;
+				expectedToken = tokenSequence[i];
+				ErrorHandler.generate(001);
+			}
 		}
 
 		condition = Expression.expect();
-		if (!condition.isValid) {
+		if(!condition.isValid) {
 			throw new Error("Expected expression not " + Node.currentToken());
 		}
 
-		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
-			Node.index++;
-		} else {
-			expectedToken = TokenType.CLOSEPARAN;
-			ErrorHandler.generate(001);
-		}
-
-		if (Node.currentToken().getType() == TokenType.OPENCURLY) {
-			Node.index++;
-		} else {
-			expectedToken = TokenType.OPENCURLY;
-			ErrorHandler.generate(001);
+		for(i = 2; i < 4; i++, Node.index++) {
+			if (Node.currentToken().getType() != tokenSequence[i]) {
+				Node.index = beginIndex;
+				expectedToken = tokenSequence[i];
+				ErrorHandler.generate(001);
+			}
 		}
 
 		block = new Block();
 
-		System.out.println(block);
-
-		if (Node.currentToken().getType() == TokenType.CLOSECURLY) {
-			Node.index++;
-		} else {
-			expectedToken = TokenType.CLOSECURLY;
+		i = 4;
+		if (Node.currentToken().getType() != tokenSequence[i]) {
+			Node.index = beginIndex;
+			expectedToken = tokenSequence[i];
 			ErrorHandler.generate(001);
 		}
-
+		Node.index++;
 		isValid = true;
 	}
 
