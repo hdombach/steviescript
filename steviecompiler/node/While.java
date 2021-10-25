@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.error.ErrorHandler;
 import steviecompiler.node.expression.Expression;
 
 public class While extends Statement {
@@ -19,7 +20,8 @@ public class While extends Statement {
 		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
 			Node.index++;
 		} else {
-			Node.GenerateUnexpectedTokenError(TokenType.OPENPARAN);
+			expectedToken = TokenType.OPENPARAN;
+			ErrorHandler.generate(001);
 		}
 
 		condition = Expression.expect();
@@ -30,13 +32,15 @@ public class While extends Statement {
 		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
 			Node.index++;
 		} else {
-			GenerateUnexpectedTokenError(TokenType.CLOSEPARAN);
+			expectedToken = TokenType.CLOSEPARAN;
+			ErrorHandler.generate(001);
 		}
 
 		if (Node.currentToken().getType() == TokenType.OPENCURLY) {
 			Node.index++;
 		} else {
-			GenerateUnexpectedTokenError(TokenType.OPENCURLY);
+			expectedToken = TokenType.OPENCURLY;
+			ErrorHandler.generate(001);
 		}
 
 		loop = new Block();
@@ -44,7 +48,8 @@ public class While extends Statement {
 		if(Node.currentToken().getType() == TokenType.CLOSECURLY) {
 			Node.index++;
 		} else {
-			GenerateUnexpectedTokenError(TokenType.CLOSECURLY);
+			expectedToken = TokenType.CLOSECURLY;
+			ErrorHandler.generate(001);
 		}
 		isValid = true;
 	}

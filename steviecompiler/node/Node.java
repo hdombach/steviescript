@@ -14,6 +14,7 @@ abstract public class Node {
 	protected static Integer indent = 0;
 	private static String printIndentChar = "| ";
 	protected boolean isValid = false;
+	protected static TokenType expectedToken;
 		
 	protected static String indentStr() {
 		var result = "";
@@ -24,6 +25,7 @@ abstract public class Node {
 	}
 
 	public boolean isValid() { return isValid; }
+	public static Token expectedToken() { return new Token(expectedToken, currentToken().getLine()); }
 	
 	public static void parse(ArrayList<Token> tokensIn) {
 		tokens = tokensIn;
@@ -37,7 +39,7 @@ abstract public class Node {
 	
 	public static Block getCode() {return block;};
 	
-	protected static Token currentToken() {
+	public static Token currentToken() {
 		if (tokens.size() > index) {
 			return tokens.get(index);
 		} else {
@@ -50,12 +52,4 @@ abstract public class Node {
 		return Expression.expect();
 	}
 
-	public static void GenerateUnexpectedTokenError(TokenType t) {
-		UnexpectedTokenError(t, currentToken());
-	}
-
-	public static void UnexpectedTokenError (TokenType t, Token content) {
-		System.out.println("ERROR at " + Main.filePath + " line " + content.getLine() + ": Unexpected Token (Expected " + t.name() + " found " + content.getType() + ")");
-		System.exit(1);
-	}
 }

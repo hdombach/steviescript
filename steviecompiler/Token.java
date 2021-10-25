@@ -20,7 +20,6 @@ public class Token {
         MATH,
         EQUALS,
         RETURN,
-        //ENDLN,
         OPENCURLY,
         CLOSECURLY,
         OPENPARAN,
