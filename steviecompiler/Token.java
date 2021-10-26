@@ -2,7 +2,14 @@ package steviecompiler;
 
 import java.util.ArrayList;
 
+/**
+ * 
+ * @author Benjamin Boardmna
+ * @author Hezekiah Dombach
+ */
 public class Token {
+
+    /** An enum of all the types of tokens stevieScript supports */
     public static enum TokenType {
         IF,
         ELSE,
@@ -29,30 +36,79 @@ public class Token {
         END,
     }
 
+    /* Whitespace characters stevieScript supports */
     private static String whites = " \t\n;";
+    
+    /* Operators stevieScript supports */
     private static String specs = "=.|><&-";
+
+    /* Enclosures stevieScript supports */
     private static String enclosures = "(){}[]";
+
+    /* An ArrayList of tokens. Tokens will be added to the ArrayList when a code is tokenized. A new ArrayList is not generated. */
     private static ArrayList<Token> tokens = new ArrayList<Token>();
+
+    /* Type of token */
     private TokenType type;
+
+    /* The token text */
     private String content;
+    
+    /* The line of code the token came from*/
     private int line;
     
+    /**
+     * Constructs a new token and adds it to the static ArrayList of tokens
+     * 
+     * @param type The type of token
+     * @param line The line of code the token came from
+     */
     public Token(TokenType type, int line){
         this.type = type;
         this.line = line;
         tokens.add(this);
     }
 
+    /**
+     * Constructs a new token and adds it to the static ArrayList of tokens
+     * 
+     * @param type The type of token
+     * @param content The token text
+     * @param line The line of code the token came from
+     */
 	public Token(TokenType type, String content, int line){
         this(type, line);
         this.content = content; 
     }
 
+    /**
+     * Gets the ArrayList of all the tokens
+     * @return the ArrayList of all the tokens
+     */
     public static ArrayList<Token> getTokenList()   { return tokens; }
+    
+    /**
+     * Gets the type of the token
+     * @return the type of token
+     */
     public TokenType getType()                      { return type; }
+    
+    /**
+     * Gets the text of the token
+     * @return The token text, if any
+     */
     public String getContent()                      { return content; }
+    
+    /**
+     * Gets the line of code where the token came from
+     * @return the line of code where the token came from
+     */
     public int getLine()                            { return line; }
 
+    /**
+     * 
+     * @return 
+     */
     public String toString() {
         String asString = "{" + type;
         if(content != null) {
@@ -61,15 +117,21 @@ public class Token {
         return asString + ", line " + line + "}"; 
     }
 
+    /**
+     * 
+     * @param token
+     * @return
+     */
     public boolean equals(Token token) {
         return type == token.getType() && content == token.getContent();
     }
 
-    /** 
-    *
-    * @param code - A line of code, to convert into a token
-    *
-    */
+    /**
+     * Takes in a line of code and splits it into tokens, adding them to the static ArrayList of tokens
+     * 
+     * @param code A line of code to convert into tokens
+     * @param line The line number of the code
+     */
     public static void tokenize(String code, int line) {
         boolean isSpecial = false;
         String accumulator = "";
@@ -134,10 +196,21 @@ public class Token {
         }
     }
 
+    /**
+     * 
+     * @param content
+     * @param line
+     */
     private static void createString(String content, int line) {
         new Token(TokenType.STRING, content, line);
     }
 
+    /**
+     * 
+     * 
+     * @param tokenText 
+     * @param line 
+     */
     private static void createToken(String tokenText, int line) {
         switch(tokenText) {
             case "if":
@@ -217,7 +290,7 @@ public class Token {
                     Integer.parseInt(tokenText);
                     Double.parseDouble(tokenText);
                     new Token(TokenType.NUMBER, tokenText, line);
-                } catch(Exception e) {
+                } catch (Exception e) {
                     new Token(TokenType.WORD, tokenText, line);
                 }
         }
