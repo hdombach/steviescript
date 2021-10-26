@@ -6,6 +6,7 @@ public abstract class Expression extends Node {
 	public Node content;
 	protected String expressionText = "";
 	protected static int beginIndex;
+	private static Boolean includeMethods = true;
 
 	public static Expression expect() {
 		return _expect(true);
@@ -14,29 +15,49 @@ public abstract class Expression extends Node {
 		return _expect(false);
 	}
 
+	private static Expression loadMethods(Expression e) {
+		if (true) {
+			return e;
+		}
+		Expression current = e;
+		if (includeMethods) {
+			return e;
+		}
+		while (true) {
+			CallMethod m = new CallMethod(current);
+			if (m.isValid) {
+				current = m;
+			} else {
+				break;
+			}
+		}
+		return current;
+	}
+
 	private static Expression _expect(Boolean expectOperation) {
 		beginIndex = Node.index;
 		Expression e;
+		includeMethods = expectOperation;
 
 		if (expectOperation) {
 			e = new Operation();
 			if (e.isValid) {
-				return e;
+				return loadMethods(e);
 			}
 		}
 		Node.index = beginIndex;
 
 		e = new FloatExpression();
-		if (e.isValid) { return e; }
+		if (e.isValid) { return loadMethods(e); }
 		Node.index = beginIndex;
 		e = new IntegerExpression();
 
-		if (e.isValid) { return e; }
+		if (e.isValid) { return loadMethods(e); }
 		Node.index = beginIndex;
 
 		e = new BooleanExpression();
 
-		if (e.isValid) { return e; }
+		if (e.isValid) { return loadMethods(e); }
 		Node.index = beginIndex;
 
 		return e;

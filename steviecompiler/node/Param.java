@@ -9,18 +9,17 @@ import java.util.ArrayList;
 //TODO: this is not actaully tested because it requires other things
 
 public class Param extends Node {
-	public ArrayList<Expression> expressions = new ArrayList<Expression>()
+	public ArrayList<Expression> expressions = new ArrayList<Expression>();
 
 	public Param() {
 		int beginIndex = Node.index;
 
-		if (Node.currentToken().getType() == "(") {
+		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
 			Node.index++;
 		} else {
 			Node.index = beginIndex;
 			return;
 		}
-
 		Expression e = Expression.expect();
 		if (e.isValid) {
 			expressions.add(e);
@@ -32,13 +31,17 @@ public class Param extends Node {
 					expressions.add(e);
 					index++;
 				} else {
+					System.out.println("no epxression"); //temp
 					ErrorHandler.generate(001);
 				}
 			}
 		}
-		if (Node.currentToken().getType() == ")") {
+		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
 			Node.index++;
 		} else {
+
+			System.out.println("no )"); //temp
+			expectedToken = TokenType.CLOSEPARAN;
 			ErrorHandler.generate(001);
 		}
 

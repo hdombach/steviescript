@@ -194,10 +194,8 @@ public class Token {
                 break;
             case "=":
                 new Token(TokenType.EQUALS, line);
-            case "":
                 break;
-            case ".":
-                new Token(TokenType.PERIOD, line);
+            case "":
                 break;
             case ",":
                 new Token(TokenType.COMMA, line);
@@ -226,7 +224,11 @@ public class Token {
                     Double.parseDouble(tokenText);
                     new Token(TokenType.NUMBER, tokenText, line);
                 } catch(Exception e) {
-                    new Token(TokenType.WORD, tokenText, line);
+                    if (tokenText.equals(".")) {
+                        new Token(TokenType.PERIOD, line);
+                    } else {
+                        new Token(TokenType.WORD, tokenText, line);
+                    }
                 }
         }
     }
