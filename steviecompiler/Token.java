@@ -26,11 +26,13 @@ public class Token {
         CLOSEPARAN,
         OPENBRACK,
         CLOSEBRACK,
+        PERIOD,
+        COMMA,
         END,
     }
 
     private static String whites = " \t\n;";
-    private static String specs = "=.|><&-";
+    private static String specs = "=.|><&-,";
     private static String enclosures = "(){}[]";
     private static ArrayList<Token> tokens = new ArrayList<Token>();
     private TokenType type;
@@ -193,6 +195,12 @@ public class Token {
             case "=":
                 new Token(TokenType.EQUALS, line);
             case "":
+                break;
+            case ".":
+                new Token(TokenType.PERIOD, line);
+                break;
+            case ",":
+                new Token(TokenType.COMMA, line);
                 break;
             case "{":
                 new Token(TokenType.OPENCURLY, line);
