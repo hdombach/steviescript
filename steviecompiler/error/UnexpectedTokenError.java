@@ -19,6 +19,9 @@ public class UnexpectedTokenError extends ErrorHandler {
 
     public String extractText(Token t) {
         String extracted;
+        if (t.getType() == null) {
+            return "NULL";
+        }
         switch(t.getType()) {
             case TRUE:
                 extracted = "true";
@@ -49,6 +52,12 @@ public class UnexpectedTokenError extends ErrorHandler {
                 break;
             case CLOSECURLY:
                 extracted = "}";
+                break;
+            case PERIOD:
+                extracted = ".";
+                break;
+            case COMMA:
+                extracted = ",";
                 break;
             default:
             extracted = t.getContent();

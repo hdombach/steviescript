@@ -1,7 +1,15 @@
 CODE = BLOCK
 BLOCK = [STATEMENT]
 STATEMENT = IF | SET | WHILE | FOR | DEFFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT
-EVALUATEDSTATEMENT = VARIABLENAME | EXPRESSION | CALLFUNC | [EVALUATEDSTATEMENT + "." METHOD]
+
+EXPRESSION = OPERATION | '(' + EXPRESSION +')' | value | CREATESTRUCT | VARIABLENAME | CALLFUNC | CALLMETHOD
+/*
+    
+*/
+
+CALLMETHOD = EXPRESSION + "." + name + PARAMS
+
+PARAMS = "(" + EXPRESSION + ["," + EXPRESSION] + ")"
 
 DEFFUNC = "function" + functionName + "(" + [dataType + variableName] + ")" + ?("->" + dataType) + "{" + BLOCK + "}"
 /*	
@@ -38,10 +46,7 @@ CALLFUNC = functionName + "(" + [dataType + variableName] + ")"
     myFunction(a, b, c)
 */
 
-EXPRESSION = EVALUATEDSTATEMENT | OPERATION | '(' + EXPRESSION +')' | value | CREATESTRUCT
-/*
-    
-*/
+
 
 OPERATION = EXPRESSION + operator + EXPRESSION
 

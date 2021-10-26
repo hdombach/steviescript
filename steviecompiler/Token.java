@@ -3,6 +3,7 @@ package steviecompiler;
 import java.util.ArrayList;
 
 /**
+ * The Token class is 
  * 
  * @author Benjamin Boardmna
  * @author Hezekiah Dombach
@@ -33,6 +34,8 @@ public class Token {
         CLOSEPARAN,
         OPENBRACK,
         CLOSEBRACK,
+        PERIOD,
+        COMMA,
         END,
     }
 
@@ -40,7 +43,7 @@ public class Token {
     private static String whites = " \t\n;";
     
     /* Operators stevieScript supports */
-    private static String specs = "=.|><&-";
+    private static String specs = "=.|><&-,";
 
     /* Enclosures stevieScript supports */
     private static String enclosures = "(){}[]";
@@ -106,8 +109,9 @@ public class Token {
     public int getLine()                            { return line; }
 
     /**
+     * Represents the token as a String
      * 
-     * @return 
+     * @return A string representation of the token {type, [content, if any], line #}
      */
     public String toString() {
         String asString = "{" + type;
@@ -118,16 +122,17 @@ public class Token {
     }
 
     /**
+     * Checks if two tokens are the same type and have the same text
      * 
-     * @param token
-     * @return
+     * @param token Another Token object
+     * @return true if the two tokens are the same
      */
     public boolean equals(Token token) {
         return type == token.getType() && content == token.getContent();
     }
 
     /**
-     * Takes in a line of code and splits it into tokens, adding them to the static ArrayList of tokens
+     * Takes in a line of code and splits it into tokens
      * 
      * @param code A line of code to convert into tokens
      * @param line The line number of the code
@@ -197,19 +202,20 @@ public class Token {
     }
 
     /**
+     * Creates a String Token
      * 
-     * @param content
-     * @param line
+     * @param content The text in the string
+     * @param line The line of code where the string is from
      */
     private static void createString(String content, int line) {
         new Token(TokenType.STRING, content, line);
     }
 
     /**
+     * Creates a new Token object given tokenText
      * 
-     * 
-     * @param tokenText 
-     * @param line 
+     * @param tokenText The text of the token
+     * @param line THe line of code where the token is from
      */
     private static void createToken(String tokenText, int line) {
         switch(tokenText) {
@@ -265,7 +271,11 @@ public class Token {
                 break;
             case "=":
                 new Token(TokenType.EQUALS, line);
+                break;
             case "":
+                break;
+            case ",":
+                new Token(TokenType.COMMA, line);
                 break;
             case "{":
                 new Token(TokenType.OPENCURLY, line);
@@ -290,8 +300,12 @@ public class Token {
                     Integer.parseInt(tokenText);
                     Double.parseDouble(tokenText);
                     new Token(TokenType.NUMBER, tokenText, line);
-                } catch (Exception e) {
-                    new Token(TokenType.WORD, tokenText, line);
+                } catch(Exception e) {
+                    if (tokenText.equals(".")) {
+                        new Token(TokenType.PERIOD, line);
+                    } else {
+                        new Token(TokenType.WORD, tokenText, line);
+                    }
                 }
         }
     }

@@ -11,7 +11,7 @@ abstract public class Node {
 	protected static ArrayList<Token> tokens;
 	private static Block block;
 	protected static Integer indent = 0;
-	private static String printIndentChar = "| ";
+	private static String printIndentChar = "⦙ ";
 	protected boolean isValid = false;
 	protected static TokenType expectedToken;
 		
