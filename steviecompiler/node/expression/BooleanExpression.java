@@ -6,6 +6,7 @@ import steviecompiler.node.Node;
 public class BooleanExpression extends Expression {
     
     public BooleanExpression() {
+        int beginIndex = Node.index;
         if(currentToken().getType() == TokenType.TRUE) {
             expressionText += "True";
         }

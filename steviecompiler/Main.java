@@ -13,7 +13,10 @@ public class Main{
     public static String filePath;
     public static HashMap<String, ArrayList<String>> codeText = new HashMap<String, ArrayList<String>>();
     public static void main(String[] args){
-      filePath = args[0]; 
+      filePath = "test.txt";
+      if (args.length > 0) {
+        filePath = args[0];
+      }
       readFile(filePath);
       //System.out.println(Token.getTokenList());
       Node.parse(Token.getTokenList());

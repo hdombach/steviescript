@@ -47,7 +47,7 @@ abstract public class Node {
 	}
 
 	private static Expression expectExpression() {
-		index++;
+		//index++;
 		return Expression.expect();
 	}
 

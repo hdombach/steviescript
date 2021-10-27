@@ -34,7 +34,7 @@ public class CallMethod extends Expression {
 			ErrorHandler.generate(001);
 		}
 		isValid = true;
-		body = body;
+		this.body = body;
 	}
 
 	public String toString() {

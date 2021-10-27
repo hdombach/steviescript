@@ -23,28 +23,38 @@ public class Param extends Node {
 		Expression e = Expression.expect();
 		if (e.isValid) {
 			expressions.add(e);
-			index++;
 			while (Node.currentToken().getType() == TokenType.COMMA) {
 				index++;
 				e = Expression.expect();
 				if (e.isValid) {
 					expressions.add(e);
-					index++;
 				} else {
 					System.out.println("no epxression"); //temp
 					ErrorHandler.generate(001);
 				}
 			}
+		} else {
+			Node.index = beginIndex;
 		}
 		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
 			Node.index++;
 		} else {
 
-			System.out.println("no )"); //temp
 			expectedToken = TokenType.CLOSEPARAN;
 			ErrorHandler.generate(001);
 		}
 
 		isValid = true;
+	}
+
+	public String toString() {
+		String result = "";
+		result += Node.indentStr() + "Paramaters:\n";
+		Node.indent++;
+		for (int i = 0; i < expressions.size(); i++) {
+			result += expressions.get(i);
+		}
+		Node.indent--;
+		return result;
 	}
 }

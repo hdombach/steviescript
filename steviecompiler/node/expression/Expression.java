@@ -16,13 +16,7 @@ public abstract class Expression extends Node {
 	}
 
 	private static Expression loadMethods(Expression e) {
-		if (true) {
-			return e;
-		}
 		Expression current = e;
-		if (includeMethods) {
-			return e;
-		}
 		while (true) {
 			CallMethod m = new CallMethod(current);
 			if (m.isValid) {
@@ -35,9 +29,8 @@ public abstract class Expression extends Node {
 	}
 
 	private static Expression _expect(Boolean expectOperation) {
-		beginIndex = Node.index;
+		int beginIndex = Node.index;
 		Expression e;
-		includeMethods = expectOperation;
 
 		if (expectOperation) {
 			e = new Operation();
@@ -52,7 +45,7 @@ public abstract class Expression extends Node {
 		Node.index = beginIndex;
 		e = new IntegerExpression();
 
-		if (e.isValid) { return loadMethods(e); }
+		if (e.isValid) {return loadMethods(e); }
 		Node.index = beginIndex;
 
 		e = new BooleanExpression();

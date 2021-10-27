@@ -12,8 +12,8 @@ public class IntegerExpression extends NumericExpression {
         isValid = true;
 
         for(int i = 0; i < 1; i++, Node.index++) {
-            if(currentToken().getType() == tokenSequence[i]) {
-                expressionText += currentToken().getContent();
+            if(Node.currentToken().getType() == tokenSequence[i]) {
+                expressionText += Node.currentToken().getContent();
             }
             else {
                 Node.index = beginIndex;
