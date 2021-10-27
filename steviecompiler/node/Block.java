@@ -5,16 +5,15 @@ import java.util.ArrayList;
 
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();
-	public static Statement currentStatement;
 
 	public Block(){
 		while (true){
 			if (Node.tokens.size() <= Node.index)
 				break;
 
-			currentStatement = Statement.expect();
-			if (currentStatement.isValid){
-				statements.add(currentStatement);
+			Statement statement = Statement.expect();
+			if (statement.isValid){
+				statements.add(statement);
 			} else {
 				return;
 			}
