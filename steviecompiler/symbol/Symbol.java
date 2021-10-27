@@ -5,12 +5,12 @@ import steviecompiler.node.DataType;
 
 
 public class Symbol {
-    DataType datatype;
-    Object val;
+    private DataType datatype;
+    private Object val;
 
     public Symbol(CreateVar c) {
         datatype = c.type;
-        this.val = c.expression;
+        val = c.expression;
     }
     
 }

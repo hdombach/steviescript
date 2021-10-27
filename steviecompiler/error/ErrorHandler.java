@@ -1,5 +1,7 @@
 package steviecompiler.error;
 
+import java.util.ArrayList;
+
 import steviecompiler.Main;
 import steviecompiler.Token;
 import steviecompiler.node.Node;
@@ -8,10 +10,12 @@ public abstract class ErrorHandler {
     protected int errorCode;
     protected int errorLine;
     protected String filePath;
+    protected static ArrayList<ErrorHandler> errors = new ArrayList<ErrorHandler>();
 
     public abstract String toString();
 
     public ErrorHandler() {
+        errors.add(this);
         filePath = Main.filePath;
     }
 
@@ -19,6 +23,8 @@ public abstract class ErrorHandler {
         switch(key) {
             case 1:
                 generateUnexpectedTokenError(Node.expectedToken(), Node.currentToken());
+            case 2:
+                generateInvalidStatementError(Node.currentToken().getLine());
             default:
         }
 
@@ -28,12 +34,18 @@ public abstract class ErrorHandler {
         new UnexpectedTokenError(expected, recieved);
     }
 
+    private static void generateInvalidStatementError(int line) {
+        new InvalidStatementError(line);
+    }
+
     /*GenerateXYZError(param p) {
         new XYZError(p);
     }*/
 
-    protected void throwError() {
-        System.out.println(this);
-        System.exit(this.errorCode);
+    public static void throwErrors() {
+        for(ErrorHandler e : errors) {
+            System.out.println(e);
+        }
+        System.out.println("Parsed with " + errors.size() + " errors.");
     }
 }

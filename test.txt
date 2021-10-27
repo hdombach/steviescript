@@ -1,4 +1,4 @@
-while( 1 + 1 ){}
+wheel
 
 another = 2 + 1
 

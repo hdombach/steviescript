@@ -14,7 +14,6 @@ public class UnexpectedTokenError extends ErrorHandler {
         this.expected = extractText(expected);
         this.recieved = extractText(recieved);
         errorLine = recieved.getLine();
-        throwError();
     }
 
     public String extractText(Token t) {
