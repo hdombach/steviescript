@@ -277,6 +277,9 @@ public class Token {
             case ",":
                 new Token(TokenType.COMMA, line);
                 break;
+            case ".":
+                new Token(TokenType.PERIOD, line);
+                break;
             case "{":
                 new Token(TokenType.OPENCURLY, line);
                 break;
@@ -301,11 +304,7 @@ public class Token {
                     Double.parseDouble(tokenText);
                     new Token(TokenType.NUMBER, tokenText, line);
                 } catch(Exception e) {
-                    if (tokenText.equals(".")) {
-                        new Token(TokenType.PERIOD, line);
-                    } else {
-                        new Token(TokenType.WORD, tokenText, line);
-                    }
+                    new Token(TokenType.WORD, tokenText, line);
                 }
         }
     }

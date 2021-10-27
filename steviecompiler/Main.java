@@ -18,7 +18,7 @@ public class Main{
         filePath = args[0];
       }
       readFile(filePath);
-      //System.out.println(Token.getTokenList());
+      System.out.println(Token.getTokenList());
       Node.parse(Token.getTokenList());
       System.out.println(Node.getCode());
       ErrorHandler.throwErrors();

@@ -4,7 +4,7 @@ import steviecompiler.node.Node;
 import steviecompiler.Token.TokenType;
 
 public class FloatExpression extends NumericExpression {
-    private static TokenType[] tokenSequence = {TokenType.NUMBER, TokenType.WORD /* period */, TokenType.NUMBER};
+    private static TokenType[] tokenSequence = {TokenType.NUMBER, TokenType.PERIOD, TokenType.NUMBER};
     private double value;
 
     public FloatExpression() {
@@ -13,7 +13,11 @@ public class FloatExpression extends NumericExpression {
 
         for(int i = 0; i <= 2; i++, Node.index++) {
             if(currentToken().getType() == tokenSequence[i]) {
-                expressionText += currentToken().getContent();
+                if (currentToken().getType() == TokenType.PERIOD) {
+                    expressionText += ".";
+                } else {
+                    expressionText += currentToken().getContent();
+                }
             }
             else {
                 Node.index = beginIndex;
