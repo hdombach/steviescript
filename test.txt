@@ -1,4 +1,4 @@
-wheel
+
 
 another = 2 + 1.method(5, 2 + 4)
 

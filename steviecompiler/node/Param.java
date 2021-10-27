@@ -24,7 +24,7 @@ public class Param extends Node {
 		if (e.isValid) {
 			expressions.add(e);
 			while (Node.currentToken().getType() == TokenType.COMMA) {
-				index++;
+				Node.index++;
 				e = Expression.expect();
 				if (e.isValid) {
 					expressions.add(e);
