@@ -47,8 +47,8 @@ public class CallMethod extends Expression {
 		Node.indent--;
 		result += Node.indentStr() + "Name: " + name + "\n";
 		result += Node.indentStr() + "Params: \n" ;
-		Node.indent++;
 		result += param;
+		Node.indent--;
 		return result;
 	};
 }

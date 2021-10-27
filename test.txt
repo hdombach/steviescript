@@ -1,6 +1,6 @@
 
 
-another = 2.4 + 1.method(5.4, 2 + 4)
+another = 2.4 + 1.method(5.4, 2 + 4).anotherMethod(5)
 
 while (1 == 2) {
 	if (4 == 2) {

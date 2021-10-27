@@ -49,12 +49,13 @@ public class Param extends Node {
 
 	public String toString() {
 		String result = "";
+		Node.indent++;
 		result += Node.indentStr() + "Paramaters:\n";
 		Node.indent++;
 		for (int i = 0; i < expressions.size(); i++) {
 			result += expressions.get(i);
 		}
-		Node.indent--;
+		Node.indent -= 2;
 		return result;
 	}
 }
