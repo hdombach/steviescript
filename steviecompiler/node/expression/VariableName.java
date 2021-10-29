@@ -13,6 +13,7 @@ public class VariableName extends Expression {
 		if (token.getType() == Token.TokenType.WORD){
 			name = token.getContent();
 			isValid = true;
+			Node.index++;
 		}
 	}
 
