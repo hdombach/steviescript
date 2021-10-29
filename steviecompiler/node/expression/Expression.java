@@ -1,5 +1,8 @@
 package steviecompiler.node.expression;
 
+import steviecompiler.error.ErrorHandler;
+
+import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
 
 public abstract class Expression extends Node {
@@ -39,19 +42,32 @@ public abstract class Expression extends Node {
 			}
 		}
 		Node.index = beginIndex;
-
 		e = new FloatExpression();
 		if (e.isValid) { return loadMethods(e); }
+
 		Node.index = beginIndex;
 		e = new IntegerExpression();
-
 		if (e.isValid) {return loadMethods(e); }
-		Node.index = beginIndex;
 
+		Node.index = beginIndex;
 		e = new BooleanExpression();
-
 		if (e.isValid) { return loadMethods(e); }
+
 		Node.index = beginIndex;
+		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
+			Node.index++;
+			e = Expression.expect();
+			if (!e.isValid) {
+				ErrorHandler.generate(002);
+			}
+			if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
+				Node.index++;
+				return loadMethods(e);
+			} else {
+				expectedToken = TokenType.CLOSEPARAN;
+				ErrorHandler.generate(001);
+			}
+		}
 
 		return e;
 		
