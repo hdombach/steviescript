@@ -16,3 +16,5 @@ load <result> "raw"
 set <result> <value>
 app <result> <value> //appends value to result
 get <result> <value> <start> <length> //get specific bytes from value
+alloc <result> <length> //length is in bits
+free <address>
