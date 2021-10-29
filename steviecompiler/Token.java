@@ -3,14 +3,17 @@ package steviecompiler;
 import java.util.ArrayList;
 
 /**
- * The Token class is 
+ * The Token class implements methods to convert a line of code into tokens.
+ * The Token object represents tokens in the stevieScript language.
  * 
- * @author Benjamin Boardmna
+ * @author Benjamin Boardman
  * @author Hezekiah Dombach
  */
 public class Token {
 
-    /** An enum of all the types of tokens stevieScript supports */
+    /** 
+     * An enum of all the types of tokens stevieScript supports 
+     */
     public static enum TokenType {
         IF,
         ELSE,
@@ -51,7 +54,7 @@ public class Token {
     /* An ArrayList of tokens. Tokens will be added to the ArrayList when a code is tokenized. A new ArrayList is not generated. */
     private static ArrayList<Token> tokens = new ArrayList<Token>();
 
-    /* Type of token */
+    /* Type of token as described by enum TokenType */
     private TokenType type;
 
     /* The token text */
@@ -111,7 +114,7 @@ public class Token {
     /**
      * Represents the token as a String
      * 
-     * @return A string representation of the token {type, [content, if any], line #}
+     * @return A string representation of the token
      */
     public String toString() {
         String asString = "{" + type;
@@ -132,7 +135,11 @@ public class Token {
     }
 
     /**
-     * Takes in a line of code and splits it into tokens
+     * Takes in a line of code and splits it into tokens.
+     * The code takes in a line of code as a String and cycles through the String by character.
+     * It appends the character to an accumulator string.
+     * When the character hits a whitespace or a new token, the accumulated string is made into a new token and cleared.
+     * The loop continues until the end of the code.
      * 
      * @param code A line of code to convert into tokens
      * @param line The line number of the code
@@ -202,7 +209,7 @@ public class Token {
     }
 
     /**
-     * Creates a String Token
+     * Creates a new Token from content.
      * 
      * @param content The text in the string
      * @param line The line of code where the string is from
@@ -212,7 +219,7 @@ public class Token {
     }
 
     /**
-     * Creates a new Token object given tokenText
+     * Creates a new Token object given tokenText.
      * 
      * @param tokenText The text of the token
      * @param line THe line of code where the token is from
