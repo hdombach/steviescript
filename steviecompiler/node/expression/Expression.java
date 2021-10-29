@@ -54,6 +54,10 @@ public abstract class Expression extends Node {
 		if (e.isValid) { return loadMethods(e); }
 
 		Node.index = beginIndex;
+		e = new VariableExpression();
+		if (e.isValid) { return loadMethods(e); }
+
+		Node.index = beginIndex;
 		if (Node.currentToken().getType() == TokenType.OPENPARAN) {
 			Node.index++;
 			e = Expression.expect();
