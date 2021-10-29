@@ -1,0 +1,18 @@
+push
+pop
+add <result> <a> <b>
+sub <result> <a> <b>
+div <result> <a> <b>
+mul <result> <a> <b>
+mod <result> <a> <b>
+comp <result> <a> <b>
+grt <result> <a> <b>
+lst <result> <a> <b>
+out <a>
+in <result>
+if <a> <line>
+go <line>
+load <result> "raw"
+set <result> <value>
+app <result> <value> //appends value to result
+get <result> <value> <start> <length> //get specific bytes from value
