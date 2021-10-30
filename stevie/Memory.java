@@ -37,6 +37,10 @@ public class Memory {
 	}
 
 	public static void printContents() {
-		System.out.println(cont);
+		int c = 0;
+		while (cont.size() > c) {
+			System.out.println(get(c));
+			c++;
+		}
 	}
 }

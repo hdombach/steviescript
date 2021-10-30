@@ -24,14 +24,7 @@ public class Main {
 		}
 		readFile(filePath);
 
-		while (true) {
-			try {
-				System.out.println(Memory.getInt(programCounter));
-			} catch (Exception e) {
-				break;
-			}
-			programCounter += 1;
-		}
+		Memory.printContents();
 	}
 
 	public static void readFile(String path){
