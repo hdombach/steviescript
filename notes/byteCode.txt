@@ -18,4 +18,5 @@ app <result> <value> //appends value to result
 get <result> <value> <start> <length> //get specific bytes from value
 alloc <result> <length>
 free <address>
+var <length> //global variables
 exit

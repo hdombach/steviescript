@@ -51,7 +51,7 @@ public class Commands {
 				Memory.set(Main.getInstruction(1), c);
 				return 4;
 				
-			case 20: //exit
+			case 21: //exit
 				Main.stop();
 				return 0;
 			default:
