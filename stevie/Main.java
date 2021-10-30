@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class Main {
 	public static String filePath;
 	private static int programCounter;
+	private static Boolean shouldExit;
 
 	public static int getInstruction(int offset) {
 		BigInteger big = new BigInteger(Memory.get(programCounter + offset));
@@ -15,14 +16,24 @@ public class Main {
 		return big.intValue();
 	}
 
+	public static void stop() {
+		shouldExit = true;
+	}
+
 	public static void main(String[] args) {
 		Memory.init();
+		shouldExit = false;
 		programCounter = 0;
 		filePath = "test.s";
 		if (args.length > 0) {
 			filePath = args[0];
 		}
 		readFile(filePath);
+
+		//atually run code
+		while (!shouldExit) {
+			programCounter += Commands.run(Memory.getInt(programCounter));
+		}
 
 		Memory.printContents();
 	}

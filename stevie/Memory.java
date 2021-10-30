@@ -3,6 +3,7 @@ package stevie;
 import java.lang.reflect.Array;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Memory {
 	private static ArrayList<byte[]> cont;
@@ -23,6 +24,14 @@ public class Memory {
 		cont.remove(cont.size() - 1);
 	}
 
+	public static void set(int address, byte[] value) {
+		if (address < 0) {
+			cont.set(cont.size() - address, value);
+		} else {
+			cont.set(address, value);
+		}
+	}
+
 	public static byte[] get(int address) {
 		if (address < 0) {
 			return cont.get(cont.size() - address);
@@ -39,7 +48,7 @@ public class Memory {
 	public static void printContents() {
 		int c = 0;
 		while (cont.size() > c) {
-			System.out.println(get(c));
+			System.out.println(Arrays.toString(get(c)));
 			c++;
 		}
 	}
