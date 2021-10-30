@@ -20,4 +20,8 @@ public class VariableName extends Expression {
 	public String toString() {
 		return Node.indentStr() + "Variable: " + name + "\n";
 	}
+
+	public String content() {
+		return name;
+	}
 }

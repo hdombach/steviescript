@@ -7,7 +7,7 @@ public class DataType extends Node {
 
 	public DataType(){
 		Token token = Node.currentToken();
-		if (token.getType() == Token.TokenType.WORD){
+		if (token.getType() == Token.TokenType.VAR) {
 			name = token.getContent();
 			isValid = true;
 		}

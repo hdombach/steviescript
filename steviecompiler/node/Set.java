@@ -4,7 +4,7 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;;
 
 public class Set extends Statement {
-	private static TokenType[] tokenSquence = {TokenType.WORD, TokenType.EQUALS};
+	private static TokenType[] tokenSequence = {TokenType.WORD, TokenType.EQUALS};
 	public String name;
 	public Expression expression;
 
@@ -12,8 +12,7 @@ public class Set extends Statement {
 		int beginIndex = Node.index;
 		name = currentToken().getContent();
 		for(int i = 0; i < 2; i++, Node.index++) {
-			if (Node.currentToken().getType() == tokenSquence[i]) {
-			} else {
+			if (Node.currentToken().getType() != tokenSequence[i]) {
 				Node.index = beginIndex;
 				return;
 			}
