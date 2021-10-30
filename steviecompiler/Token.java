@@ -311,7 +311,6 @@ public class Token {
                 break;
             default:
                 try{
-                    Integer.parseInt(tokenText);
                     Double.parseDouble(tokenText);
                     new Token(TokenType.NUMBER, tokenText, line);
                 } catch(Exception e) {
