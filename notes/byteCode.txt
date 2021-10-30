@@ -1,5 +1,5 @@
 push <length>
-pop <length>
+pop
 add <result> <a> <b>
 sub <result> <a> <b>
 div <result> <a> <b>

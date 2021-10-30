@@ -1,21 +1,37 @@
 package stevie;
 
 import java.io.File;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Main {
 	public static String filePath;
-	public static ArrayList<Integer> instructions;
+	private static int programCounter;
+
+	public static int getInstruction(int offset) {
+		BigInteger big = new BigInteger(Memory.get(programCounter + offset));
+
+		return big.intValue();
+	}
 
 	public static void main(String[] args) {
-		instructions = new ArrayList<Integer>();
+		Memory.init();
+		programCounter = 0;
 		filePath = "test.s";
 		if (args.length > 0) {
 			filePath = args[0];
 		}
 		readFile(filePath);
-		System.out.println(instructions);
+
+		while (true) {
+			try {
+				System.out.println(Memory.getInt(programCounter));
+			} catch (Exception e) {
+				break;
+			}
+			programCounter += 1;
+		}
 	}
 
 	public static void readFile(String path){
@@ -23,11 +39,13 @@ public class Main {
 			Scanner reader = new Scanner(new File(path));
 			while (reader.hasNextLine()) {
 				String thisLine = reader.nextLine();
-				commands.add(Integer.parseInt(thisLine));
+				BigInteger value = new BigInteger(thisLine);
+				Memory.push(value.toByteArray());
 			}
 			reader.close();
 		} catch (Exception e) {
 			System.out.println(e);
+			e.printStackTrace();
 			System.exit(1);
 		}
 	}
