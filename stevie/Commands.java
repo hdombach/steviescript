@@ -8,10 +8,10 @@ public class Commands {
 	
 	//returns the length of the commmand. Ect, pop command is 1 long, add command is 4 long.
 	public static int run(Integer command) {
+		byte[] a;
+		byte[] b;
+		byte[] c;
 		switch (command) {
-			byte[] a;
-			byte[] b;
-			byte[] c;
 
 			case 0: //push
 				int size = Main.getInstruction(1);
@@ -51,7 +51,7 @@ public class Commands {
 				Memory.set(Main.getInstruction(1), c);
 				return 4;
 				
-			case 20: //exit
+			case 21: //exit
 				Main.stop();
 				return 0;
 			default:

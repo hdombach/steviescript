@@ -44,7 +44,7 @@ public class Main {
 			while (reader.hasNextLine()) {
 				String thisLine = reader.nextLine();
 				BigInteger value = new BigInteger(thisLine);
-				Memory.push(value.toByteArray());
+				Memory.var(value.toByteArray());
 			}
 			reader.close();
 		} catch (Exception e) {
