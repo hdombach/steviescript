@@ -2,16 +2,20 @@ package steviecompiler.node;
 
 import java.util.ArrayList;
 
+import steviecompiler.symbol.SymbolTable;
+
 
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();
+	protected SymbolTable symbols;
 
 	public Block(){
+		symbols = new SymbolTable();
 		while (true){
 			if (Node.tokens.size() <= Node.index)
 				break;
 
-			Statement statement = Statement.expect();
+			Statement statement = Statement.expect(symbols);
 			if (statement.isValid){
 				statements.add(statement);
 			} else {
