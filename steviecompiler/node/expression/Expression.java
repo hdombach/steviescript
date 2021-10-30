@@ -54,6 +54,10 @@ public abstract class Expression extends Node {
 		if (e.isValid) { return loadMethods(e); }
 
 		Node.index = beginIndex;
+		e = new FunctionCall();
+		if (e.isValid) {return loadMethods(e);}
+
+		Node.index = beginIndex;
 		e = new VariableName();
 		if (e.isValid) { return loadMethods(e); }
 
