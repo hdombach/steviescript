@@ -8,6 +8,13 @@
 			"type": "java",
 			"name": "Launch Main",
 			"request": "launch",
+			"mainClass": "stevie.Main",
+			"projectName": "stevieScript_1319da88"
+		},
+		{
+			"type": "java",
+			"name": "Launch Main",
+			"request": "launch",
 			"mainClass": "steviecompiler.Main",
 			"projectName": "steviescript_5ecba08b"
 		},
