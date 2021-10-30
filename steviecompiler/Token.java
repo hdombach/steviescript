@@ -39,6 +39,7 @@ public class Token {
         CLOSEBRACK,
         PERIOD,
         COMMA,
+        POINTER,
         END,
     }
 
@@ -46,7 +47,7 @@ public class Token {
     private static String whites = " \t\n;";
     
     /* Operators stevieScript supports */
-    private static String specs = "=.|><&-,";
+    private static String specs = "@=.|><&-,";
 
     /* Enclosures stevieScript supports */
     private static String enclosures = "(){}[]";
@@ -304,6 +305,9 @@ public class Token {
                 break;
             case "]":
                 new Token(TokenType.CLOSEBRACK, line);
+                break;
+            case "@":
+                new Token(TokenType.POINTER, line);
                 break;
             default:
                 try{
