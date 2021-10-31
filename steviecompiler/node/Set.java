@@ -9,10 +9,12 @@ public class Set extends Statement {
 	public Expression expression;
 
 	public Set(){
+		isValid = true;
 		int beginIndex = Node.index;
 		name = currentToken().getContent();
 		for(int i = 0; i < 2; i++, Node.index++) {
 			if (Node.currentToken().getType() != tokenSequence[i]) {
+				isValid = false;
 				Node.index = beginIndex;
 				return;
 			}
@@ -23,7 +25,7 @@ public class Set extends Statement {
 			isValid = false;
 			return;
 		}
-		isValid = true;
+		
 	}
 
 	public String toString() {
