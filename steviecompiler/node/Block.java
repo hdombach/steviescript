@@ -15,7 +15,7 @@ public class Block extends Node {
 			if (Node.tokens.size() <= Node.index)
 				break;
 
-			Statement statement = Statement.expect(symbols);
+			Statement statement = Statement.expect(symbols, statements);
 			if (statement.isValid){
 				statements.add(statement);
 			} else {

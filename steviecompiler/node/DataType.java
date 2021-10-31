@@ -17,7 +17,7 @@ public class DataType extends Node {
 		return Node.indentStr() + "DataType: " + name + "\n";
 	}
 
-	public String name() {
+	public String getType() {
 		return name;
 	}
 }

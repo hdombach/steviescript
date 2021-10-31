@@ -16,7 +16,7 @@ public class Flag {
     }
 
     public String toString() {
-        return"[" + datatype.name() + ", " + address + "]";
+        return"[" + datatype.getType() + ", " + address + "]";
     }
     
 }
