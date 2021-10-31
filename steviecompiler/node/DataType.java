@@ -3,7 +3,7 @@ package steviecompiler.node;
 import steviecompiler.Token;
 
 public class DataType extends Node {
-	public String name;
+	private String name;
 
 	public DataType(){
 		Token token = Node.currentToken();
@@ -15,5 +15,9 @@ public class DataType extends Node {
 
 	public String toString(){
 		return Node.indentStr() + "DataType: " + name + "\n";
+	}
+
+	public String name() {
+		return name;
 	}
 }

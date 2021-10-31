@@ -21,6 +21,7 @@ public class Set extends Statement {
 		expression = Expression.expect();
 		if (!expression.isValid) {
 			isValid = false;
+			return;
 		}
 		isValid = true;
 	}

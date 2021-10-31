@@ -14,5 +14,9 @@ public class Flag {
         address = index;
         index++;
     }
+
+    public String toString() {
+        return"[" + datatype.name() + ", " + address + "]";
+    }
     
 }
