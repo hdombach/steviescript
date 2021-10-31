@@ -15,8 +15,8 @@ public abstract class Statement extends Node {
 			Node.index--;
 			Set tempSet = new Set();
 			if(tempSet.isValid) {
-				statements.add(tempSet);
-				return temp;
+				statements.add(temp);
+				return tempSet;
 			}
 			Node.index++;
 			return temp;
