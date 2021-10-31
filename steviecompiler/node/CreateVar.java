@@ -24,7 +24,7 @@ public class CreateVar extends Statement {
 			Node.index = beginIndex;
 			return;
 		}
-		this.name = name.content();		
+		this.name = name.content();	
 	}
 
 	//Needs toString()
