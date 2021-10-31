@@ -19,6 +19,9 @@ public class Main {
 	public static void stop() {
 		shouldExit = true;
 	}
+	public static void jump(int newCounter) {
+		programCounter = newCounter;
+	}
 
 	public static void main(String[] args) {
 		Memory.init();
@@ -33,9 +36,10 @@ public class Main {
 		//atually run code
 		while (!shouldExit) {
 			programCounter += Commands.run(Memory.getInt(programCounter));
+			//System.out.println(getInstruction(0));
 		}
 
-		Memory.printContents();
+		//Memory.printContents();
 	}
 
 	public static void readFile(String path){

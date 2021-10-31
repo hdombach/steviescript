@@ -57,7 +57,7 @@ public class Memory {
 
 	public static void set(int address, byte[] value) {
 		if (address < 0) {
-			cont.set(cont.size() - address, value);
+			cont.set(cont.size() + address, value);
 		} else {
 			cont.set(address, value);
 		}
@@ -65,7 +65,7 @@ public class Memory {
 
 	public static byte[] get(int address) {
 		if (address < 0) {
-			return cont.get(cont.size() - address);
+			return cont.get(cont.size() + address);
 		} else {
 			return cont.get(address);
 		}
