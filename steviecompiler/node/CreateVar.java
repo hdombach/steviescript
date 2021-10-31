@@ -27,5 +27,13 @@ public class CreateVar extends Statement {
 		this.name = name.content();	
 	}
 
-	//Needs toString()
+	public String toString() {
+		String result = "";
+		result += Node.indentStr() + "Statement " + name + ": \n";
+		Node.indent++;
+		result += Node.indentStr() + "type: " + type.getType() + "\n";
+		Node.indent--;
+		Node.indent--;
+		return result;
+	}
 }
