@@ -7,6 +7,7 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
 
 abstract public class Node {
+	protected boolean unexpectedToken = false;
 	protected static int index = 0;
 	protected static ArrayList<Token> tokens;
 	private static Block block;

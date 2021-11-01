@@ -5,10 +5,11 @@ import java.util.ArrayList;
 import steviecompiler.symbol.SymbolTable;
 
 public abstract class Statement extends Node {
-	protected boolean unexpectedToken = false;
+	protected static SymbolTable symbols;
 
 	public static Statement expect(SymbolTable symbols, ArrayList<Statement> statements) {
 		Statement temp;
+		Statement.symbols = symbols;
 
 		temp = new CreateVar();
 		if (temp.isValid) {

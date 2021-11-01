@@ -1,3 +1,8 @@
 int test2
 test2 = 1
 int test3 = @test2
+
+int y
+for(int x = 0, x < 5, x = x + 1){
+    y = y + 1
+}
