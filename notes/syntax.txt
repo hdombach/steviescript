@@ -35,9 +35,9 @@ WHILE = "while" + "(" + expression + ")" + "{" + BLOCK + "}"
     while (boolean expression) {}
 */
 
-FOR = "for" + "(" + CREATEVAR + "," + EXPRESSION + "," + STATEMENT + ")" + "(" + BLOCK + ")"
+FOR = "for" + "(" + CREATEVAR + "," + EXPRESSION + "," + EXPRESSION + ")" + "(" + BLOCK + ")"
 /*
-    for(CREATEVAR, EXPRESSION, statement) {}
+    for(CREATEVAR, EXPRESSION, EXPRESSION) {}
 */
 
 
