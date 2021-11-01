@@ -23,8 +23,10 @@ public abstract class ErrorHandler {
         switch(key) {
             case 1:
                 generateUnexpectedTokenError(Node.expectedToken(), Node.currentToken());
+                break;
             case 2:
                 generateInvalidStatementError(Node.currentToken().getLine());
+                break;
             default:
         }
 

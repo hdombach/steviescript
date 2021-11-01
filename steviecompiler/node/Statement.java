@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import steviecompiler.symbol.SymbolTable;
 
 public abstract class Statement extends Node {
+	protected boolean unexpectedToken = false;
 
 	public static Statement expect(SymbolTable symbols, ArrayList<Statement> statements) {
 		Statement temp;
@@ -21,19 +22,40 @@ public abstract class Statement extends Node {
 			Node.index++;
 			return temp;
 		}
+		else if(temp.unexpectedToken) {
+			return null;
+		}
 
 		temp = new Set();
 		if (temp.isValid) {
 			return temp;
 		}
+		else if(temp.unexpectedToken) {
+			return null;
+		}	
+		
 		temp = new While();
 		if (temp.isValid) {
 			return temp;
+		}
+		else if(temp.unexpectedToken) {
+			return null;
 		}
 
 		temp = new If();
 		if (temp.isValid) {
 			return temp;
+		}
+		else if(temp.unexpectedToken) {
+			return null;
+		}
+
+		temp = new For();
+		if(temp.isValid) {
+			return temp;
+		}
+		else if(temp.unexpectedToken) {
+			return null;
 		}
 
 		temp = new End();
@@ -41,7 +63,10 @@ public abstract class Statement extends Node {
 			return temp;
 		}
 
-		return new InvalidStatement();
+		if(!temp.unexpectedToken) {
+			return new InvalidStatement();
+		}
+		return null;
 	}
 
 }
