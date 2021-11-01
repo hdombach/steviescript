@@ -89,19 +89,37 @@ public class Memory {
 	}
 
 	public static void set(int address, byte[] value) {
-		
+		bytes.put(address, value);
 	}
 
-	public static byte[] get(int address) {
-		throw new Error("Not implemented");
+	//Normalizes the adress
+	private static int normAdd(int address) {
+		if (address < 0) {
+			return heapSize + stackSize + address;
+		} else {
+			return address;
+		}
+	}
+
+	public static byte[] get(int address, int length) {
+		return bytes.get(new byte[length], normAdd(address), length).array();
 	}
 
 	public static int getInt(int address) {
-		throw new Error("Not implemented");
+		return bytes.getInt(normAdd(address));
 	}
 
 	public static void printContents() {
-		
+		int c = 0;
+		byte[] section;
+		while (c < metaData.size()) {
+			MetaData d = metaData.get(c);
+			section = get(d.start, d.length);
+			System.out.println(d.start + ": " + section);
+		}
+
+		section = get(heapSize, stackSize);
+		System.out.println("Stack: " + section);
 	}
 	public static void printMetData() {
 		System.out.println(metaData);
