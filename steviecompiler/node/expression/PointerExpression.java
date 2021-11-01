@@ -21,5 +21,7 @@ public class PointerExpression extends Expression {
 	}
 
 
-    //needs toString()
+    public String toString() {
+        return Node.indentStr() + "Pointer: " + name + "\n";
+    }
 }

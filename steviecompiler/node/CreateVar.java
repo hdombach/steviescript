@@ -33,7 +33,6 @@ public class CreateVar extends Statement {
 		Node.indent++;
 		result += Node.indentStr() + "type: " + type.getType() + "\n";
 		Node.indent--;
-		Node.indent--;
 		return result;
 	}
 }

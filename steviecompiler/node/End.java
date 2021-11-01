@@ -11,5 +11,9 @@ public class End extends Statement {
         }
     }
 
-    //Needs toString()
+    public String toString() {
+        String result = "";
+		result += Node.indentStr() + "END\n";
+        return result;
+    }
 }
