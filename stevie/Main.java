@@ -34,6 +34,7 @@ public class Main {
 		Memory.free(4);
 		Memory.free(13);
 		Memory.printMetData();
+		Memory.printContents();
 
 		if (true) {
 			return;
