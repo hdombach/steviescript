@@ -19,7 +19,7 @@ public class Commands {
 				Memory.push(size);
 				return 2;
 			case 1: //pop
-				Memory.pop();
+				//Memory.pop();
 				return 1;
 			case 2: //add
 				a = Memory.get(Main.getInstruction(2));
