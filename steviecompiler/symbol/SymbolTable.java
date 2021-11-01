@@ -6,22 +6,22 @@ import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 
 public class SymbolTable {
-    public static HashMap<String, Flag> globalTable = new HashMap<String, Flag>();
+    public static HashMap<String, Symbol> globalTable = new HashMap<String, Symbol>();
 
-    public static HashMap<String, Flag> table;
+    public static HashMap<String, Symbol> table;
 
     public SymbolTable() {
-        table = new HashMap<String, Flag>();
+        table = new HashMap<String, Symbol>();
     }
 
     public void symbolize(CreateVar make) {
-        Flag symbol = new Flag(make);
+        Symbol symbol = new Symbol(make);
         table.put(make.name, symbol);
         globalTable.put(make.name, symbol);
     }
 
 
-    public Flag get(String name) {
+    public Symbol get(String name) {
         return table.get(name);
     }
 
