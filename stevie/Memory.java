@@ -6,6 +6,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 
 /*
 
@@ -46,14 +48,25 @@ public class Memory {
 		metaData.add(new MetaData(0, startingHeapSize));
 	}
 
+	private static void increaseStack() {
+		maxStackSize *= 2;
+		ByteBuffer bigger = ByteBuffer.allocate(heapSize + maxStackSize);
+		bytes.position(0);
+		bigger.put(bytes);
+		bytes = bigger;
+	}
+
 	//adds to end of stack
 	public static void push(int length) {
-		bytes.put(stackSize, new byte[length]);
-		stackSize += length;
+		push(new byte[length]);
 	}
 	//adds to end of stack
 	public static void push(byte[] data) {
-		bytes.put(stackSize, data);
+		while (stackSize + data.length > bytes.capacity()) {
+			increaseStack();
+		}
+		bytes.position(stackSize);
+		bytes.put(data);
 		stackSize += data.length;
 	}
 
@@ -119,7 +132,8 @@ public class Memory {
 
 	
 	public static void set(int address, byte[] value) {
-		bytes.put(normAdd(address), value);
+		bytes.position(normAdd(address));
+		bytes.put(value);
 	}
 
 	//Normalizes the adress
@@ -133,7 +147,10 @@ public class Memory {
 	}
 
 	public static byte[] get(int address, int length) {
-		return bytes.get(new byte[length], normAdd(address), length).array();
+		bytes.position(normAdd(address));
+		byte[] result = new byte[length];
+		bytes.get(result);
+		return result;
 	}
 
 	public static int getInt(int address) {
@@ -145,12 +162,25 @@ public class Memory {
 		byte[] section;
 		while (c < metaData.size()) {
 			MetaData d = metaData.get(c);
-			section = get(d.start, d.length);
-			System.out.println(d.start + ": " + section);
+			System.out.println(d);
+			int add = 0;
+			while (d.length > add) {
+				byte thing = get(add, 1)[0];
+				System.out.println((int) thing);
+				add += 1;
+			}
+			c += 1;
 		}
 
-		section = get(heapSize, stackSize);
-		System.out.println("Stack: " + section);
+		int add = 0;
+		System.out.println(add);
+		if (true) {
+			return;
+		}
+		while (stackSize > add) {
+			System.out.println((int) get(heapSize + add, 1)[0]);
+			add += 1;
+		}
 	}
 	public static void printMetData() {
 		System.out.println(metaData);

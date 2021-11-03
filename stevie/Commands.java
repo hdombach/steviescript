@@ -1,5 +1,6 @@
 package stevie;
 
+import java.io.StreamTokenizer;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -12,61 +13,62 @@ public class Commands {
 		byte[] a;
 		byte[] b;
 		byte[] c;
+		int size;
 		switch (command) {
-
 			case 0: //push
-				int size = Main.getInstruction(1);
+				size = Main.getInstruction(1, 4);
 				Memory.push(size);
 				return 2;
 			case 1: //pop
-				//Memory.pop();
+				size = Main.getInstruction(2, 4);
+				Memory.pop(size);
 				return 1;
 			case 2: //add
 				a = Memory.get(Main.getInstruction(2), 4);
 				b = Memory.get(Main.getInstruction(3), 4);
 				c = (new BigInteger(a).add(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 4;
+				return 5;
 			case 3: //sub
 				a = Memory.get(Main.getInstruction(2), 4);
 				b = Memory.get(Main.getInstruction(3), 4);
 				c = (new BigInteger(a).subtract(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 4;
+				return 5;
 			case 4: //divide
 				a = Memory.get(Main.getInstruction(2), 4);
 				b = Memory.get(Main.getInstruction(3), 4);
 				c = (new BigInteger(a).divide(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 4;
+				return 5;
 			case 5: //multiply
 				a = Memory.get(Main.getInstruction(2), 4);
 				b = Memory.get(Main.getInstruction(3), 4);
 				c = (new BigInteger(a).multiply(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 4;
+				return 5;
 			case 6: //mod
 				a = Memory.get(Main.getInstruction(2), 4);
 				b = Memory.get(Main.getInstruction(3), 4);
 				c = (new BigInteger(a).mod(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 4;
+				return 5;
 			case 7: //compare
 				a = Memory.get(Main.getInstruction(2), 4);
 				b = Memory.get(Main.getInstruction(3), 4);
 				int tempC = new BigInteger(a).compareTo(new BigInteger(b));
 				c = ByteBuffer.allocate(4).putInt(tempC).array();
 				Memory.set(Main.getInstruction(1), c);
-				return 4;
+				return 5;
 			case 8: //out
-				a = Memory.get(Main.getInstruction(1), 1);
+				a = Memory.get(Main.getInstruction(1), Main.getInstruction(2));
 				System.out.println(new BigInteger(a));
-				return 2;
+				return 3;
 			case 9: //in
 				//TODO: i don't know how i wanna do this yet
 				return 2;
 			case 10: //if
-				a = Memory.get(Main.getInstruction(1));
+				a = Memory.get(Main.getInstruction(1), 1);
 				if (0 > a[0]) {
 					Main.jump(Main.getInstruction(2));
 					return 0;
@@ -88,15 +90,15 @@ public class Commands {
 				Memory.set(Main.getInstruction(1), a);
 				return 3 + length;
 			case 13: //set
-				Memory.set(Main.getInstruction(1), Memory.get(Main.getInstruction(2)));
-				return 3;
+				Memory.set(Main.getInstruction(1), Memory.get(Main.getInstruction(2), Main.getInstruction(3)));
+				return 4;
 			case 14: //appends stuff
-				a = Memory.get(Main.getInstruction(2));
+				/*a = Memory.get(Main.getInstruction(2));
 				b = Memory.get(Main.getInstruction(3));
 				c = new byte[a.length + b.length];
 				System.arraycopy(a, 0, c, 0, a.length);
 				System.arraycopy(b, 0, c, a.length, b.length);
-				Memory.set(Main.getInstruction(1), c);
+				Memory.set(Main.getInstruction(1), c);*/
 				return 4;
 			case 15: //get
 			//TODO: do this as wel

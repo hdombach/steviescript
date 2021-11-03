@@ -1,21 +1,21 @@
 push <length>
-pop
-add <result> <a> <b>
-sub <result> <a> <b>
-div <result> <a> <b>
-mul <result> <a> <b>
-mod <result> <a> <b>
-comp <result> <a> <b>
-out <a>
+pop <lenght>
+add <result> <a> <b> <length>
+sub <result> <a> <b> <length>
+div <result> <a> <b> <length>
+mul <result> <a> <b> <length>
+mod <result> <a> <b> <length>
+comp <result> <a> <b> <length>
+out <a> <length>
 in <result>
-if <a> <line> //jumps if negative
-go <line>
-load <result> <length> "raw"
-set <result> <value>
-join <result> <beggining> <end>
-get <result> <value> <start> <length> //get specific bytes from value
+if <a> <line> //jumps if negative. as is always 1 byte
+go <line> //line number is always 4 bytes long
+load <result> <length> "raw" //needs to be list of byte long numbers
+set <result> <value> <length>
+__  join <result> <beggining> <end> //deprecated
+__ get <result> <value> <start> <length> //deprecated
 alloc <result> <length>
-free <address>
+free <address> //address is 4 bytes long
 var <length> //global variables
 
 

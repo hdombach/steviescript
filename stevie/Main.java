@@ -11,8 +11,15 @@ public class Main {
 	private static int programCounter;
 	private static Boolean shouldExit;
 
+
+	//deafult instruciton size is 4
 	public static int getInstruction(int offset) {
-		BigInteger big = new BigInteger(Memory.get(programCounter + offset));
+		return getInstruction(offset, 4);
+	}
+
+	//commands are one byte long
+	public static int getInstruction(int offset, int length) {
+		BigInteger big = new BigInteger(Memory.get(programCounter + offset, length));
 
 		return big.intValue();
 	}
@@ -26,19 +33,7 @@ public class Main {
 
 	public static void main(String[] args) {
 		Memory.init(128, 128);
-
-		Memory.alloc(4);
-		Memory.alloc(9);
-		Memory.alloc(5);
-		Memory.alloc(2);
-		Memory.free(4);
-		Memory.free(13);
-		Memory.printMetData();
-		Memory.printContents();
-
-		if (true) {
-			return;
-		}
+		
 		shouldExit = false;
 		programCounter = 0;
 		filePath = "test.s";
@@ -47,29 +42,40 @@ public class Main {
 		}
 		readFile(filePath);
 
+		System.out.println(Memory.getInt(1));
+
+		if (true) {
+			return;
+		}
+
+		Memory.printContents();
+
 		//atually run code
 		while (!shouldExit) {
-			programCounter += Commands.run(Memory.getInt(programCounter));
-			//System.out.println(getInstruction(0));
+			System.out.println(getInstruction(0) + ", " + programCounter);
+			if (programCounter > 100) {
+				shouldExit = true;
+			}
+			programCounter += Commands.run(getInstruction(0, 1));
 		}
 
 		//Memory.printContents();
 	}
 
+	//assumes that memory is empty so will start writing at 0
 	public static void readFile(String path){
 		try {
 			Scanner reader = new Scanner(new File(path));
 			ArrayList<Byte> commands = new ArrayList<Byte>();
+			int add = 0;
+			byte[] bytes = new byte[1];
 			while (reader.hasNextLine()) {
 				String thisLine = reader.nextLine();
-				int value = Integer.parseInt(thisLine);
-				byte[] bytes = ByteBuffer.allocate(4).putInt(value).array();
-				int c = 0;
-				while (4 > c) {
-					commands.add(bytes[c]);
-					c += 1;
-				}
+				bytes[0] = (byte) Integer.parseInt(thisLine);
+				Memory.set(add, bytes);
+				add += 1;
 			}
+			Memory.alloc(add);
 			reader.close();
 		} catch (Exception e) {
 			System.out.println(e);
