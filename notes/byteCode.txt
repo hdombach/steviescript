@@ -1,22 +1,31 @@
-push <length>
-pop <lenght>
-add <result> <a> <b> <length>
-sub <result> <a> <b> <length>
-div <result> <a> <b> <length>
-mul <result> <a> <b> <length>
-mod <result> <a> <b> <length>
-comp <result> <a> <b> <length>
-out <a> <length>
-in <result>
-if <a> <line> //jumps if negative. as is always 1 byte
-go <line> //line number is always 4 bytes long
-load <result> <length> "raw" //needs to be list of byte long numbers
-set <result> <value> <length>
+The is the definition of the assembly code the parse will generate
+Start with a command such as push which identified by a number one byte long.
+Unless told otherwise, every input is 4 bytes long
+I wrote the offset from the starting address in every address feild
+The final bytecode will be list of signed 1 byte integers.
+
+
+
+
+push <1 length>
+pop <1 lenght>
+add <1 result> <5 a> <9 b> <13 length>
+sub <1 result> <5 a> <9 b> <13 length>
+div <1 result> <5 a> <9 b> <13 length>
+mul <1 result> <5 a> <9 b> <13 length>
+mod <1 result> <5 a> <9 b> <13 length>
+comp <1 result> <5 a> <9 b> <13 length>
+out <1 a> <5 length>
+in <1 result>
+if <1 a> <2 line> //jumps if negative. a is always 1 byte
+go <1 line>
+load <1 result> <5 length> "raw" //needs to be list of byte long numbers
+set <1 result> <5 value> <9 length>
 __  join <result> <beggining> <end> //deprecated
 __ get <result> <value> <start> <length> //deprecated
-alloc <result> <length>
-free <address> //address is 4 bytes long
-var <length> //global variables
+alloc <1 result> <5 length>
+free <1 address>
+var <1 length> //global variables
 
 
 
