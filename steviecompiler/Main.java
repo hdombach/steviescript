@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import steviecompiler.node.Node;
 import steviecompiler.symbol.SymbolTable;
 import steviecompiler.error.ErrorHandler;
-
+ 
 
 public class Main{   
     public static String filePath;

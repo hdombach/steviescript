@@ -22,49 +22,54 @@ public class Commands {
 			case 1: //pop
 				size = Main.getInstruction(1);
 				Memory.pop(size);
-				return 1;
+				return 5;
 			case 2: //add
 				size = Main.getInstruction(13);
 				a = Memory.get(Main.getInstruction(5), size);
 				b = Memory.get(Main.getInstruction(9), size);
 				c = (new BigInteger(a).add(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 5;
+				return 17;
 			case 3: //sub
-				a = Memory.get(Main.getInstruction(2), 4);
-				b = Memory.get(Main.getInstruction(3), 4);
+				size = Main.getInstruction(13);
+				a = Memory.get(Main.getInstruction(5), size);
+				b = Memory.get(Main.getInstruction(9), size);
 				c = (new BigInteger(a).subtract(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 5;
+				return 17;
 			case 4: //divide
-				a = Memory.get(Main.getInstruction(2), 4);
-				b = Memory.get(Main.getInstruction(3), 4);
+				size = Main.getInstruction(13);
+				a = Memory.get(Main.getInstruction(5), size);
+				b = Memory.get(Main.getInstruction(9), size);
 				c = (new BigInteger(a).divide(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 5;
+				return 17;
 			case 5: //multiply
-				a = Memory.get(Main.getInstruction(2), 4);
-				b = Memory.get(Main.getInstruction(3), 4);
+				size = Main.getInstruction(13);
+				a = Memory.get(Main.getInstruction(5), size);
+				b = Memory.get(Main.getInstruction(9), size);
 				c = (new BigInteger(a).multiply(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 5;
+				return 17;
 			case 6: //mod
-				a = Memory.get(Main.getInstruction(2), 4);
-				b = Memory.get(Main.getInstruction(3), 4);
+				size = Main.getInstruction(13);
+				a = Memory.get(Main.getInstruction(5), size);
+				b = Memory.get(Main.getInstruction(9), size);
 				c = (new BigInteger(a).mod(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
-				return 5;
+				return 17;
 			case 7: //compare
-				a = Memory.get(Main.getInstruction(2), 4);
-				b = Memory.get(Main.getInstruction(3), 4);
+				size = Main.getInstruction(13);
+				a = Memory.get(Main.getInstruction(5), size);
+				b = Memory.get(Main.getInstruction(9), size);
 				int tempC = new BigInteger(a).compareTo(new BigInteger(b));
 				c = ByteBuffer.allocate(4).putInt(tempC).array();
 				Memory.set(Main.getInstruction(1), c);
-				return 5;
+				return 17;
 			case 8: //out
-				a = Memory.get(Main.getInstruction(1), Main.getInstruction(2));
+				a = Memory.get(Main.getInstruction(1), Main.getInstruction(5));
 				System.out.println(new BigInteger(a));
-				return 3;
+				return 9;
 			case 9: //in
 				//TODO: i don't know how i wanna do this yet
 				return 2;
@@ -74,25 +79,25 @@ public class Commands {
 					Main.jump(Main.getInstruction(2));
 					return 0;
 				} else {
-					return 3;
+					return 6;
 				}
 			case 11: //go
 				Main.jump(Main.getInstruction(1));
 				return 0;
 			case 12: //load
-				int length = Main.getInstruction(2);
+				int length = Main.getInstruction(5);
 				a = new byte[length];
 
 				int i = 0;
 				while (length > i) {
-					a[i] = Integer.valueOf(Main.getInstruction(3 + i)).byteValue();
+					a[i] = Integer.valueOf(Main.getInstruction(9 + i)).byteValue();
 					i += 1;
 				}
 				Memory.set(Main.getInstruction(1), a);
-				return 3 + length;
+				return 9 + length;
 			case 13: //set
-				Memory.set(Main.getInstruction(1), Memory.get(Main.getInstruction(2), Main.getInstruction(3)));
-				return 4;
+				Memory.set(Main.getInstruction(1), Memory.get(Main.getInstruction(5), Main.getInstruction(9)));
+				return 13;
 			case 14: //appends stuff
 				/*a = Memory.get(Main.getInstruction(2));
 				b = Memory.get(Main.getInstruction(3));
@@ -102,15 +107,15 @@ public class Commands {
 				Memory.set(Main.getInstruction(1), c);*/
 				return 4;
 			case 15: //get
-			//TODO: do this as wel
+			//deprecated
 				return 5;
 			case 16: //alloc
-				int address = Memory.alloc(Main.getInstruction(2));
+				int address = Memory.alloc(Main.getInstruction(5));
 				Memory.set(Main.getInstruction(1), ByteBuffer.allocate(4).putInt(address).array());
-				return 3;
+				return 9;
 			case 17: //free
 				Memory.free(Main.getInstruction(1));
-				return 2;
+				return 5;
 			case 99: //exit
 				Main.stop();
 				return 0;
