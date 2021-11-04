@@ -69,7 +69,6 @@ public class For extends Statement {
             throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
         }
 
-        //Node.index += 2;
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
             isValid = false;
@@ -107,6 +106,8 @@ public class For extends Statement {
             Node.index = beginIndex;
             return;
         }
+
+        Node.index++;
 
         loop = new Block();
                 
