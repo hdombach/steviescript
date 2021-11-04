@@ -39,8 +39,6 @@ public class If extends Statement {
 			}
 		}
 
-		int j;
-
 		//if(!unexpectedToken) {
 			block = new Block(); //TODO: fix error where unexpected token causes infinite loop
 		//}

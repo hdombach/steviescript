@@ -96,6 +96,8 @@ public class Operation extends Expression {
                 return 3;
             case "!=":
             case ">=":
+            case ">":
+            case "<":
             case "<=":
             case "&&":
             case "||":
