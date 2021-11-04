@@ -24,12 +24,8 @@ public class For extends Statement {
         Node.index++;
 
         if(Node.currentToken().getType() != TokenType.OPENPARAN) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.OPENPARAN;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
@@ -53,12 +49,8 @@ public class For extends Statement {
         }
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.COMMA;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
@@ -71,12 +63,8 @@ public class For extends Statement {
 
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.COMMA;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
@@ -88,23 +76,15 @@ public class For extends Statement {
         }
 
         if(Node.currentToken().getType() != TokenType.CLOSEPARAN) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.CLOSEPARAN;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
 
         if(Node.currentToken().getType() != TokenType.OPENCURLY) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.OPENCURLY;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
@@ -112,12 +92,8 @@ public class For extends Statement {
         loop = new Block();
                 
         if(Node.currentToken().getType() != TokenType.CLOSECURLY) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.CLOSECURLY;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;

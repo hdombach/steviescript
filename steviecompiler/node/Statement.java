@@ -68,6 +68,5 @@ public abstract class Statement extends Node {
 	protected void unexpectedToken(int beginIndex) {
 		ErrorHandler.generate(001);
 		this.unexpectedToken = true;
-		//Node.index = beginIndex;
 	}
 }
