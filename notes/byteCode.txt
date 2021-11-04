@@ -5,7 +5,7 @@ I wrote the offset from the starting address in every address feild
 The final bytecode will be list of signed 1 byte integers.
 
 
-
+Right now, all lengths are constants and not addresses
 
 push <1 length>
 pop <1 lenght>

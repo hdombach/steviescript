@@ -6,7 +6,7 @@ import steviecompiler.node.DataType;
 
 public class Symbol {
     protected DataType datatype;
-    private static int index = 0;
+    private static int index = 0; //mabye ahve blocks do this
     private int size;
     protected int address;
 
