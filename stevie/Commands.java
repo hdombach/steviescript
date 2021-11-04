@@ -16,16 +16,17 @@ public class Commands {
 		int size;
 		switch (command) {
 			case 0: //push
-				size = Main.getInstruction(1, 4);
+				size = Main.getInstruction(1);
 				Memory.push(size);
-				return 2;
+				return 5;
 			case 1: //pop
-				size = Main.getInstruction(2, 4);
+				size = Main.getInstruction(1);
 				Memory.pop(size);
 				return 1;
 			case 2: //add
-				a = Memory.get(Main.getInstruction(2), 4);
-				b = Memory.get(Main.getInstruction(3), 4);
+				size = Main.getInstruction(13);
+				a = Memory.get(Main.getInstruction(5), size);
+				b = Memory.get(Main.getInstruction(9), size);
 				c = (new BigInteger(a).add(new BigInteger(b))).toByteArray();
 				Memory.set(Main.getInstruction(1), c);
 				return 5;
