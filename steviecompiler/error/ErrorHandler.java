@@ -22,7 +22,7 @@ public abstract class ErrorHandler {
     public static void generate(int key) {
         switch(key) {
             case 1:
-                generateUnexpectedTokenError(Node.expectedToken(), Node.currentToken());
+                generateUnexpectedTokenError();
                 break;
             case 2:
                 generateInvalidStatementError(Node.currentToken().getLine());
@@ -32,8 +32,8 @@ public abstract class ErrorHandler {
 
     }
 
-    private static void generateUnexpectedTokenError(Token expected, Token recieved) {
-        new UnexpectedTokenError(expected, recieved);
+    private static void generateUnexpectedTokenError() {
+        new UnexpectedTokenError();
     }
 
     private static void generateInvalidStatementError(int line) {
