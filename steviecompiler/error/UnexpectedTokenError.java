@@ -1,6 +1,7 @@
 package steviecompiler.error;
 
 import steviecompiler.Token;
+import steviecompiler.node.Node;
 
 public class UnexpectedTokenError extends ErrorHandler {
     private String expected;
@@ -8,12 +9,12 @@ public class UnexpectedTokenError extends ErrorHandler {
 
 
 
-    public UnexpectedTokenError(Token expected, Token recieved) {
+    public UnexpectedTokenError() {
         super();
         errorCode = 1;
-        this.expected = extractText(expected);
-        this.recieved = extractText(recieved);
-        errorLine = recieved.getLine();
+        expected = extractText(Node.expectedToken());
+        recieved = extractText(Node.currentToken());
+        errorLine = Node.currentToken().getLine();
     }
 
     public String extractText(Token t) {
