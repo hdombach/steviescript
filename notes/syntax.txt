@@ -1,6 +1,6 @@
 CODE = BLOCK
 BLOCK = [STATEMENT]
-STATEMENT = IF | SET | WHILE | FOR | DEFFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT
+STATEMENT = EPXRESSION | IF | SET | WHILE | FOR | DEFFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT
 
 EXPRESSION = OPERATION | '(' + EXPRESSION +')' | value | CREATESTRUCT | VARIABLENAME | CALLFUNC | CALLMETHOD
 /*
@@ -9,7 +9,7 @@ EXPRESSION = OPERATION | '(' + EXPRESSION +')' | value | CREATESTRUCT | VARIABLE
 
 CALLMETHOD = EXPRESSION + "." + name + PARAMS
 
-PARAMS = "(" + EXPRESSION + ["," + EXPRESSION] + ")"
+PARAMS = "(" + ?EXPRESSION + ?["," + EXPRESSION] + ")"
 
 DEFFUNC = "function" + functionName + "(" + [dataType + variableName] + ")" + ?("->" + dataType) + "{" + BLOCK + "}"
 /*	
@@ -41,11 +41,10 @@ FOR = "for" + "(" + CREATEVAR + "," + EXPRESSION + "," + SET + ")" + "(" + BLOCK
 */
 
 
-CALLFUNC = functionName + "(" + [dataType + variableName] + ")"
+CALLFUNC = functionName + PARAM
 /*
     myFunction(a, b, c)
 */
-
 
 
 OPERATION = EXPRESSION + operator + EXPRESSION
