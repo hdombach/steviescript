@@ -16,9 +16,13 @@ public class Block extends Node {
 				break;
 
 			Statement statement = Statement.expect(symbols, statements);
-			if (statement.isValid){
+			if (statement != null && statement.isValid){
 				statements.add(statement);
-			} else {
+			}
+			else if (statement != null && statement.unexpectedToken) {
+
+			}
+			else {
 				return;
 			}
 		}

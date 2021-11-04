@@ -36,17 +36,21 @@ public class For extends Statement {
 
         index = new CreateVar(); //Still not sure how/if we want to store the index declaration in the Statement ArrayList
         if(!index.isValid) {
-            isValid = false;
-            unexpectedToken = true; //Assuming that the CreateVar being invalid will throw an error on its own and this statement doesn't need to
-            Node.index = beginIndex;
-            return;
+            setIndex = new Set();
+            if(!setIndex.isValid) {
+                unexpectedToken = true; //Assuming that the CreateVar being invalid will throw an error on its own and this statement doesn't need to
+                Node.index = beginIndex;
+                return;
+            }
         }
-        symbols.symbolize(index);
-		Node.index--;
-		Set tempSet = new Set();
-		if(tempSet.isValid) {
-            setIndex = tempSet;
-		}
+        else {
+            symbols.symbolize(index);
+		    Node.index--;
+            Set tempSet = new Set();
+		    if(tempSet.isValid) {
+                setIndex = tempSet;
+		    }
+        }
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
             isValid = false;
@@ -65,7 +69,7 @@ public class For extends Statement {
             throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
         }
 
-        Node.index += 2;
+        //Node.index += 2;
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
             isValid = false;

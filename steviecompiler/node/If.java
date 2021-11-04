@@ -21,9 +21,8 @@ public class If extends Statement {
 
 		for(i = 1; i < 2; i++, Node.index++) {
 			if (Node.currentToken().getType() != tokenSequence[i]) {
-				Node.index = beginIndex;
 				expectedToken = tokenSequence[i];
-				ErrorHandler.generate(001);
+				unexpectedToken(beginIndex);
 			}
 		}
 
@@ -34,19 +33,22 @@ public class If extends Statement {
 
 		for(i = 2; i < 4; i++, Node.index++) {
 			if (Node.currentToken().getType() != tokenSequence[i]) {
-				Node.index = beginIndex;
 				expectedToken = tokenSequence[i];
-				ErrorHandler.generate(001);
+				unexpectedToken(beginIndex);
+
 			}
 		}
 
-		block = new Block();
+		int j;
+
+		//if(!unexpectedToken) {
+			block = new Block(); //TODO: fix error where unexpected token causes infinite loop
+		//}
 
 		i = 4;
 		if (Node.currentToken().getType() != tokenSequence[i]) {
-			Node.index = beginIndex;
 			expectedToken = tokenSequence[i];
-			ErrorHandler.generate(001);
+			unexpectedToken(beginIndex);
 		}
 		Node.index++;
 		isValid = true;

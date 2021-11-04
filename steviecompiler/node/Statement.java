@@ -2,6 +2,8 @@ package steviecompiler.node;
 
 import java.util.ArrayList;
 
+import steviecompiler.Token;
+import steviecompiler.error.ErrorHandler;
 import steviecompiler.symbol.SymbolTable;
 
 public abstract class Statement extends Node {
@@ -16,58 +18,56 @@ public abstract class Statement extends Node {
 			symbols.symbolize((CreateVar) (temp));
 			Node.index--;
 			Set tempSet = new Set();
-			if(tempSet.isValid) {
+			if (tempSet.isValid) {
 				statements.add(temp);
 				return tempSet;
 			}
 			Node.index++;
 			return temp;
-		}
-		else if(temp.unexpectedToken) {
+		} else if (temp.unexpectedToken) {
 			return null;
 		}
 
 		temp = new Set();
 		if (temp.isValid) {
 			return temp;
-		}
-		else if(temp.unexpectedToken) {
+		} else if (temp.unexpectedToken) {
 			return null;
-		}	
-		
+		}
+
 		temp = new While();
 		if (temp.isValid) {
 			return temp;
-		}
-		else if(temp.unexpectedToken) {
+		} else if (temp.unexpectedToken) {
 			return null;
 		}
 
 		temp = new If();
-		if (temp.isValid) {
+		if (temp.isValid || temp.unexpectedToken) {
 			return temp;
-		}
-		else if(temp.unexpectedToken) {
-			return null;
 		}
 
 		temp = new For();
-		if(temp.isValid) {
+		if (temp.isValid) {
 			return temp;
-		}
-		else if(temp.unexpectedToken) {
+		} else if (temp.unexpectedToken) {
 			return null;
 		}
 
 		temp = new End();
-		if(temp.isValid) {
+		if (temp.isValid) {
 			return temp;
 		}
 
-		if(!temp.unexpectedToken) {
+		if (!temp.unexpectedToken && Node.currentToken().getType() != Token.TokenType.CLOSECURLY) {
 			return new InvalidStatement();
 		}
 		return null;
 	}
 
+	protected void unexpectedToken(int beginIndex) {
+		ErrorHandler.generate(001);
+		this.unexpectedToken = true;
+		//Node.index = beginIndex;
+	}
 }
