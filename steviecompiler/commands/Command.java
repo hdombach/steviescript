@@ -1,4 +1,4 @@
-package steviecompiler.Command;
+package steviecompiler.commands;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
