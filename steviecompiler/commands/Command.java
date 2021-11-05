@@ -17,12 +17,13 @@ public abstract class Command {
         int i = 0;
         while (4 > i) {
             result += Byte.valueOf(bytes[i]).intValue() + "\n";
+            i += 1;
         }
         return result;
     }
 
     public static void test() {
-        String result = PushCommand.getAssembly(2);
+        String result = PushCommand.getAssembly(-2);
         System.out.println(result);
     }
 }

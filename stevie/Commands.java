@@ -17,6 +17,7 @@ public class Commands {
 		switch (command) {
 			case 0: //push
 				size = Main.getInstruction(1);
+				System.out.println(size);
 				Memory.push(size);
 				return 5;
 			case 1: //pop
