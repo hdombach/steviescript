@@ -262,6 +262,8 @@ public class Token {
             case "var":
                 new Token(TokenType.VAR, tokenText, line);
                 break;
+            case ">":
+            case "<":
             case "<=":
             case "!=":
             case ">=":

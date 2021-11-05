@@ -24,37 +24,33 @@ public class For extends Statement {
         Node.index++;
 
         if(Node.currentToken().getType() != TokenType.OPENPARAN) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.OPENPARAN;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
 
         index = new CreateVar(); //Still not sure how/if we want to store the index declaration in the Statement ArrayList
         if(!index.isValid) {
-            isValid = false;
-            unexpectedToken = true; //Assuming that the CreateVar being invalid will throw an error on its own and this statement doesn't need to
-            Node.index = beginIndex;
-            return;
+            setIndex = new Set();
+            if(!setIndex.isValid) {
+                unexpectedToken = true; //Assuming that the CreateVar being invalid will throw an error on its own and this statement doesn't need to
+                Node.index = beginIndex;
+                return;
+            }
         }
-        symbols.symbolize(index);
-		Node.index--;
-		Set tempSet = new Set();
-		if(tempSet.isValid) {
-            setIndex = tempSet;
-		}
+        else {
+            symbols.symbolize(index);
+		    Node.index--;
+            Set tempSet = new Set();
+		    if(tempSet.isValid) {
+                setIndex = tempSet;
+		    }
+        }
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.COMMA;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
@@ -65,15 +61,10 @@ public class For extends Statement {
             throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
         }
 
-        Node.index += 2;
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.COMMA;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
@@ -85,34 +76,24 @@ public class For extends Statement {
         }
 
         if(Node.currentToken().getType() != TokenType.CLOSEPARAN) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.CLOSEPARAN;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
 
         if(Node.currentToken().getType() != TokenType.OPENCURLY) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.OPENCURLY;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
+
+        Node.index++;
 
         loop = new Block();
                 
         if(Node.currentToken().getType() != TokenType.CLOSECURLY) {
-            isValid = false;
-            unexpectedToken = true;
             Node.expectedToken = TokenType.CLOSECURLY;
-            ErrorHandler.generate(001);
-            Node.index = beginIndex;
-            return;
+            unexpectedToken(beginIndex);
         }
 
         Node.index++;
