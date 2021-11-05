@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.function.Function;
 
 public class Commands {
-	//TODO: update some of the commands so that it takes into account length can be address
 	//returns the length of the commmand. Ect, pop command is 1 long, add command is 4 long.
 	public static int run(Integer command) {
 		byte[] a;
@@ -97,7 +96,8 @@ public class Commands {
 				Memory.set(Main.getInstruction(1), a);
 				return 9 + length;
 			case 13: //set
-				Memory.set(Main.getInstruction(1), Memory.get(Main.getInstruction(5), Main.getInstruction(9)));
+				size = Memory.getInt(Main.getInstruction(9));
+				Memory.set(Main.getInstruction(1), Memory.get(Main.getInstruction(5), size));
 				return 13;
 			case 14: //appends stuff
 				/*a = Memory.get(Main.getInstruction(2));
@@ -111,7 +111,8 @@ public class Commands {
 			//deprecated
 				return 5;
 			case 16: //alloc
-				int address = Memory.alloc(Main.getInstruction(5));
+				size = Memory.getInt(Main.getInstruction(5));
+				int address = Memory.alloc(size);
 				Memory.set(Main.getInstruction(1), ByteBuffer.allocate(4).putInt(address).array());
 				return 9;
 			case 17: //free

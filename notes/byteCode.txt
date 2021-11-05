@@ -9,7 +9,7 @@ Right now, all lengths are constants and not addresses
 
 push <1 length>
 pop <1 lenght>
-add <1 result> <5 a> <9 b> <13 length>
+add <1 @result> <5 @a> <9 @b> <13 length>
 sub <1 @result> <5 @a> <9 @b> <13 length>
 div <1 @result> <5 @a> <9 @b> <13 length>
 mul <1 @result> <5 @a> <9 @b> <13 length>
@@ -26,8 +26,6 @@ __ get <result> <value> <start> <length> //deprecated
 alloc <1 @result> <5 @length>
 free <1 @address>
 var <1 length> //global variables
-
-//TODO: add thingies fro alloc, free, and var.
 
 
 
