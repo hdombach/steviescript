@@ -1,7 +1,8 @@
-package steviecompiler.Command;
+package steviecompiler.commands;
 
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 
 public abstract class Command {
     
@@ -18,5 +19,10 @@ public abstract class Command {
             result += Byte.valueOf(bytes[i]).intValue() + "\n";
         }
         return result;
+    }
+
+    public static void test() {
+        String result = PushCommand.getAssembly(2);
+        System.out.println(result);
     }
 }
