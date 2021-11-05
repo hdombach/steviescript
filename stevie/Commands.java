@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.function.Function;
 
 public class Commands {
-	
+	//TODO: update some of the commands so that it takes into account length can be address
 	//returns the length of the commmand. Ect, pop command is 1 long, add command is 4 long.
 	public static int run(Integer command) {
 		byte[] a;

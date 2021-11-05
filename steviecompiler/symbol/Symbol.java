@@ -34,6 +34,10 @@ public class Symbol {
     public void malloc(int n) {
         size = n;
     }
+
+    public int getAddress() {
+        return address;
+    }
     
     public int getMemSize() {
         return size;

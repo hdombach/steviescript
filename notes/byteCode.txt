@@ -10,23 +10,24 @@ Right now, all lengths are constants and not addresses
 push <1 length>
 pop <1 lenght>
 add <1 result> <5 a> <9 b> <13 length>
-sub <1 result> <5 a> <9 b> <13 length>
-div <1 result> <5 a> <9 b> <13 length>
-mul <1 result> <5 a> <9 b> <13 length>
-mod <1 result> <5 a> <9 b> <13 length>
-comp <1 result> <5 a> <9 b> <13 length>
-out <1 a> <5 length>
-in <1 result>
-if <1 a> <2 line> //jumps if negative. a is always 1 byte
-go <1 line>
-load <1 result> <5 length> "raw" //needs to be list of byte long numbers
-set <1 result> <5 value> <9 length>
+sub <1 @result> <5 @a> <9 @b> <13 length>
+div <1 @result> <5 @a> <9 @b> <13 length>
+mul <1 @result> <5 @a> <9 @b> <13 length>
+mod <1 @result> <5 @a> <9 @b> <13 length>
+comp <1 @result> <5 @a> <9 @b> <13 length>
+out <1 @a> <5 length>
+in <1 @result>
+if <1 @a> <5 line> //jumps if negative. a is always 1 byte
+go <1 @line>
+load <1 @result> <5 length> "raw" //needs to be list of byte long numbers
+set <1 @result> <5 @value> <9 @length>
 __  join <result> <beggining> <end> //deprecated
 __ get <result> <value> <start> <length> //deprecated
-alloc <1 result> <5 length>
-free <1 address>
+alloc <1 @result> <5 @length>
+free <1 @address>
 var <1 length> //global variables
 
+//TODO: add thingies fro alloc, free, and var.
 
 
 

@@ -22,6 +22,19 @@ public abstract class Command {
         return result;
     }
 
+    protected static String parseByte(byte b) {
+        return Byte.valueOf(b).intValue() + "\n";
+    }
+    protected static String parseBytes(byte[] b) {
+        int i = 0;
+        String result = "";
+        while (b.length > i) {
+            result += parseByte(b[i]);
+            i += 1;
+        }
+        return result
+    }
+
     public static void test() {
         String result = PushCommand.getAssembly(-2);
         System.out.println(result);
