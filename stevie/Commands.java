@@ -9,6 +9,9 @@ import java.util.function.Function;
 public class Commands {
 	//returns the length of the commmand. Ect, pop command is 1 long, add command is 4 long.
 	public static int run(Integer command) {
+		int aInt;
+		int bInt;
+		int cInt;
 		byte[] a;
 		byte[] b;
 		byte[] c;
@@ -24,48 +27,59 @@ public class Commands {
 				Memory.pop(size);
 				return 5;
 			case 2: //add
-				size = Main.getField(13);
-				a = Memory.get(Main.getField(5), size);
-				b = Memory.get(Main.getField(9), size);
-				c = (new BigInteger(a).add(new BigInteger(b))).toByteArray();
+				a = Memory.get(Main.getField(5), 4);
+				aInt = ByteBuffer.wrap(a).getInt();
+				b = Memory.get(Main.getField(9), 4);
+				bInt = ByteBuffer.wrap(b).getInt();
+				cInt = aInt + bInt;
+				c = ByteBuffer.allocate(4).putInt(cInt).array();
 				Memory.set(Main.getField(1), c);
-				return 17;
+				return 13;
 			case 3: //sub
-				size = Main.getField(13);
-				a = Memory.get(Main.getField(5), size);
-				b = Memory.get(Main.getField(9), size);
-				c = (new BigInteger(a).subtract(new BigInteger(b))).toByteArray();
+				a = Memory.get(Main.getField(5), 4);
+				aInt = ByteBuffer.wrap(a).getInt();
+				b = Memory.get(Main.getField(9), 4);
+				bInt = ByteBuffer.wrap(b).getInt();
+				cInt = aInt - bInt;
+				c = ByteBuffer.allocate(4).putInt(cInt).array();
 				Memory.set(Main.getField(1), c);
-				return 17;
+				return 13;
 			case 4: //divide
-				size = Main.getField(13);
-				a = Memory.get(Main.getField(5), size);
-				b = Memory.get(Main.getField(9), size);
-				c = (new BigInteger(a).divide(new BigInteger(b))).toByteArray();
+				a = Memory.get(Main.getField(5), 4);
+				aInt = ByteBuffer.wrap(a).getInt();
+				b = Memory.get(Main.getField(9), 4);
+				bInt = ByteBuffer.wrap(b).getInt();
+				cInt = aInt / bInt;
+				c = ByteBuffer.allocate(4).putInt(cInt).array();
 				Memory.set(Main.getField(1), c);
-				return 17;
+				return 13;
 			case 5: //multiply
-				size = Main.getField(13);
-				a = Memory.get(Main.getField(5), size);
-				b = Memory.get(Main.getField(9), size);
-				c = (new BigInteger(a).multiply(new BigInteger(b))).toByteArray();
+				a = Memory.get(Main.getField(5), 4);
+				aInt = ByteBuffer.wrap(a).getInt();
+				b = Memory.get(Main.getField(9), 4);
+				bInt = ByteBuffer.wrap(b).getInt();
+				cInt = aInt * bInt;
+				c = ByteBuffer.allocate(4).putInt(cInt).array();
 				Memory.set(Main.getField(1), c);
-				return 17;
+				return 13;
 			case 6: //mod
-				size = Main.getField(13);
-				a = Memory.get(Main.getField(5), size);
-				b = Memory.get(Main.getField(9), size);
-				c = (new BigInteger(a).mod(new BigInteger(b))).toByteArray();
+				a = Memory.get(Main.getField(5), 4);
+				aInt = ByteBuffer.wrap(a).getInt();
+				b = Memory.get(Main.getField(9), 4);
+				bInt = ByteBuffer.wrap(b).getInt();
+				cInt = aInt % bInt;
+				c = ByteBuffer.allocate(4).putInt(cInt).array();
 				Memory.set(Main.getField(1), c);
-				return 17;
+				return 13;
 			case 7: //compare
-				size = Main.getField(13);
-				a = Memory.get(Main.getField(5), size);
-				b = Memory.get(Main.getField(9), size);
-				int tempC = new BigInteger(a).compareTo(new BigInteger(b));
-				c = ByteBuffer.allocate(4).putInt(tempC).array();
+				a = Memory.get(Main.getField(5), 4);
+				aInt = ByteBuffer.wrap(a).getInt();
+				b = Memory.get(Main.getField(9), 4);
+				bInt = ByteBuffer.wrap(b).getInt();
+				cInt = aInt - bInt;
+				c = ByteBuffer.allocate(4).putInt(cInt).array();
 				Memory.set(Main.getField(1), c);
-				return 17;
+				return 13;
 			case 8: //out
 				a = Memory.get(Main.getField(1), Main.getField(5));
 				System.out.println(new BigInteger(a));

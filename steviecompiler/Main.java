@@ -15,11 +15,6 @@ public class Main{
     public static String filePath;
     public static HashMap<String, ArrayList<String>> codeText = new HashMap<String, ArrayList<String>>();
     public static void main(String[] args){
-      //for testing generating the commands
-      if (true) {
-        Command.test();
-        return;
-      }
 
 
       filePath = "test.txt";

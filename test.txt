@@ -7,6 +7,6 @@ for(int x = 0, x < 5, x = x + 1) {
     y = y + 1
 }
 
-if(y > 2) [
+if(y > 2) {
  test2 = 2
 }

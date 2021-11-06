@@ -4,17 +4,17 @@ Unless told otherwise, every input is 4 bytes long
 I wrote the offset from the starting address in every address feild
 The final bytecode will be list of signed 1 byte integers.
 
-
+Mathmatical operations work on 4 bytes.
 Right now, all lengths are constants and not addresses
 
 push <1 length>
 pop <1 lenght>
-add <1 @result> <5 @a> <9 @b> <13 length>
-sub <1 @result> <5 @a> <9 @b> <13 length>
-div <1 @result> <5 @a> <9 @b> <13 length>
-mul <1 @result> <5 @a> <9 @b> <13 length>
-mod <1 @result> <5 @a> <9 @b> <13 length>
-comp <1 @result> <5 @a> <9 @b> <13 length>
+add <1 @result> <5 @a> <9 @b>
+sub <1 @result> <5 @a> <9 @b>
+div <1 @result> <5 @a> <9 @b>
+mul <1 @result> <5 @a> <9 @b>
+mod <1 @result> <5 @a> <9 @b>
+comp <1 @result> <5 @a> <9 @b>
 out <1 @a> <5 length>
 in <1 @result>
 if <1 @a> <5 line> //jumps if negative. a is always 1 byte

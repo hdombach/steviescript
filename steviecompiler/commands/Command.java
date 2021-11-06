@@ -42,7 +42,7 @@ public abstract class Command {
         result += PushCommand.getAssembly(4); //r -4
         result += LoadCommand.getAssembly(-12, 5);
         result += LoadCommand.getAssembly(-8, 7);
-        result += AddCommand.getAssembly(-4, -8, -12, 4);
+        result += AddCommand.getAssembly(-4, -8, -12);
         result += OutCommand.getAssembly(-4, 4);
         result += ExitCommand.getAssembly();
         System.out.println(result);
