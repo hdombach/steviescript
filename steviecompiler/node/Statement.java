@@ -34,6 +34,13 @@ public abstract class Statement extends Node {
 		} else if (temp.unexpectedToken) {
 			return null;
 		}
+		
+		temp = new PointerSet();
+		if (temp.isValid) {
+			return temp;
+		} else if (temp.unexpectedToken) {
+			return null;
+		}
 
 		temp = new While();
 		if (temp.isValid) {
