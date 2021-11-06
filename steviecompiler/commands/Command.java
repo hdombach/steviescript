@@ -32,7 +32,7 @@ public abstract class Command {
             result += parseByte(b[i]);
             i += 1;
         }
-        return result
+        return result;
     }
 
     public static void test() {
