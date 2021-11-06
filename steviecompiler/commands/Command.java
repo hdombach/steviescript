@@ -32,11 +32,19 @@ public abstract class Command {
             result += parseByte(b[i]);
             i += 1;
         }
-        return result
+        return result;
     }
 
     public static void test() {
-        String result = PushCommand.getAssembly(-2);
+        String result = "";
+        result += PushCommand.getAssembly(4); //a  -12
+        result += PushCommand.getAssembly(4); //b -8
+        result += PushCommand.getAssembly(4); //r -4
+        result += LoadCommand.getAssembly(-12, 5);
+        result += LoadCommand.getAssembly(-8, 7);
+        result += AddCommand.getAssembly(-4, -8, -12, 4);
+        result += OutCommand.getAssembly(-4, 4);
+        result += ExitCommand.getAssembly();
         System.out.println(result);
     }
 }

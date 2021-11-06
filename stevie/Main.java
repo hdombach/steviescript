@@ -12,9 +12,13 @@ public class Main {
 	private static Boolean shouldExit;
 
 
-	//deafult instruciton size is 4
-	public static int getInstruction(int offset) {
+	//deafult field size is 4
+	public static int getField(int offset) {
 		return getInstruction(offset, 4);
+	}
+
+	public static int getCommand() {
+		return getInstruction(0, 1);
 	}
 
 	//commands are one byte long
@@ -42,17 +46,12 @@ public class Main {
 		}
 		readFile(filePath);
 
-		System.out.println(Memory.getInt(1));
 
-		if (true) {
-			return;
-		}
-
-		Memory.printContents();
+		//Memory.printContents();
 
 		//atually run code
 		while (!shouldExit) {
-			System.out.println(getInstruction(0) + ", " + programCounter);
+			//System.out.println(getCommand() + ", " + programCounter);
 			if (programCounter > 100) {
 				shouldExit = true;
 			}

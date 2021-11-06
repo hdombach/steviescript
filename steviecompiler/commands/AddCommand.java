@@ -13,7 +13,7 @@ public class AddCommand extends Command {
     }
 
     public static String getAssembly(int resultAddress, int aAddress, int bAddress, int length) {
-        String result = "1\n";
+        String result = "2\n";
         result += parseInt(resultAddress);
         result += parseInt(aAddress);
         result += parseInt(bAddress);
