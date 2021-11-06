@@ -5,6 +5,8 @@ import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 public abstract class Command {
+    //location will be set by Block after all the commands have been added.
+    int location;
     
     public String toAssembly() {
         return "You should not be seeing this message";
