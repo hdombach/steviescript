@@ -8,9 +8,17 @@ import steviecompiler.symbol.SymbolTable;
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();
 	protected SymbolTable symbols;
+	private static Block currentParent;
+	private Block parent;
 
 	public Block(){
-		symbols = new SymbolTable();
+		parent = currentParent;
+		currentParent = this;
+		if (parent == null) {
+			symbols = new SymbolTable(null);
+		} else {
+			symbols = new SymbolTable(parent.symbols);
+		}
 		while (true){
 			if (Node.tokens.size() <= Node.index)
 				break;
@@ -23,9 +31,11 @@ public class Block extends Node {
 
 			}
 			else {
+				currentParent = parent;
 				return;
 			}
 		}
+		currentParent = parent;
     }
 
 	public String toString() {

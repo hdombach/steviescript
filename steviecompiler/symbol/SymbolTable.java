@@ -2,16 +2,22 @@ package steviecompiler.symbol;
 
 import java.util.HashMap;
 
+import javax.xml.crypto.Data;
+
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 
 public class SymbolTable {
     public static HashMap<String, Symbol> globalTable = new HashMap<String, Symbol>();
 
-    public static HashMap<String, Symbol> table;
+    public HashMap<String, Symbol> table;
 
-    public SymbolTable() {
+    //can be null
+    public SymbolTable parent;
+
+    public SymbolTable(SymbolTable parent) {
         table = new HashMap<String, Symbol>();
+        this.parent = parent;
     }
 
     public void symbolize(CreateVar make) {
@@ -22,7 +28,12 @@ public class SymbolTable {
 
 
     public Symbol get(String name) {
-        return table.get(name);
+        if (table.containsKey(name)) {
+            return table.get(name);
+        } else if (parent != null) {
+            return parent.get(name);
+        }
+        return null;
     }
 
     public Integer getAddress(String name) {
@@ -45,9 +56,6 @@ public class SymbolTable {
     }
 
     public boolean inScope(String name) {
-        if(exists(name) && table.containsKey(name)) {
-            return true;
-        }
-        return false;
+        return get(name) != null;
     }
 }
