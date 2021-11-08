@@ -46,6 +46,10 @@ public class For extends Statement {
 		    if(tempSet.isValid) {
                 setIndex = tempSet;
 		    }
+            else {
+                unexpectedToken = true;
+                return;
+            }
         }
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
@@ -98,4 +102,30 @@ public class For extends Statement {
 
         Node.index++;
     }
+
+    public String toString() {
+		String result = "";
+		result += Node.indentStr() + "For: \n";
+		Node.indent++;
+        result += Node.indentStr() + "Index: \n";
+        Node.indent++;
+        if(index.isValid) {
+            result += index;
+        }
+        result += setIndex;
+        Node.indent--;
+		result += Node.indentStr() + "Condition: \n";
+		Node.indent++;
+		result += condition;
+		Node.indent--;
+        result += Node.indentStr() + "increment: \n";
+        Node.indent++;
+        result += increment;
+        Node.indent--;
+		result += Node.indentStr() + "Content: \n";
+		Node.indent++;
+		result += loop;
+		Node.indent-= 2;
+		return result;
+	}
 }
