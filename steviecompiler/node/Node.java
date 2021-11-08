@@ -57,8 +57,6 @@ abstract public class Node {
 		return Expression.expect();
 	}
 
-	public void checkSymbols(SymbolTable scope) {
-		throw new Error("Check Symbols not implemented. Current node is \n" + this);
-	}
+	public abstract void checkSymbols(SymbolTable scope);
 
 }
