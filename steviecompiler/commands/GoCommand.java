@@ -1,7 +1,11 @@
 package steviecompiler.commands;
 
 public class GoCommand extends Command {
-    int line;
+    Command command;
+
+    public String toAssembly() {
+        return getAssembly(command.location);
+    }
 
     public static String getAssembly(int line) {
         String result = "11\n";

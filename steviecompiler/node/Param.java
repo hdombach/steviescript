@@ -2,7 +2,6 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
-import steviecompiler.node.Node;
 import steviecompiler.node.expression.Expression;
 import java.util.ArrayList;
 
@@ -29,8 +28,7 @@ public class Param extends Node {
 				if (e.isValid) {
 					expressions.add(e);
 				} else {
-					System.out.println("no epxression"); //temp
-					ErrorHandler.generate(001);
+					Expression.invalid();
 				}
 			}
 		} else {

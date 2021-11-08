@@ -2,7 +2,6 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
-import steviecompiler.error.ErrorHandler;
 
 public class If extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.IF, TokenType.OPENPARAN, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
@@ -28,7 +27,7 @@ public class If extends Statement {
 
 		condition = Expression.expect();
 		if(!condition.isValid) {
-			throw new Error("Expected expression not " + Node.currentToken());
+			Expression.invalid();
 		}
 
 		for(i = 2; i < 4; i++, Node.index++) {

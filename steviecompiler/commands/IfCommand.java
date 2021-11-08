@@ -4,10 +4,10 @@ import steviecompiler.symbol.Symbol;
 
 public class IfCommand extends Command {
     Symbol a;
-    int line;
+    Command command;
 
     public String toAssembly() {
-        return getAssembly(a.getAddress(), line);
+        return getAssembly(a.getAddress(), command.location);
     }
 
     public static String getAssembly(int a, int line) {

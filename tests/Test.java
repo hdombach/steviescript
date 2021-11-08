@@ -1,3 +1,5 @@
+package tests;
+
 public class Test {
     public static void main(String[] args) {
         //for testing generating the commands

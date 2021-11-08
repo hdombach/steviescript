@@ -8,8 +8,10 @@ import steviecompiler.symbol.SymbolTable;
 
 public abstract class Statement extends Node {
 	protected static SymbolTable symbols;
+	protected static ArrayList<Statement> statements;
 
 	public static Statement expect(SymbolTable symbols, ArrayList<Statement> statements) {
+		Statement.statements = statements;
 		Statement temp;
 		Statement.symbols = symbols;
 
@@ -28,7 +30,22 @@ public abstract class Statement extends Node {
 			return null;
 		}
 
+		temp = new DefFunction();
+		if (temp.isValid) {
+			symbols.symbolize((DefFunction) (temp));
+			return temp;
+		} else if (temp.unexpectedToken) {
+			return null;
+		}
+
 		temp = new Set();
+		if (temp.isValid) {
+			return temp;
+		} else if (temp.unexpectedToken) {
+			return null;
+		}
+		
+		temp = new PointerSet();
 		if (temp.isValid) {
 			return temp;
 		} else if (temp.unexpectedToken) {
@@ -54,6 +71,11 @@ public abstract class Statement extends Node {
 			return null;
 		}
 
+		temp = new Return();
+		if(temp.isValid) {
+			return temp;
+		}
+		
 		temp = new End();
 		if (temp.isValid) {
 			return temp;

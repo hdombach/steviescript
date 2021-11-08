@@ -40,6 +40,7 @@ public class Token {
         PERIOD,
         COMMA,
         POINTER,
+        ARROW,
         END,
     }
 
@@ -310,6 +311,9 @@ public class Token {
                 break;
             case "@":
                 new Token(TokenType.POINTER, line);
+                break;
+            case "->":
+                new Token(TokenType.ARROW, line);
                 break;
             default:
                 try{

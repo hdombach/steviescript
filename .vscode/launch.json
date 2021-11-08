@@ -6,6 +6,13 @@
 	"configurations": [
 		{
 			"type": "java",
+			"name": "Launch Test",
+			"request": "launch",
+			"mainClass": "tests.Test",
+			"projectName": "stevieScript_1319da88"
+		},
+		{
+			"type": "java",
 			"name": "Launch Main",
 			"request": "launch",
 			"mainClass": "stevie.Main",

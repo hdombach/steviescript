@@ -2,10 +2,8 @@ package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
 import steviecompiler.Token.TokenType;
-import steviecompiler.error.ErrorHandler;
 
 public class For extends Statement {
-    private static TokenType[] tokenSequence = {TokenType.FOR, TokenType.OPENPARAN, TokenType.COMMA, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
     private CreateVar index;
     private Set setIndex;
     private Expression condition;
@@ -17,7 +15,6 @@ public class For extends Statement {
         isValid = true;
         if(Node.currentToken().getType() != TokenType.FOR) {
             isValid = false;
-            Node.index = beginIndex;
             return;
         }
 
@@ -32,12 +29,14 @@ public class For extends Statement {
 
         index = new CreateVar(); //Still not sure how/if we want to store the index declaration in the Statement ArrayList
         if(!index.isValid) {
+            statements.add(index);
             setIndex = new Set();
             if(!setIndex.isValid) {
                 unexpectedToken = true; //Assuming that the CreateVar being invalid will throw an error on its own and this statement doesn't need to
                 Node.index = beginIndex;
                 return;
             }
+            statements.add(setIndex);
         }
         else {
             symbols.symbolize(index);
@@ -46,6 +45,10 @@ public class For extends Statement {
 		    if(tempSet.isValid) {
                 setIndex = tempSet;
 		    }
+            else {
+                unexpectedToken = true;
+                return;
+            }
         }
 
         if(Node.currentToken().getType() != TokenType.COMMA) {
@@ -57,8 +60,9 @@ public class For extends Statement {
 
         condition = Expression.expect();
         if(!condition.isValid) {
+            Expression.invalid();
 			Node.index = beginIndex;
-            throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
+            //throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
         }
 
 
@@ -98,4 +102,30 @@ public class For extends Statement {
 
         Node.index++;
     }
+
+    public String toString() {
+		String result = "";
+		result += Node.indentStr() + "For: \n";
+		Node.indent++;
+        result += Node.indentStr() + "Index: \n";
+        Node.indent++;
+        if(index.isValid) {
+            result += index;
+        }
+        result += setIndex;
+        Node.indent--;
+		result += Node.indentStr() + "Condition: \n";
+		Node.indent++;
+		result += condition;
+		Node.indent--;
+        result += Node.indentStr() + "increment: \n";
+        Node.indent++;
+        result += increment;
+        Node.indent--;
+		result += Node.indentStr() + "Content: \n";
+		Node.indent++;
+		result += loop;
+		Node.indent-= 2;
+		return result;
+	}
 }
