@@ -43,6 +43,10 @@ public class Symbol {
         return size;
     }
 
+    /**
+     * Represents the flag as a string
+     * @return A string representation of the flag
+     */
     public String toString() {
         return"[" + datatype.getType() + ", " + address + ", " + size + "]";
     }
