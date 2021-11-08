@@ -7,3 +7,5 @@ function exampleFunction(int value, int anotherValue) -> int {
     int test2 = 5
     return test2
 }
+
+exampleFunction(5)
