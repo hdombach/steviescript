@@ -32,7 +32,7 @@ public abstract class Statement extends Node {
 
 		temp = new DefFunction();
 		if (temp.isValid) {
-			//TODO: do things with scope.
+			symbols.symbolize((DefFunction) (temp));
 			return temp;
 		} else if (temp.unexpectedToken) {
 			return null;

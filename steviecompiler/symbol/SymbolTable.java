@@ -6,6 +6,8 @@ import javax.xml.crypto.Data;
 
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
+import steviecompiler.node.DefFunction;
+import steviecompiler.node.expression.FunctionCall;
 
 public class SymbolTable {
     public static HashMap<String, Symbol> globalTable = new HashMap<String, Symbol>();
@@ -28,6 +30,15 @@ public class SymbolTable {
         Symbol symbol = new Symbol(make);
         table.put(make.name, symbol);
         globalTable.put(make.name, symbol);
+    }
+
+    public void symbolize(DefFunction make) {
+        if (table.containsKey(make.functionName)) {
+            throw new Error("Symbol " + make.functionName + "already exists in current scope.");
+        }
+        Symbol symbol = new Symbol(make);
+        table.put(make.functionName, symbol);
+        globalTable.put(make.functionName, symbol);
     }
 
 

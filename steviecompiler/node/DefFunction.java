@@ -20,12 +20,12 @@ public class DefFunction extends Statement{
 
         }
     */
-    private String functionName;
+    public String functionName;
 
     private ArrayList<DefParam> params = new ArrayList<DefParam>();
 
     private boolean hasReturn = false;
-    private DataType returnType;
+    public DataType returnType;
 
     private Block code;
 
