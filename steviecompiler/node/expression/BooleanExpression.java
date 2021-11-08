@@ -2,6 +2,7 @@ package steviecompiler.node.expression;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
+import steviecompiler.symbol.SymbolTable;
 
 public class BooleanExpression extends Expression {
     
@@ -22,7 +23,7 @@ public class BooleanExpression extends Expression {
         }
     }
 
-    public void checkSymbols() {
+    public void checkSymbols(SymbolTable scope) {
         return;
     }
 }

@@ -1,8 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
-
-
+import steviecompiler.symbol.SymbolTable;
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 
@@ -40,5 +39,9 @@ public class DefParam extends Node {
         result += type;
         Node.indent -= 2;
         return result;
+    }
+
+    public void checkSymbols(SymbolTable scope) {
+        return;
     }
 }

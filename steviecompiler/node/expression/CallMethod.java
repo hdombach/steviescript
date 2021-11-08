@@ -4,6 +4,7 @@ import steviecompiler.error.*;
 
 import steviecompiler.node.Node;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
 import steviecompiler.node.Param;
 import steviecompiler.Token.TokenType;
 
@@ -37,8 +38,8 @@ public class CallMethod extends Expression {
 		this.body = body;
 	}
 
-	public void checkSymbols() {
-		throw new Error("Method Calls are not implemented yet.);
+	public void checkSymbols(SymbolTable scope) {
+		throw new Error("Method Calls are not implemented yet.");
 	}
 
 	public String toString() {

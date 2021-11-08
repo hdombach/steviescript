@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.Token;
+import steviecompiler.symbol.SymbolTable;
 
 public class DataType extends Node {
 	private String name;
@@ -19,5 +20,9 @@ public class DataType extends Node {
 
 	public String getType() {
 		return name;
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		return;
 	}
 }
