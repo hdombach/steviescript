@@ -21,6 +21,10 @@ public class SymbolTable {
     }
 
     public void symbolize(CreateVar make) {
+        if (table.containsKey(make.name)) {
+            //Doesn't test global tree or parent trees because it's fine if symbols have same name in different scopes.
+            throw new Error("Sumbol " + make.name + " already exists in current scope. ");
+        }
         Symbol symbol = new Symbol(make);
         table.put(make.name, symbol);
         globalTable.put(make.name, symbol);

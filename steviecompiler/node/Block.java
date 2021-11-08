@@ -3,7 +3,7 @@ package steviecompiler.node;
 import java.util.ArrayList;
 
 import steviecompiler.symbol.SymbolTable;
-
+ 
 
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();
