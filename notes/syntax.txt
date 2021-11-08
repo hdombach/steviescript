@@ -16,6 +16,9 @@ DEFFUNC = "function" + functionName + "(" + [dataType + variableName] + ")" + ?(
     function exampleFunction(type name, type name) -> returnType {
 		<code>
 	}
+	function exampleFunction(type name, type name) {
+    		<code>
+    }
 */
  
 IF = "if" + "(" + expression +  ")" + "{" + BLOCK + "}"
