@@ -86,7 +86,6 @@ public class DefFunction extends Statement{
         Node.index++;
 
         code = new Block();
-        Node.index++;
 
         if (Node.currentToken().getType() != TokenType.CLOSECURLY){
             Node.expectedToken = TokenType.CLOSECURLY;
