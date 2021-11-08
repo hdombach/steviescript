@@ -1,18 +1,9 @@
-int test2
-test2 = 1
-int test3 = @test2
-@test2 = 66 / 3
-@(test + 4) = 5
-
 int y
 for(int x = 0, x < 5, x = x + 1) {
     y = y + 1
 }
 
-if(y > 2) {
- test2 = 2
-}
-
-function exampleFunction(int value, int anotherValue) {
-    test2 = 5
+function exampleFunction(int value, int anotherValue) -> int {
+    int test2 = 5
+    return test2
 }
