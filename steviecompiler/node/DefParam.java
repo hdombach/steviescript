@@ -1,6 +1,8 @@
 package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
+
+
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 
@@ -26,5 +28,17 @@ public class DefParam extends Node {
         }
         name = Node.currentToken().getContent();
         isValid = true;
+    }
+
+    public String toString() {
+        String result = "";
+        result += Node.indentStr() + "Paramater Definition: \n";
+        Node.indent += 1;
+        result += Node.indentStr() + "Name: " + name + "\n";
+        result += Node.indentStr() + "Type: \n";
+        Node.indent += 1;
+        result += type;
+        Node.indent -= 2;
+        return result;
     }
 }

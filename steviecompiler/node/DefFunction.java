@@ -1,6 +1,9 @@
 package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
+
+import java.util.ArrayList;
+
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 
@@ -90,5 +93,23 @@ public class DefFunction extends Statement{
             unexpectedToken(Node.index);
         }
         Node.index++;
+    }
+
+    public String toString() {
+        String result = "";
+        result += Node.indentStr() + "Function Definition: \n";
+        Node.indent += 1;
+        result += Node.indentStr() + "Name: " + functionName + "\n";
+        result += Node.indentStr() + "Paramaters: \n";
+        Node.indent += 1;
+        for (DefParam param : params) {
+            result += param;
+        }
+        Node.indent -= 1;
+        result += Node.indentStr() + "Code: \n";
+        Node.indent += 1;
+        result += code;
+        Node.indent -= 2;
+        return result;
     }
 }

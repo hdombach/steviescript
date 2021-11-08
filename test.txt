@@ -12,3 +12,7 @@ for(int x = 0, x < 5, x = x + 1) {
 if(y > 2) {
  test2 = 2
 }
+
+function exampleFunction(int value, int anotherValue) {
+    test2 = 5
+}

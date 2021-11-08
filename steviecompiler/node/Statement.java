@@ -30,6 +30,14 @@ public abstract class Statement extends Node {
 			return null;
 		}
 
+		temp = new DefFunction();
+		if (temp.isValid) {
+			//TODO: do things with scope.
+			return temp;
+		} else if (temp.unexpectedToken) {
+			return null;
+		}
+
 		temp = new Set();
 		if (temp.isValid) {
 			return temp;
