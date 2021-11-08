@@ -3,6 +3,7 @@ package steviecompiler.node.expression;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
 import steviecompiler.node.Param;
+import steviecompiler.symbol.SymbolTable;
 
 public class FunctionCall extends Expression {
 	public String name;
@@ -24,6 +25,13 @@ public class FunctionCall extends Expression {
 			return;
 		} else {
 			Node.index = beginIndex;
+		}
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		param.checkSymbols(scope);
+		if (!scope.inScope(name)) {
+			throw new Error("Symbol " + name + " does not exits");
 		}
 	}
 

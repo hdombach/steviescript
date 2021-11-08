@@ -1,6 +1,7 @@
 package steviecompiler.node;
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
+import steviecompiler.symbol.SymbolTable;
 
 public class InvalidStatement extends Statement {
     public InvalidStatement() {
@@ -14,5 +15,9 @@ public class InvalidStatement extends Statement {
             Node.index++;
         }
 
+    }
+
+    public void checkSymbols(SymbolTable scope) {
+        return;
     }
 }

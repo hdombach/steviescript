@@ -3,6 +3,7 @@ package steviecompiler.node.expression;
 import steviecompiler.Token.TokenType;
 import steviecompiler.Token;
 import steviecompiler.node.Node;
+import steviecompiler.symbol.SymbolTable;
 
 public class PointerExpression extends Expression {
     private String name;
@@ -20,6 +21,11 @@ public class PointerExpression extends Expression {
         isValid = true;
 	}
 
+    public void checkSymbols(SymbolTable scope) {
+        if (!scope.inScope(name)) {
+            throw new Error("Symbol " + name + " does not exist in scope");
+        }
+    }
 
     public String toString() {
         return Node.indentStr() + "Pointer: " + name + "\n";

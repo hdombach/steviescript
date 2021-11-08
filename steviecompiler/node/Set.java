@@ -1,7 +1,8 @@
 package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
-import steviecompiler.node.expression.Expression;;
+import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;;
 
 public class Set extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.WORD, TokenType.EQUALS};
@@ -28,9 +29,16 @@ public class Set extends Statement {
 		
 	}
 
+	public void checkSymbols(SymbolTable scope) {
+		expression.checkSymbols(scope);
+		if (!scope.inScope(name)) {
+			throw new Error("Symbol " + name + " does not exist in scope.");
+		}
+	}
+
 	public String toString() {
 		String result = "";
-		result += Node.indentStr() + "Statement " + name + ": \n";
+		result += Node.indentStr() + "Set statement " + name + ": \n";
 		Node.indent++;
 		result += Node.indentStr() + "expression: \n";
 		Node.indent++;

@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
+import steviecompiler.symbol.SymbolTable;
 import steviecompiler.Token.TokenType;
 
 public class For extends Statement {
@@ -101,6 +102,12 @@ public class For extends Statement {
         }
 
         Node.index++;
+    }
+    public void checkSymbols(SymbolTable scope) {
+        setIndex.checkSymbols(scope);
+        condition.checkSymbols(scope);
+        increment.checkSymbols(scope);
+        loop.checkSymbols(scope);
     }
 
     public String toString() {

@@ -2,6 +2,7 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
 
 public class Return extends Statement {
     public Expression expression;
@@ -22,6 +23,10 @@ public class Return extends Statement {
             isValid = false;
             Expression.invalid();
         }
+    }
+
+    public void checkSymbols(SymbolTable scope) {
+        expression.checkSymbols(scope);
     }
 
     public String toString() {

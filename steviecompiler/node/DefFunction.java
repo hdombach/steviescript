@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
+import steviecompiler.symbol.SymbolTable;
 
 import java.util.ArrayList;
 
@@ -91,6 +92,10 @@ public class DefFunction extends Statement{
             unexpectedToken(Node.index);
         }
         Node.index++;
+    }
+
+    public void checkSymbols(SymbolTable scope) {
+        code.checkSymbols(scope);
     }
 
     public String toString() {

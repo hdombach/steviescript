@@ -2,6 +2,7 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
 
 public class If extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.IF, TokenType.OPENPARAN, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
@@ -49,6 +50,11 @@ public class If extends Statement {
 		}
 		Node.index++;
 		isValid = true;
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		condition.checkSymbols(scope);
+		block.checkSymbols(scope);
 	}
 
 	public String toString() {

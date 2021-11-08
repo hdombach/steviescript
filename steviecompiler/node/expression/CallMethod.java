@@ -37,6 +37,10 @@ public class CallMethod extends Expression {
 		this.body = body;
 	}
 
+	public void checkSymbols() {
+		throw new Error("Method Calls are not implemented yet.);
+	}
+
 	public String toString() {
 		String result = "";
 		result += Node.indentStr() + "Call Method:\n";

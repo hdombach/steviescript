@@ -21,4 +21,8 @@ public class BooleanExpression extends Expression {
                 isValid = false;
         }
     }
+
+    public void checkSymbols() {
+        return;
+    }
 }

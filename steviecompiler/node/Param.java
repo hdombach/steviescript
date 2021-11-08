@@ -3,6 +3,8 @@ package steviecompiler.node;
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
+
 import java.util.ArrayList;
 
 //TODO: this is not actaully tested because it requires other things
@@ -43,6 +45,12 @@ public class Param extends Node {
 		}
 
 		isValid = true;
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		for (Expression exp : expressions) {
+			exp.checkSymbols(scope);
+		}
 	}
 
 	public String toString() {

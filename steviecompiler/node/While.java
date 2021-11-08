@@ -3,6 +3,7 @@ package steviecompiler.node;
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
 
 public class While extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.WHILE, TokenType.OPENPARAN, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
@@ -51,6 +52,11 @@ public class While extends Statement {
 		}
 		Node.index++;
 		isValid = true;
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		condition.checkSymbols(scope);
+		loop.checkSymbols(scope);
 	}
 	
 	public String toString() {

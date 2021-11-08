@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
 
 abstract public class Node {
 	protected boolean unexpectedToken = false;
@@ -36,6 +37,10 @@ abstract public class Node {
 			e.printStackTrace();
 		}
 	}
+
+	public static void checkScope() {
+		block.checkSymbols(null);
+	}
 	
 	public static Block getCode() {return block;};
 	
@@ -50,6 +55,10 @@ abstract public class Node {
 	private static Expression expectExpression() {
 		//index++;
 		return Expression.expect();
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		throw new Error("Check Symbols not implemented. Current node is \n" + this);
 	}
 
 }

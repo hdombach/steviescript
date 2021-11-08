@@ -38,6 +38,12 @@ public class Block extends Node {
 		currentParent = parent;
     }
 
+	public void checkSymbols(SymbolTable scope) {
+		for (Statement statement : statements) {
+			statement.checkSymbols(this.symbols);
+		}
+	}
+
 	public String toString() {
 		String result = "";
 		result += Node.indentStr() + "Block:\n";

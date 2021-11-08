@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
+import steviecompiler.symbol.SymbolTable;
 
 public class Operation extends Expression {
     public String operator;
@@ -84,6 +85,10 @@ public class Operation extends Expression {
         return result;
     }
 
+    public void checkSymbols(SymbolTable scope) {
+        left.checkSymbols(scope);
+        right.checkSymbols(scope);
+    }
     
     //TODO: add more operations to list
     private int getPrecedence(String operation) {

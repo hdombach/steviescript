@@ -26,6 +26,7 @@ public class Main{
       Node.parse(Token.getTokenList());
       System.out.println(Node.getCode());
       ErrorHandler.throwErrors();
+      Node.checkScope();
     }
 
     public static void readFile(String path) {

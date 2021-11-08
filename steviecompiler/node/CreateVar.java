@@ -1,6 +1,7 @@
 package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
+import steviecompiler.symbol.SymbolTable;
 
 public class CreateVar extends Statement {
 	public String name;
@@ -34,5 +35,11 @@ public class CreateVar extends Statement {
 		result += Node.indentStr() + "type: " + type.getType() + "\n";
 		Node.indent--;
 		return result;
+	}
+
+	public void checkSymbols(SymbolTable scope) {
+		if (expression != null) {
+			expression.checkSymbols(scope);
+		}
 	}
 }

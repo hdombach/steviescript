@@ -3,6 +3,7 @@ package steviecompiler.node;
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.SymbolTable;
 
 public class PointerSet extends Statement{
     public Expression pointerValue;
@@ -37,6 +38,11 @@ public class PointerSet extends Statement{
         } else {
             expression.invalid();
         }
+    }
+
+    public void checkSymbols(SymbolTable scope) {
+        pointerValue.checkSymbols(scope);
+        expression.checkSymbols(scope;
     }
 
     public String toString() {
