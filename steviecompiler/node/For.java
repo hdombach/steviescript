@@ -2,7 +2,6 @@ package steviecompiler.node;
 
 import steviecompiler.node.expression.*;
 import steviecompiler.Token.TokenType;
-import steviecompiler.error.ErrorHandler;
 
 public class For extends Statement {
     private CreateVar index;

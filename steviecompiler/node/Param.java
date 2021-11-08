@@ -2,7 +2,6 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
-import steviecompiler.node.Node;
 import steviecompiler.node.expression.Expression;
 import java.util.ArrayList;
 

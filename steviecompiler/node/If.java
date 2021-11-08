@@ -2,7 +2,6 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
-import steviecompiler.error.ErrorHandler;
 
 public class If extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.IF, TokenType.OPENPARAN, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};

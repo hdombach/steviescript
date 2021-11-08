@@ -1,7 +1,5 @@
 package steviecompiler.node.expression;
 
-import steviecompiler.node.expression.Expression;
-
 import steviecompiler.Token;
 import steviecompiler.node.Node;
 
