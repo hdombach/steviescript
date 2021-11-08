@@ -6,11 +6,10 @@ import steviecompiler.Main;
 public class InvalidStatementError extends ErrorHandler{
     private String statement;
 
-    public InvalidStatementError(int line) {
+    public InvalidStatementError() {
         super();
         errorCode = 2;
-        errorLine = line;
-        statement = Main.getLine(line);
+        statement = Main.getLine(errorLine);
     }
 
     public String toString() {

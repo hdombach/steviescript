@@ -60,8 +60,9 @@ public class For extends Statement {
 
         condition = Expression.expect();
         if(!condition.isValid) {
+            Expression.invalid();
 			Node.index = beginIndex;
-            throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
+            //throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
         }
 
 

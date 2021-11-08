@@ -28,8 +28,7 @@ public class Param extends Node {
 				if (e.isValid) {
 					expressions.add(e);
 				} else {
-					System.out.println("no epxression"); //temp
-					ErrorHandler.generate(001);
+					Expression.invalid();
 				}
 			}
 		} else {

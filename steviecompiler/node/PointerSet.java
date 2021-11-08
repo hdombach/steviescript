@@ -12,22 +12,22 @@ public class PointerSet extends Statement{
         int beginIndex = Node.index;
 
         if (Node.currentToken().getType() == TokenType.POINTER) {
-                Node.index += 1;
+            Node.index += 1;
         } else {
             return;
         }
 
         pointerValue = Expression.expect();
         if (!pointerValue.isValid) {
-            throw new Error("Expected expression not" + Node.currentToken());
+            Expression.invalid();
         }
 
         if (Node.currentToken().getType() == TokenType.EQUALS) {
             Node.index += 1;
         } else {
+            ErrorHandler.generate(001);
             Node.index = beginIndex;
             expectedToken = TokenType.EQUALS;
-            ErrorHandler.generate(001);
         }
 
         expression = Expression.expect();
@@ -35,7 +35,7 @@ public class PointerSet extends Statement{
         if (expression.isValid) {
             isValid = true;
         } else {
-            throw new Error("Expected expression not" + Node.currentToken());
+            expression.invalid();
         }
     }
 

@@ -17,6 +17,7 @@ public abstract class ErrorHandler {
     public ErrorHandler() {
         errors.add(this);
         filePath = Main.filePath;
+        errorLine = Node.currentToken().getLine();
     }
 
     public static void generate(int key) {
@@ -25,7 +26,10 @@ public abstract class ErrorHandler {
                 generateUnexpectedTokenError();
                 break;
             case 2:
-                generateInvalidStatementError(Node.currentToken().getLine());
+                generateInvalidStatementError();
+                break;
+            case 3:
+                generateInvalidExpressionError();
                 break;
             default:
         }
@@ -36,8 +40,12 @@ public abstract class ErrorHandler {
         new UnexpectedTokenError();
     }
 
-    private static void generateInvalidStatementError(int line) {
-        new InvalidStatementError(line);
+    private static void generateInvalidStatementError() {
+        new InvalidStatementError();
+    }
+
+    private static void generateInvalidExpressionError() {
+        new InvalidExpressionError();
     }
 
     /*GenerateXYZError(param p) {

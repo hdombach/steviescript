@@ -8,7 +8,10 @@ public class Return extends Statement {
 
     public Return() {
         int beginIndex = Node.index;
+        isValid = true;
+        
         if(Node.currentToken().getType() != TokenType.RETURN) {
+            isValid = false;
             return;
         }
         
@@ -16,11 +19,9 @@ public class Return extends Statement {
 
         expression = Expression.expect();
         if(!expression.isValid) {
-            Node.index = beginIndex;
-            throw new Error("Expected expression not " + Node.currentToken()); //Replace with invalid expression error
+            isValid = false;
+            Expression.invalid();
         }
-
-        isValid = true;
     }
 
     public String toString() {

@@ -27,7 +27,7 @@ public class If extends Statement {
 
 		condition = Expression.expect();
 		if(!condition.isValid) {
-			throw new Error("Expected expression not " + Node.currentToken());
+			Expression.invalid();
 		}
 
 		for(i = 2; i < 4; i++, Node.index++) {

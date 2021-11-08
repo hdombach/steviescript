@@ -5,7 +5,6 @@ import steviecompiler.node.expression.*;
 import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
-import steviecompiler.error.ErrorHandler;
 
 public class DefFunction extends Statement{
     /*

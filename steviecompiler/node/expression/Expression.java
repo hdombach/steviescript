@@ -97,4 +97,8 @@ public abstract class Expression extends Node {
 		Node.indent -= 2;
 		return result;
 	}
+	
+	public static void invalid() {
+		ErrorHandler.generate(003);
+	}
 }
