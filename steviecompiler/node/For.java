@@ -5,7 +5,6 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 
 public class For extends Statement {
-    private static TokenType[] tokenSequence = {TokenType.FOR, TokenType.OPENPARAN, TokenType.COMMA, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
     private CreateVar index;
     private Set setIndex;
     private Expression condition;
@@ -17,7 +16,6 @@ public class For extends Statement {
         isValid = true;
         if(Node.currentToken().getType() != TokenType.FOR) {
             isValid = false;
-            Node.index = beginIndex;
             return;
         }
 
@@ -32,12 +30,14 @@ public class For extends Statement {
 
         index = new CreateVar(); //Still not sure how/if we want to store the index declaration in the Statement ArrayList
         if(!index.isValid) {
+            statements.add(index);
             setIndex = new Set();
             if(!setIndex.isValid) {
                 unexpectedToken = true; //Assuming that the CreateVar being invalid will throw an error on its own and this statement doesn't need to
                 Node.index = beginIndex;
                 return;
             }
+            statements.add(setIndex);
         }
         else {
             symbols.symbolize(index);

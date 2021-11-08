@@ -8,8 +8,10 @@ import steviecompiler.symbol.SymbolTable;
 
 public abstract class Statement extends Node {
 	protected static SymbolTable symbols;
+	protected static ArrayList<Statement> statements;
 
 	public static Statement expect(SymbolTable symbols, ArrayList<Statement> statements) {
+		Statement.statements = statements;
 		Statement temp;
 		Statement.symbols = symbols;
 
