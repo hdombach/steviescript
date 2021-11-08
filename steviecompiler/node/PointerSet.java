@@ -42,7 +42,7 @@ public class PointerSet extends Statement{
 
     public void checkSymbols(SymbolTable scope) {
         pointerValue.checkSymbols(scope);
-        expression.checkSymbols(scope;
+        expression.checkSymbols(scope);
     }
 
     public String toString() {
