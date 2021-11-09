@@ -1,5 +1,7 @@
 package steviecompiler.node;
 
+import java.util.Arrays;
+
 import steviecompiler.Token;
 import steviecompiler.symbol.SymbolTable;
 
@@ -14,6 +16,10 @@ public class DataType extends Node {
 		}
 	}
 
+	public DataType(String name) {
+		this.name = name;
+	}
+
 	public String toString(){
 		return Node.indentStr() + "DataType: " + name + "\n";
 	}
@@ -23,6 +29,16 @@ public class DataType extends Node {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
-		return;
+		if (!scope.inScope(name)) {
+			throw new Error("Symbol " + name + " does not exist in scope.");
+		}
 	}
+
+    public Boolean compare(DataType t) {
+        String[] _1 = {"byte", "char", "bool"};
+        String[] _4 = {"int", "pointer"};
+        Boolean is1 = Arrays.asList(_1).contains(name) && Arrays.asList(_1).contains(t.name);
+        Boolean is4 = Arrays.asList(_4).contains(name) && Arrays.asList(_4).contains(t.name);
+        return is1 || is4;
+    }
 }

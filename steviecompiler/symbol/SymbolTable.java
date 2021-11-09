@@ -1,5 +1,6 @@
 package steviecompiler.symbol;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 import javax.xml.crypto.Data;
@@ -20,6 +21,14 @@ public class SymbolTable {
     public SymbolTable(SymbolTable parent) {
         table = new HashMap<String, Symbol>();
         this.parent = parent;
+        //if root node the add default data types
+        if (parent == null) {
+            symbolize(new DataType("int"));
+            symbolize(new DataType("pointer"));
+            symbolize(new DataType("char"));
+            symbolize(new DataType("boolean"));
+            symbolize(new DataType("byte"));
+        }
     }
 
     public void symbolize(CreateVar make) {
@@ -39,6 +48,15 @@ public class SymbolTable {
         Symbol symbol = new Symbol(make);
         table.put(make.functionName, symbol);
         globalTable.put(make.functionName, symbol);
+    }
+
+    public void symbolize(DataType make) {
+        if (table.containsKey(make.getType())) {
+            throw new Error("Symbol " + make.getType() + " already exists in current scope.");
+        }
+        Symbol symbol = new Symbol(make);
+        table.put(make.getType(), symbol);
+        globalTable.put(make.getType(), symbol);
     }
 
 

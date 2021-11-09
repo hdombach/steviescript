@@ -3,6 +3,7 @@ package steviecompiler.node.expression;
 import steviecompiler.error.ErrorHandler;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 import steviecompiler.symbol.SymbolTable;
 
@@ -11,6 +12,7 @@ public abstract class Expression extends Node {
 	protected String expressionText = "";
 	protected static int beginIndex;
 	private static Boolean includeMethods = true;
+	public DataType evaluatedType;
 
 	public static Expression expect() {
 		return _expect(true);

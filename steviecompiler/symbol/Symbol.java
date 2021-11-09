@@ -8,7 +8,8 @@ import steviecompiler.node.DefFunction;
 public class Symbol {
     public static enum SymbolType {
         VALUE,
-        FUNCTION
+        FUNCTION,
+        DATATYPE
     }
 
     protected DataType datatype;
@@ -31,6 +32,11 @@ public class Symbol {
         index++;
         memLoad();
         type = SymbolType.FUNCTION;
+    }
+    
+    public Symbol(DataType t) {
+        datatype = t;
+        type = SymbolType.DATATYPE;
     }
 
     public void memLoad() {
