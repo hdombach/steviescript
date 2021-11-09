@@ -69,7 +69,6 @@ public class If extends Statement{
 			Node.index++;
 	
 			elseCode = new Block();
-			Node.index++;
 	
 			if (Node.currentToken().getType() != TokenType.CLOSECURLY){
 				Node.expectedToken = TokenType.CLOSECURLY;
