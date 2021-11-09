@@ -3,12 +3,12 @@ for(int x = 0, x < 5, x = x + 1) {
     y = y + 1
 }
 
-if (test) {
-    return test
-} else if (test + test) {
-    return test
+if (y) {
+    return y - 5
+} else if (y + y) {
+    return y + 3
 } else {
-    return test
+    return y / 3
 }
 
 function exampleFunction(int value, int anotherValue) -> int {

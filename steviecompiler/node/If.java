@@ -81,7 +81,15 @@ public class If extends Statement{
 	}
 
 	public void checkSymbols(SymbolTable scope){
-		
+		for (Expression condition : conditions) {
+			condition.checkSymbols(scope);
+		}
+		for (Block code : codes) {
+			code.checkSymbols(scope);
+		}
+		if (elseCode != null) {
+			elseCode.checkSymbols(scope);
+		}
 	}
 
 	public String toString(){
