@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import steviecompiler.Token;
 import steviecompiler.error.ErrorHandler;
+import steviecompiler.node.expression.Expression;
 import steviecompiler.symbol.SymbolTable;
 
 public abstract class Statement extends Node {
@@ -73,6 +74,11 @@ public abstract class Statement extends Node {
 
 		temp = new Return();
 		if(temp.isValid) {
+			return temp;
+		}
+
+		temp = Expression.expect();
+		if (temp.isValid) {
 			return temp;
 		}
 		

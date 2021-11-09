@@ -5,9 +5,10 @@ import steviecompiler.error.ErrorHandler;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
+import steviecompiler.node.Statement;
 import steviecompiler.symbol.SymbolTable;
 
-public abstract class Expression extends Node {
+public abstract class Expression extends Statement {
 	public Node content;
 	protected String expressionText = "";
 	protected static int beginIndex;
