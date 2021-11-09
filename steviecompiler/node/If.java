@@ -33,7 +33,6 @@ public class If extends Statement{
 				Expression.invalid();
 				Node.index = beginIndex;
 			}
-			Node.index++;
 
 			if (Node.currentToken().getType() != TokenType.CLOSEPARAN){
 				Node.expectedToken = TokenType.CLOSEPARAN;
@@ -49,7 +48,6 @@ public class If extends Statement{
 
 			conditions.add(condition);
 			codes.add(new Block());
-			Node.index++;
 
 			if (Node.currentToken().getType() != TokenType.CLOSECURLY){
 				Node.expectedToken = TokenType.CLOSECURLY;

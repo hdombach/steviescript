@@ -3,6 +3,14 @@ for(int x = 0, x < 5, x = x + 1) {
     y = y + 1
 }
 
+if (test) {
+    return test
+} else if (test + test) {
+    return test
+} else {
+    return test
+}
+
 function exampleFunction(int value, int anotherValue) -> int {
     int test2 = 5
     return test2
