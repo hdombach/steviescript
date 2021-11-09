@@ -15,6 +15,8 @@ public class BooleanExpression extends Expression {
         }
         else if(currentToken().getType() == TokenType.FALSE) {
             expressionText += "False";
+        } else {
+            return;
         }
         try {
             Boolean.parseBoolean(expressionText);
@@ -22,7 +24,10 @@ public class BooleanExpression extends Expression {
         catch(Exception e) {
                 Node.index = beginIndex;
                 isValid = false;
+                return;
         }
+        isValid = true;
+        Node.index += 1;
     }
 
     public void checkSymbols(SymbolTable scope) {

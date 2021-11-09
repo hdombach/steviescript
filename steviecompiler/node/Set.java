@@ -34,6 +34,9 @@ public class Set extends Statement {
 		if (!scope.inScope(name)) {
 			throw new Error("Symbol " + name + " does not exist in scope.");
 		}
+		if (!expression.evaluatedType.compare(scope.get(name).dataType)) {
+			throw new Error("Cannot set a " + scope.get(name).dataType.getType() + " to a " + expression.evaluatedType.getType() + ".");
+		}
 	}
 
 	public String toString() {

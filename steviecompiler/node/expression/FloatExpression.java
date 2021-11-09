@@ -1,5 +1,6 @@
 package steviecompiler.node.expression;
 
+import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 import steviecompiler.Token.TokenType;
 
@@ -8,6 +9,7 @@ public class FloatExpression extends NumericExpression {
     private double value;
 
     public FloatExpression() {
+        evaluatedType = new DataType("float");
         int beginIndex = Node.index;
         isValid = true;
 

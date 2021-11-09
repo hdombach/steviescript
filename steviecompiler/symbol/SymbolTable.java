@@ -74,7 +74,7 @@ public class SymbolTable {
     }
 
     public DataType getType(String name, DataType t) {
-        return get(name).datatype;
+        return get(name).dataType;
     }
 
     public boolean exists(String name) {
@@ -85,7 +85,7 @@ public class SymbolTable {
     }
 
     public boolean isDataType(String name, DataType d) {
-        return get(name).datatype == d;
+        return get(name).dataType == d;
     }
 
     public boolean inScope(String name) {

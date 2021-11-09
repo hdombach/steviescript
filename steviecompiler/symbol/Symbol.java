@@ -12,14 +12,14 @@ public class Symbol {
         DATATYPE
     }
 
-    protected DataType datatype;
+    public DataType dataType;
     private static int index = 0; //mabye ahve blocks do this
     private int size;
     protected int address;
     private SymbolType type;
 
     public Symbol(CreateVar c) {
-        datatype = c.type;
+        dataType = c.type;
         address = index;
         index++;
         memLoad();
@@ -27,7 +27,7 @@ public class Symbol {
     }
 
     public Symbol(DefFunction f) {
-        datatype = f.returnType;
+        dataType = f.returnType;
         address = index;
         index++;
         memLoad();
@@ -35,12 +35,12 @@ public class Symbol {
     }
     
     public Symbol(DataType t) {
-        datatype = t;
+        dataType = t;
         type = SymbolType.DATATYPE;
     }
 
     public void memLoad() {
-        switch(datatype.getType()) {
+        switch(dataType.getType()) {
             case "int":
             case "float":
             case "pointer":
@@ -70,7 +70,7 @@ public class Symbol {
      * @return A string representation of the flag
      */
     public String toString() {
-        return"[" + datatype.getType() + ", " + address + ", " + size + "]";
+        return"[" + dataType.getType() + ", " + address + ", " + size + "]";
     }
     
 }

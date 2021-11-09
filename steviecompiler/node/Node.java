@@ -57,6 +57,7 @@ abstract public class Node {
 		return Expression.expect();
 	}
 
+	//Checks if symbols exist in current scope and if the data types are interchagable
 	public abstract void checkSymbols(SymbolTable scope);
 
 }

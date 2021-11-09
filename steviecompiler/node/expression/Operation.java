@@ -2,7 +2,10 @@ package steviecompiler.node.expression;
 
 import java.util.ArrayList;
 
+import javax.xml.crypto.Data;
+
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 import steviecompiler.symbol.SymbolTable;
 
@@ -88,6 +91,11 @@ public class Operation extends Expression {
     public void checkSymbols(SymbolTable scope) {
         left.checkSymbols(scope);
         right.checkSymbols(scope);
+        if (left.evaluatedType.compare(right.evaluatedType)) {
+            evaluatedType = left.evaluatedType;
+        } else {
+            throw new Error("Missmatched evaluated types\n" + left + "\n" + right);
+        }
     }
     
     //TODO: add more operations to list

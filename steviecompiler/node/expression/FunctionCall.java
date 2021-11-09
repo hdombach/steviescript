@@ -29,10 +29,13 @@ public class FunctionCall extends Expression {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
-		param.checkSymbols(scope);
 		if (!scope.inScope(name)) {
 			throw new Error("Symbol " + name + " does not exits");
+		} else {
+			evaluatedType = scope.get(name).dataType;
 		}
+
+		param.checkSymbols(scope);
 	}
 
 	public String toString() {

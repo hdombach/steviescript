@@ -38,8 +38,13 @@ public class CreateVar extends Statement {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
-		if (expression != null) {
+		if (expression == null) {
+			return;
+		} else {
 			expression.checkSymbols(scope);
+		}
+		if (!expression.evaluatedType.compare(type)) {
+			throw new Error("Cannot set a " + type.getType() + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
 }

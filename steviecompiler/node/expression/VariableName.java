@@ -24,6 +24,7 @@ public class VariableName extends Expression {
 		if (!scope.inScope(name)) {
 			throw new Error("Symbol " + name + " does not exist in scope");
 		}
+		evaluatedType = scope.get(name).dataType;
 	}
 
 	public String content() {

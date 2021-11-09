@@ -1,5 +1,6 @@
 package steviecompiler.node.expression;
 
+import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 import steviecompiler.Token.TokenType;
 
@@ -8,6 +9,7 @@ public class IntegerExpression extends NumericExpression {
     private int value;
 
     public IntegerExpression() {
+        evaluatedType = new DataType("int");
         int beginIndex = Node.index;
         isValid = true;
 
