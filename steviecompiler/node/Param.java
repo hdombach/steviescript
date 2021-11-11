@@ -12,6 +12,14 @@ import java.util.ArrayList;
 public class Param extends Node {
 	public ArrayList<Expression> expressions = new ArrayList<Expression>();
 
+	public ArrayList<DataType> getParamTypes() {
+		ArrayList<DataType> r = new ArrayList<DataType>();
+		for (Expression exp : expressions) {
+			r.add(exp.evaluatedType);
+		}
+		return r;
+	}
+
 	public Param() {
 		int beginIndex = Node.index;
 

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import steviecompiler.Token;
+import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
 public class DataType extends Node {
@@ -30,7 +31,8 @@ public class DataType extends Node {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
-		if (!scope.inScope(name)) {
+		Symbol s = scope.getDataType(name);
+		if (s == null) {
 			throw new Error("Symbol " + name + " does not exist in scope.");
 		}
 	}

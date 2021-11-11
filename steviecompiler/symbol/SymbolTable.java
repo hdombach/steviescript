@@ -1,5 +1,6 @@
 package steviecompiler.symbol;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -9,17 +10,18 @@ import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 import steviecompiler.node.DefFunction;
 import steviecompiler.node.expression.FunctionCall;
+import steviecompiler.symbol.Symbol.SymbolType;
 
 public class SymbolTable {
-    public static HashMap<String, Symbol> globalTable = new HashMap<String, Symbol>();
+   // public static HashMap<String, Symbol> globalTable = new HashMap<String, Symbol>();
 
-    public HashMap<String, Symbol> table;
+    public HashMap<String, ArrayList<Symbol>> table;
 
     //can be null
     public SymbolTable parent;
 
     public SymbolTable(SymbolTable parent) {
-        table = new HashMap<String, Symbol>();
+        table = new HashMap<String, ArrayList<Symbol>>();
         this.parent = parent;
         //if root node the add default data types
         if (parent == null) {
@@ -28,67 +30,129 @@ public class SymbolTable {
             symbolize(new DataType("char"));
             symbolize(new DataType("boolean"));
             symbolize(new DataType("byte"));
+            
+            //allowed operations
+            symbolize("+", new DataType("int"), new DataType("int"), new DataType("int"));
+            symbolize("-", new DataType("int"), new DataType("int"), new DataType("int"));
+            symbolize("*", new DataType("int"), new DataType("int"), new DataType("int"));
+            symbolize("/", new DataType("int"), new DataType("int"), new DataType("int"));
+
+            symbolize("+", new DataType("char"), new DataType("char"), new DataType("char"));
+            symbolize("-", new DataType("char"), new DataType("char"), new DataType("char"));
+            symbolize("*", new DataType("char"), new DataType("char"), new DataType("char"));
+            symbolize("/", new DataType("char"), new DataType("char"), new DataType("char"));
+
+            symbolize(">", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize("<", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize(">=", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize("!=", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize(">=", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize("&&", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize("||", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize("^^", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize("==", new DataType("boolean"), new DataType("int"), new DataType("int"));
         }
+    }
+
+    private void addSymbol(Symbol s, String name) {
+        ArrayList<Symbol> list;
+
+        if (table.containsKey(name)) {
+            list = table.get(name);
+        } else {
+            list = new ArrayList<Symbol>();
+            table.put(name, list);
+        }
+
+        list.add(s);
     }
 
     public void symbolize(CreateVar make) {
-        if (table.containsKey(make.name)) {
-            //Doesn't test global tree or parent trees because it's fine if symbols have same name in different scopes.
+        if (getValue(make.name) != null) {
             throw new Error("Sumbol " + make.name + " already exists in current scope. ");
         }
-        Symbol symbol = new Symbol(make);
-        table.put(make.name, symbol);
-        globalTable.put(make.name, symbol);
+        addSymbol(new Symbol(make), make.name);
     }
 
     public void symbolize(DefFunction make) {
-        if (table.containsKey(make.functionName)) {
+        if (getFunction(make.functionName, make.getParamsTypes()) != null) {
             throw new Error("Symbol " + make.functionName + "already exists in current scope.");
         }
-        Symbol symbol = new Symbol(make);
-        table.put(make.functionName, symbol);
-        globalTable.put(make.functionName, symbol);
+        addSymbol(new FunctionSymbol(make), make.functionName);
     }
 
     public void symbolize(DataType make) {
-        if (table.containsKey(make.getType())) {
+        if (getDataType(make.getType()) != null) {
             throw new Error("Symbol " + make.getType() + " already exists in current scope.");
         }
-        Symbol symbol = new Symbol(make);
-        table.put(make.getType(), symbol);
-        globalTable.put(make.getType(), symbol);
+        addSymbol(new Symbol(make), make.getType());
     }
 
+    public void symbolize(String name, DataType l, DataType r, DataType type) {
+        if (getOperator(name, l, r) != null) {
+            throw new Error("Symbol " + name + " already exists in current scope.");
+        }
+        addSymbol(new OperatorSymbol(l, r, type), name);
+    }
 
-    public Symbol get(String name) {
+    //symobls in current close will be at beggining.
+    //as a result, don't have to worry about not include same names from parent SymbolTable
+    private ArrayList<Symbol> getList(String name) {
+        ArrayList<Symbol> result = new ArrayList<Symbol>();
+
         if (table.containsKey(name)) {
-            return table.get(name);
-        } else if (parent != null) {
-            return parent.get(name);
+            result.addAll(table.get(name));
+        }
+
+        if (parent != null) {
+            result.addAll(parent.getList(name));
+        }
+        return result;
+    }
+
+    public Symbol getValue(String name) {
+        ArrayList<Symbol> symbols = getList(name);
+        for (Symbol symbol : symbols) {
+            if (symbol.type == SymbolType.VALUE) {
+                return symbol;
+            }
         }
         return null;
     }
 
-    public Integer getAddress(String name) {
-        return get(name).address;
-    }
-
-    public DataType getType(String name, DataType t) {
-        return get(name).dataType;
-    }
-
-    public boolean exists(String name) {
-        if(globalTable.containsKey(name) && globalTable.get(name).address == this.getAddress(name))  {
-            return true;
+    public FunctionSymbol getFunction(String name, ArrayList<DataType> params) {
+        ArrayList<Symbol> symbols = getList(name);
+        for (Symbol symbol : symbols) {
+            if (symbol.type == SymbolType.FUNCTION) {
+                FunctionSymbol fSymbol = (FunctionSymbol) symbol;
+                if (params.equals(fSymbol.params)) {
+                    return fSymbol;
+                } 
+            }
         }
-        return false;
+        return null;
     }
 
-    public boolean isDataType(String name, DataType d) {
-        return get(name).dataType == d;
+    public OperatorSymbol getOperator(String name, DataType l, DataType r) {
+        ArrayList<Symbol> symbols = getList(name);
+        for (Symbol symbol : symbols) {
+            if (symbol.type == SymbolType.OPERATOR) {
+                OperatorSymbol oSymbol = (OperatorSymbol) symbol;
+                if (oSymbol.left == l && oSymbol.right == r) {
+                    return oSymbol;
+                }
+            }
+        }
+        return null;
     }
 
-    public boolean inScope(String name) {
-        return get(name) != null;
+    public Symbol getDataType(String name) {
+        ArrayList<Symbol> symbols = getList(name);
+        for (Symbol symbol : symbols) {
+            if (symbol.type == SymbolType.DATATYPE) {
+                return symbol;
+            }
+        }
+        return null;
     }
 }

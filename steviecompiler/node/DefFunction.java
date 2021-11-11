@@ -5,6 +5,8 @@ import steviecompiler.symbol.SymbolTable;
 
 import java.util.ArrayList;
 
+import javax.xml.crypto.Data;
+
 import steviecompiler.Token.TokenType;
 
 public class DefFunction extends Statement{
@@ -23,12 +25,20 @@ public class DefFunction extends Statement{
     */
     public String functionName;
 
-    private ArrayList<DefParam> params = new ArrayList<DefParam>();
+    public ArrayList<DefParam> params = new ArrayList<DefParam>();
 
     private boolean hasReturn = false;
     public DataType returnType;
 
     private Block code;
+
+    public ArrayList<DataType> getParamsTypes() {
+        ArrayList<DataType> result = new ArrayList<DataType>();
+        for (DefParam param : params) {
+            result.add(param.type);
+        }
+        return result;
+    }
 
     
     public DefFunction(){

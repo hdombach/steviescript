@@ -9,14 +9,15 @@ public class Symbol {
     public static enum SymbolType {
         VALUE,
         FUNCTION,
-        DATATYPE
+        DATATYPE,
+        OPERATOR
     }
 
     public DataType dataType;
     private static int index = 0; //mabye ahve blocks do this
     private int size;
     protected int address;
-    private SymbolType type;
+    protected SymbolType type;
 
     public Symbol(CreateVar c) {
         dataType = c.type;
@@ -24,14 +25,6 @@ public class Symbol {
         index++;
         memLoad();
         type = SymbolType.VALUE;
-    }
-
-    public Symbol(DefFunction f) {
-        dataType = f.returnType;
-        address = index;
-        index++;
-        memLoad();
-        type = SymbolType.FUNCTION;
     }
     
     public Symbol(DataType t) {

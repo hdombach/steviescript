@@ -6,8 +6,8 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.error.ErrorHandler;
 
 public class DefParam extends Node {
-    private DataType type;
-    private String name;
+    public DataType type;
+    public String name;
 
     public DefParam(){
         int beginIndex = Node.index;

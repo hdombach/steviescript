@@ -7,6 +7,7 @@ import javax.xml.crypto.Data;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
+import steviecompiler.symbol.OperatorSymbol;
 import steviecompiler.symbol.SymbolTable;
 
 public class Operation extends Expression {
@@ -91,11 +92,11 @@ public class Operation extends Expression {
     public void checkSymbols(SymbolTable scope) {
         left.checkSymbols(scope);
         right.checkSymbols(scope);
-        if (left.evaluatedType.compare(right.evaluatedType)) {
-            evaluatedType = left.evaluatedType;
-        } else {
-            throw new Error("Missmatched evaluated types\n" + left + "\n" + right);
+        OperatorSymbol s = scope.getOperator(operator, left.evaluatedType, right.evaluatedType);
+        if (s == null) {
+            throw new Error("Operation does not exist.");
         }
+        evaluatedType = s.dataType;
     }
     
     //TODO: add more operations to list

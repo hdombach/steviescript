@@ -3,6 +3,7 @@ package steviecompiler.node.expression;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
 import steviecompiler.node.Param;
+import steviecompiler.symbol.FunctionSymbol;
 import steviecompiler.symbol.SymbolTable;
 
 public class FunctionCall extends Expression {
@@ -29,13 +30,15 @@ public class FunctionCall extends Expression {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
-		if (!scope.inScope(name)) {
+		param.checkSymbols(scope);
+
+		FunctionSymbol s = scope.getFunction(name, param.getParamTypes());
+		if (s == null) {
 			throw new Error("Symbol " + name + " does not exits");
 		} else {
-			evaluatedType = scope.get(name).dataType;
+			evaluatedType = s.dataType;
 		}
 
-		param.checkSymbols(scope);
 	}
 
 	public String toString() {

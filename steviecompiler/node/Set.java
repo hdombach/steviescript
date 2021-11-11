@@ -2,6 +2,7 @@ package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;;
 
 public class Set extends Statement {
@@ -31,11 +32,12 @@ public class Set extends Statement {
 
 	public void checkSymbols(SymbolTable scope) {
 		expression.checkSymbols(scope);
-		if (!scope.inScope(name)) {
+		Symbol s = scope.getValue(name);
+		if (s == null) {
 			throw new Error("Symbol " + name + " does not exist in scope.");
 		}
-		if (!expression.evaluatedType.compare(scope.get(name).dataType)) {
-			throw new Error("Cannot set a " + scope.get(name).dataType.getType() + " to a " + expression.evaluatedType.getType() + ".");
+		if (!expression.evaluatedType.compare(s.dataType)) {
+			throw new Error("Cannot set a " + s.dataType + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
 

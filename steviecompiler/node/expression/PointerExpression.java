@@ -4,6 +4,7 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.Token;
 import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
+import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
 public class PointerExpression extends Expression {
@@ -23,7 +24,8 @@ public class PointerExpression extends Expression {
 	}
 
     public void checkSymbols(SymbolTable scope) {
-        if (!scope.inScope(name)) {
+        Symbol s = scope.getValue(name);
+        if (s == null) {
             throw new Error("Symbol " + name + " does not exist in scope");
         }
         evaluatedType = new DataType("pointer");

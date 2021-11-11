@@ -2,6 +2,7 @@ package steviecompiler.node.expression;
 
 import steviecompiler.Token;
 import steviecompiler.node.Node;
+import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
 public class VariableName extends Expression {
@@ -21,10 +22,11 @@ public class VariableName extends Expression {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
-		if (!scope.inScope(name)) {
+		Symbol s = scope.getValue(name);
+		if (s == null) {
 			throw new Error("Symbol " + name + " does not exist in scope");
 		}
-		evaluatedType = scope.get(name).dataType;
+		evaluatedType = s.dataType;
 	}
 
 	public String content() {
