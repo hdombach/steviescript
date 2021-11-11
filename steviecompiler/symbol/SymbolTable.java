@@ -42,15 +42,15 @@ public class SymbolTable {
             symbolize("*", new DataType("char"), new DataType("char"), new DataType("char"));
             symbolize("/", new DataType("char"), new DataType("char"), new DataType("char"));
 
-            symbolize(">", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize("<", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize(">=", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize("!=", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize(">=", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize("&&", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize("||", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize("^^", new DataType("boolean"), new DataType("int"), new DataType("int"));
-            symbolize("==", new DataType("boolean"), new DataType("int"), new DataType("int"));
+            symbolize(">", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("<", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize(">=", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("!=", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("<=", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("&&", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("||", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("^^", new DataType("int"), new DataType("int"), new DataType("boolean"));
+            symbolize("==", new DataType("int"), new DataType("int"), new DataType("boolean"));
         }
     }
 
@@ -138,7 +138,7 @@ public class SymbolTable {
         for (Symbol symbol : symbols) {
             if (symbol.type == SymbolType.OPERATOR) {
                 OperatorSymbol oSymbol = (OperatorSymbol) symbol;
-                if (oSymbol.left == l && oSymbol.right == r) {
+                if (oSymbol.left.compare(l) && oSymbol.right.compare(r)) {
                     return oSymbol;
                 }
             }

@@ -42,7 +42,7 @@ public class DataType extends Node {
 	}
 
     public Boolean compare(String t) {
-        String[] _1 = {"byte", "char", "bool"};
+        String[] _1 = {"byte", "char", "boolean"};
         String[] _4 = {"int", "pointer"};
         Boolean is1 = Arrays.asList(_1).contains(name) && Arrays.asList(_1).contains(t);
         Boolean is4 = Arrays.asList(_4).contains(name) && Arrays.asList(_4).contains(t);

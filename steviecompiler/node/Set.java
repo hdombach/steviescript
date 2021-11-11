@@ -37,7 +37,7 @@ public class Set extends Statement {
 			throw new Error("Symbol " + name + " does not exist in scope.");
 		}
 		if (!expression.evaluatedType.compare(s.dataType)) {
-			throw new Error("Cannot set a " + s.dataType + " to a " + expression.evaluatedType.getType() + ".");
+			throw new Error("Cannot set a " + s.dataType.getType() + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
 

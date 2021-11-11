@@ -1,5 +1,6 @@
 int y = 7
-y = false
+boolean z = y > 5
+
 for(int x = 0, x < 5, x = x + 1) {
     y = y + 1
 }
@@ -17,4 +18,7 @@ function exampleFunction(int value, int anotherValue) -> int {
     return test2
 }
 
-exampleFunction(5)
+function doSomething() {
+}
+
+exampleFunction(5, 7)
