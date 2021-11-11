@@ -52,10 +52,15 @@ public abstract class ErrorHandler {
         new XYZError(p);
     }*/
 
+    public static int errorCount() {
+        return  errors.size();
+    }
+
     public static void throwErrors() {
         for(ErrorHandler e : errors) {
             System.out.println(e);
         }
         System.out.println("Parsed with " + errors.size() + " errors.");
+        System.exit(1);
     }
 }

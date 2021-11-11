@@ -1,6 +1,9 @@
 package steviecompiler;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -14,8 +17,9 @@ import steviecompiler.error.ErrorHandler;
 public class Main{   
     public static String filePath;
     public static HashMap<String, ArrayList<String>> codeText = new HashMap<String, ArrayList<String>>();
-    public static void main(String[] args){
+    public static ArrayList<Command> commands;
 
+    public static void main(String[] args){
 
       filePath = "test.txt";
       if (args.length > 0) {
@@ -25,8 +29,12 @@ public class Main{
       System.out.println(Token.getTokenList());
       Node.parse(Token.getTokenList());
       System.out.println(Node.getCode());
-      ErrorHandler.throwErrors();
       Node.checkScope();
+      //commands = Command.generate();
+      if(ErrorHandler.errorCount() == 0) {
+          //write(args[args.length - 1]);
+      }
+      ErrorHandler.throwErrors();
     }
 
     public static void readFile(String path) {
@@ -46,6 +54,21 @@ public class Main{
         e.printStackTrace();
         System.exit(1);
       }
+    }
+
+    public static void write(String path) {
+        try {
+            File out = new File(path);
+            out.createNewFile();
+            FileWriter writer = new FileWriter(path);
+            for(Command c : commands) {
+                writer.write(c.toString()); //TODO: toString for Command that prints out a command
+                writer.close();
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
     }
 
     public static String getLine(int line) {
