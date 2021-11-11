@@ -9,6 +9,7 @@ import javax.xml.crypto.Data;
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 import steviecompiler.node.DefFunction;
+import steviecompiler.node.Param;
 import steviecompiler.node.expression.FunctionCall;
 import steviecompiler.symbol.Symbol.SymbolType;
 
@@ -125,7 +126,7 @@ public class SymbolTable {
         for (Symbol symbol : symbols) {
             if (symbol.type == SymbolType.FUNCTION) {
                 FunctionSymbol fSymbol = (FunctionSymbol) symbol;
-                if (params.equals(fSymbol.params)) {
+                if (Param.compare(params, fSymbol.params)) { //TODO make a function to compare lists of params
                     return fSymbol;
                 } 
             }
