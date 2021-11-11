@@ -41,8 +41,6 @@ public class Param extends Node {
 					Expression.invalid();
 				}
 			}
-		} else {
-			Node.index = beginIndex;
 		}
 		if (Node.currentToken().getType() == TokenType.CLOSEPARAN) {
 			Node.index++;

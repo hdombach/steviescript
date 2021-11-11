@@ -22,3 +22,4 @@ function doSomething() {
 }
 
 exampleFunction(5, 7)
+doSomething()
