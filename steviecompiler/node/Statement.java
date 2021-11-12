@@ -77,6 +77,14 @@ public abstract class Statement extends Node {
 			return temp;
 		}
 
+		temp = new Import();
+		if (temp.isValid) {
+			return temp;
+		}
+		else if (temp.unexpectedToken) {
+			return null;
+		}
+
 		temp = Expression.expect();
 		if (temp.isValid) {
 			return temp;

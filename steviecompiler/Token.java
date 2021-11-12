@@ -27,6 +27,7 @@ public class Token {
         FALSE,
         TRUE,
         VAR,
+        IMPORT,
         CONDITIONAL,
         MATH,
         EQUALS,
@@ -254,6 +255,9 @@ public class Token {
                 break;
             case "return":
                 new Token(TokenType.RETURN, line);
+                break;
+            case "import":
+                new Token(TokenType.IMPORT, line);
                 break;
             case "int":
             case "float":

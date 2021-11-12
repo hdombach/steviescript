@@ -1,3 +1,5 @@
+import steviecore
+
 int y = 7
 boolean z = y > 5
 
