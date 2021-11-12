@@ -1,5 +1,6 @@
 package steviecompiler.symbol;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -121,6 +122,36 @@ public class SymbolTable {
             }
         }
         return null;
+    }
+
+    //TODO: need to test this still later on (can prob test when stuff is set up for code generation)
+    public int getValueAddress(String name) {
+        //dedicated variables appear beneath the temp memory in the stack
+        
+        Object[] localKeys = table.keySet().toArray();
+        Arrays.sort(localKeys);
+
+        int currentAddress = 0 - requiredTempMemory;
+
+        for (Object key : localKeys) {
+            ArrayList<Symbol> symbols = table.get(key);
+            for (Symbol symbol : symbols) {
+                if (symbol.type == SymbolType.VALUE) {
+                    currentAddress -= symbol.dataType.getReqMemory();
+                }
+                if ((String) key == name) {
+                    return currentAddress;
+                }
+            }
+        }
+
+        if (parent != null) {
+            return currentAddress - parent.getValueAddress(name);
+        }
+
+        //theoretically this should neve happen since all the names would be tested in checkSymbols.
+        //In other words, if this happens, something is terribly wrong.
+        throw new Error("Value " + name + " could not be found when looking for an address");
     }
 
     public FunctionSymbol getFunction(String name, ArrayList<DataType> params) {
