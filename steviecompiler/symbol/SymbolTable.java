@@ -21,6 +21,8 @@ public class SymbolTable {
     //can be null
     public SymbolTable parent;
 
+	public int requiredTempMemory;
+
     public SymbolTable(SymbolTable parent) {
         table = new HashMap<String, ArrayList<Symbol>>();
         this.parent = parent;
