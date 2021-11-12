@@ -16,26 +16,50 @@ import steviecompiler.error.ErrorHandler;
 
 public class Main{   
     public static String filePath;
+    public static ArrayList<String> files = new ArrayList<String>();
+    public static String outputPath = "";
     public static HashMap<String, ArrayList<String>> codeText = new HashMap<String, ArrayList<String>>();
     public static ArrayList<Command> commands;
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
 
-      filePath = "test.txt";
-      if (args.length > 0) {
-        filePath = args[0];
-      }
-      readFile(filePath);
-      System.out.println(Token.getTokenList());
-      Node.parse(Token.getTokenList());
-      Node.checkScope();
-      Node.getAllReqMemory();
-      //commands = Command.generate();
-      System.out.println(Node.getCode());
-      if(ErrorHandler.errorCount() == 0) {
-          //write(args[args.length - 1]);
-      }
-      ErrorHandler.throwErrors();
+        filePath = "test.txt";
+        readFile(filePath);
+
+        //parseArgs(args);
+        /*for(String s : files) {
+            readFile(s);
+        }*/
+        System.out.println(Token.getTokenList());
+         Node.parse(Token.getTokenList());
+        System.out.println(Node.getCode());
+        Node.checkScope();
+        //commands = Command.generate();
+        if(ErrorHandler.errorCount() == 0) {
+            //write(outputPath);
+        }
+        ErrorHandler.throwErrors();
+    }
+
+    public static void parseArgs(String[] args) {
+        boolean filesComplete = false;
+        for(int i = 0; i < args.length; i++) {
+            if(!filesComplete) {
+                if(args[i].contains("-")) {
+                    filesComplete = true;
+                }
+                else {
+                    files.add(args[i]);
+                }
+            }
+            if(args[i].equals("-o")) {
+                outputPath = args[i + 1];
+                i++;
+            }
+        }
+        if(outputPath.equals("")) {
+            outputPath = "stevout.t";
+        }
     }
 
     public static void readFile(String path) {
