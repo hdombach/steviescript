@@ -10,6 +10,7 @@ public class Block extends Node {
 	protected SymbolTable symbols;
 	private static Block currentParent;
 	private Block parent;
+	private int requiredTempMemory;
 
 	public Block(){
 		parent = currentParent;
@@ -44,10 +45,24 @@ public class Block extends Node {
 		}
 	}
 
+	public int getReqMemory() {
+		int biggest = 0;
+		int temp;
+		for (Statement statement : statements) {
+			temp = statement.getReqMemory();
+			if (temp > biggest) {
+				biggest = temp;
+			}
+		}
+		requiredTempMemory = biggest;
+		return 0;
+	}
+
 	public String toString() {
 		String result = "";
 		result += Node.indentStr() + "Block:\n";
 		Node.indent++;
+		result += Node.indentStr() + "temp meory: " + requiredTempMemory + "\n";
 		result += Node.indentStr() + "statements: [\n";
 		Node.indent++;
 

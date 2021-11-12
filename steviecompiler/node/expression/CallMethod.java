@@ -56,4 +56,18 @@ public class CallMethod extends Expression {
 		Node.indent--;
 		return result;
 	};
+
+	public int getReqMemory() {
+		int big = 0;
+		int result = 0;
+		int temp;
+		for (Expression exp : param.expressions) {
+			result += exp.evaluatedType.getReqMemory();
+			temp = exp.getReqMemory();
+			if (temp > big) {
+				big = temp;
+			}
+		}
+		return result + big;
+	}
 }

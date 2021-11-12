@@ -110,6 +110,25 @@ public class For extends Statement {
         loop.checkSymbols(scope);
     }
 
+    public int getReqMemory() {
+        int biggest;
+        int temp;
+        biggest = setIndex.getReqMemory();
+        
+        temp = condition.getReqMemory();
+        if (temp > biggest) {
+            biggest = temp;
+        }
+
+        temp = increment.getReqMemory();
+        if (temp > biggest) {
+            biggest = temp;
+        }
+
+        loop.getReqMemory();
+        return biggest + condition.evaluatedType.getReqMemory();
+    }
+
     public String toString() {
 		String result = "";
 		result += Node.indentStr() + "For: \n";

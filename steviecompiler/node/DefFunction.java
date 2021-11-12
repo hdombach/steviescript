@@ -108,6 +108,11 @@ public class DefFunction extends Statement{
         code.checkSymbols(scope);
     }
 
+    public int getReqMemory() {
+        code.getReqMemory();
+        return 0;
+    }
+
     public String toString() {
         String result = "";
         result += Node.indentStr() + "Function Definition: \n";

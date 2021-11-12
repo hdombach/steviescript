@@ -59,6 +59,11 @@ public class Param extends Node {
 		}
 	}
 
+	public int getReqMemory() {
+		System.out.println("WARNING: Param.getReqMemory should not be called.");
+		return 0;
+	}
+
 	public static boolean compare(ArrayList<DataType> p1, ArrayList<DataType> p2) {
 		if(p1.size() == p2.size()) {
 			for(int i = 0; i < p1.size(); i++) {

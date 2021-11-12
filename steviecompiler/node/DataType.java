@@ -37,6 +37,19 @@ public class DataType extends Node {
 		}
 	}
 
+	public int getReqMemory() {
+		switch(getType()) {
+            case "int":
+            case "float":
+            case "pointer":
+                return 4;
+            case "char":
+            case "boolean":
+            default:
+                return 1;
+        }
+	}
+
 	public Boolean compare(DataType t) {
 		return compare(t.name);
 	}

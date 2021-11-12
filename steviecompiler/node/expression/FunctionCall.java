@@ -1,5 +1,7 @@
 package steviecompiler.node.expression;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.Node;
 import steviecompiler.node.Param;
@@ -39,6 +41,20 @@ public class FunctionCall extends Expression {
 			evaluatedType = s.dataType;
 		}
 
+	}
+	
+	public int getReqMemory() {
+		int big = 0;
+		int result = 0;
+		int temp;
+		for (Expression exp : param.expressions) {
+			result += exp.evaluatedType.getReqMemory();
+			temp = exp.getReqMemory();
+			if (temp > big) {
+				big = temp;
+			}
+		}
+		return result + big;
 	}
 
 	public String toString() {

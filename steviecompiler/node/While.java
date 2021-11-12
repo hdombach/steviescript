@@ -55,8 +55,13 @@ public class While extends Statement {
 	}
 
 	public void checkSymbols(SymbolTable scope) {
+		//TODO: test to see if condition evaluates to a bool
 		condition.checkSymbols(scope);
 		loop.checkSymbols(scope);
+	}
+	public int getReqMemory() {
+		loop.getReqMemory();
+		return condition.evaluatedType.getReqMemory() + condition.getReqMemory();
 	}
 	
 	public String toString() {

@@ -92,6 +92,24 @@ public class If extends Statement{
 		}
 	}
 
+	public int getReqMemory() {
+		int biggest = 0;
+		int temp;
+		for (Expression condition : conditions) {
+			temp = condition.getReqMemory() + condition.evaluatedType.getReqMemory();
+			if (temp > biggest) {
+				biggest = temp;
+			}
+		}
+		for (Block code : codes) {
+			code.getReqMemory();
+		}
+		if (hasElse) {
+			elseCode.getReqMemory();
+		}
+		return biggest;
+	}
+
 	public String toString(){
 		String result = "";
 		result += Node.indentStr() + "If: \n";

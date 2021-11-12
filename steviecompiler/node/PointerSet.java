@@ -41,8 +41,26 @@ public class PointerSet extends Statement{
     }
 
     public void checkSymbols(SymbolTable scope) {
+        //TODO: check to see if pointerValue is a pointer data type
         pointerValue.checkSymbols(scope);
         expression.checkSymbols(scope);
+    }
+
+    public int getReqMemory() {
+        int biggest;
+        int sum;
+        int temp;
+
+        sum = pointerValue.evaluatedType.getReqMemory();
+        biggest = pointerValue.getReqMemory();
+
+        sum += expression.evaluatedType.getReqMemory();
+        temp = expression.getReqMemory();
+        if (temp > biggest) {
+            biggest = temp;
+        }
+
+        return biggest+ sum;
     }
 
     public String toString() {

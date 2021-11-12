@@ -28,6 +28,9 @@ public class Return extends Statement {
     public void checkSymbols(SymbolTable scope) {
         expression.checkSymbols(scope);
     }
+    public int getReqMemory() {
+        return expression.evaluatedType.getReqMemory() + expression.getReqMemory();
+    }
 
     public String toString() {
 		String result = "";

@@ -60,4 +60,11 @@ abstract public class Node {
 	//Checks if symbols exist in current scope and if the data types are interchagable
 	public abstract void checkSymbols(SymbolTable scope);
 
+	//Gets the temp memory required to evalute things
+	public abstract int getReqMemory();
+
+	public static void getAllReqMemory() {
+		block.getReqMemory();
+	}
+
 }

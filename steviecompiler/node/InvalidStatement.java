@@ -20,4 +20,7 @@ public class InvalidStatement extends Statement {
     public void checkSymbols(SymbolTable scope) {
         return;
     }
+    public int getReqMemory() {
+        return 0;
+    }
 }

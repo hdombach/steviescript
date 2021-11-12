@@ -47,4 +47,11 @@ public class CreateVar extends Statement {
 			throw new Error("Cannot set a " + type.getType() + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
+
+	public int getReqMemory() {
+		if (expression == null) {
+			return 0;
+		}
+		return expression.getReqMemory() + expression.evaluatedType.getReqMemory();
+	}
 }

@@ -28,9 +28,10 @@ public class Main{
       readFile(filePath);
       System.out.println(Token.getTokenList());
       Node.parse(Token.getTokenList());
-      System.out.println(Node.getCode());
       Node.checkScope();
+      Node.getAllReqMemory();
       //commands = Command.generate();
+      System.out.println(Node.getCode());
       if(ErrorHandler.errorCount() == 0) {
           //write(args[args.length - 1]);
       }

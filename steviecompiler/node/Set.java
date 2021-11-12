@@ -40,6 +40,9 @@ public class Set extends Statement {
 			throw new Error("Cannot set a " + s.dataType.getType() + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
+	public int getReqMemory() {
+		return expression.evaluatedType.getReqMemory() + expression.getReqMemory();
+	}
 
 	public String toString() {
 		String result = "";

@@ -32,4 +32,7 @@ public class VariableName extends Expression {
 	public String content() {
 		return name;
 	}
+	public int getReqMemory() {
+		return 0;
+	}
 }

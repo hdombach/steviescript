@@ -23,7 +23,7 @@ public class Symbol {
         dataType = c.type;
         address = index;
         index++;
-        memLoad();
+        //memLoad();
         type = SymbolType.VALUE;
     }
     
@@ -32,7 +32,7 @@ public class Symbol {
         type = SymbolType.DATATYPE;
     }
 
-    public void memLoad() {
+    /*public void memLoad() {
         switch(dataType.getType()) {
             case "int":
             case "float":
@@ -44,7 +44,7 @@ public class Symbol {
             default:
                 size = 1;
         }
-    }
+    }*/ //moving to DataType
 
     public void malloc(int n) {
         size = n;

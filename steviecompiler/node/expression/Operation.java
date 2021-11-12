@@ -122,4 +122,19 @@ public class Operation extends Expression {
                 return 0;
         }
     }
+
+    public int getReqMemory() {
+        int result = 0;
+        int templ;
+        int tempr;
+        result += left.evaluatedType.getReqMemory();
+        result += right.evaluatedType.getReqMemory();
+        templ = left.getReqMemory();
+        tempr = right.getReqMemory();
+        if (templ > tempr) {
+            return result + templ;
+        } else {
+            return result + tempr;
+        }
+    }
 }

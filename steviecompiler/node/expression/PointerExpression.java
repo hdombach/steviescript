@@ -34,4 +34,7 @@ public class PointerExpression extends Expression {
     public String toString() {
         return Node.indentStr() + "Pointer: " + name + "\n";
     }
+    public int getReqMemory() {
+        return 0;
+    }
 }
