@@ -32,8 +32,9 @@ public class Main{
         }*/
         System.out.println(Token.getTokenList());
          Node.parse(Token.getTokenList());
-        System.out.println(Node.getCode());
         Node.checkScope();
+        Node.getAllReqMemory();
+        System.out.println(Node.getCode());
         //commands = Command.generate();
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);
