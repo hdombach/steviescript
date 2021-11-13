@@ -170,7 +170,7 @@ public class Token {
                     } else {
                         if (c.equals("\"")) {
                             isString = false;
-                            createString(accumulator, i);
+                            createString(accumulator, i++);
                             accumulator = "";
                         } else if (c.equals("\\")) { //doesn't properly recognize "\n", "\t"
                             isBackSlash = true;
@@ -182,26 +182,26 @@ public class Token {
                     if (c.equals("\"")) {
                         isString = true;
                         isBackSlash = false;
-                        createToken(accumulator, i);
+                        createToken(accumulator, i++);
                         accumulator = "";
                     } else if (specs.contains(c) && !isSpecial) {
-                        createToken(accumulator, i);
+                        createToken(accumulator, i++);
                         accumulator = c;
                         isSpecial = true;
                     } else if (whites.contains(c)) {
-                        createToken(accumulator, i + 1);
+                        createToken(accumulator, i++);
                         accumulator = "";
                         isSpecial = false;
                     } else if(enclosures.contains(c)) {
-                        createToken(accumulator, i);
-                        createToken(c, i);
+                        createToken(accumulator, i++);
+                        createToken(c, i++);
                         accumulator = "";
                         isSpecial = false;
                     } else {
                         if(specs.contains(c)) {
                             accumulator += c;
                         } else if (isSpecial) {
-                            createToken(accumulator, i);
+                            createToken(accumulator, i++);
                             accumulator = c;
                             isSpecial = false;
                         } else {
@@ -211,7 +211,7 @@ public class Token {
                 }
             }
             if (!accumulator.equals("")) {
-                createToken(accumulator, i);
+                createToken(accumulator, i++);
             }
         }
     }
