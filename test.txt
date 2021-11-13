@@ -5,14 +5,7 @@ boolean z = y > 5
 
 for(int x = 0, x < 5, x = x + 1) {
     y = y + 1
-}
-
-if (y) {
-    return y - 5
-} else if (y + y) {
-    return y + 3
-} else {
-    return y / 3
+    break
 }
 
 function exampleFunction(int value, int anotherValue) -> int {
