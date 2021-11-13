@@ -94,7 +94,7 @@ public class For extends Statement {
 
         Node.index++;
 
-        loop = new Block();
+        loop = new Block(null);
                 
         if(Node.currentToken().getType() != TokenType.CLOSECURLY) {
             Node.expectedToken = TokenType.CLOSECURLY;

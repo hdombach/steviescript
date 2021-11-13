@@ -13,11 +13,15 @@ public class Block extends Node {
 	private Block parent;
 	private ArrayList<Command> commands = new ArrayList<Command>();
 
-	public Block(){
+	public Block(SymbolTable shared){
 		parent = currentParent;
 		currentParent = this;
 		if (parent == null) {
-			symbols = new SymbolTable(null);
+			if (shared == null) {
+				symbols = new SymbolTable(null);
+			} else {
+				symbols = shared;
+			}
 		} else {
 			symbols = new SymbolTable(parent.symbols);
 		}

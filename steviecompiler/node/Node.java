@@ -36,7 +36,7 @@ abstract public class Node {
 	public static void parse(ArrayList<Token> tokensIn) {
 		tokens = tokensIn;
 		try {
-			block = new Block();
+			block = new Block(null);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
