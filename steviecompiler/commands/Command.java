@@ -37,6 +37,10 @@ public abstract class Command {
         return result;
     }
 
+    public static ArrayList<Command> generate() {
+       return null; //TODO: final generation of commands
+    }
+
     public static void test() {
         String result = "";
         result += PushCommand.getAssembly(4); //a  -12

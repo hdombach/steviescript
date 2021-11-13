@@ -3,7 +3,6 @@ package steviecompiler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.Scanner;
 import java.util.HashMap;
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class Main{
         Node.getAllReqMemory();
         System.out.println(Node.getCode());
         Node.getCode().makeAllCommands();
-        //commands = Command.generate();
+        commands = Command.generate();
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);
         }
@@ -90,8 +89,8 @@ public class Main{
             FileWriter writer = new FileWriter(path);
             for(Command c : commands) {
                 writer.write(c.toString()); //TODO: toString for Command that prints out a command
-                writer.close();
             }
+            writer.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
