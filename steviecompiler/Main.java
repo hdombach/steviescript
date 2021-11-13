@@ -23,13 +23,16 @@ public class Main{
     public static void main(String[] args) {
 
         filePath = "test.txt";
-        readFile(filePath);
+        files.add(filePath);
+        
 
         //parseArgs(args);
         /*for(String s : files) {
             readFile(s);
         }*/
         for(String f : files) {
+            filePath = f;
+            readFile(f);
             Token.tokenize(codeText);
             System.out.println(Token.getTokenList());
             Node.parse(Token.getTokenList());
@@ -84,11 +87,9 @@ public class Main{
     public static void readFile(String path) {
         try {
             Scanner reader = new Scanner(new File(path));
-            int line = 1;
             while(reader.hasNextLine()) {
                 String thisLine = reader.nextLine();
                 codeText.add(thisLine);
-                line++;
             }
             reader.close();
         }

@@ -155,6 +155,9 @@ public class Token {
         boolean isString = false;
         boolean isBackSlash = false;
         for(int i = 0; i < code.size(); i++) {
+            if(code.get(i).length() == 0) {
+                accumulator = "";
+            }
             for(int j = 0; j < code.get(i).length(); j++) {
                 if(j < code.get(i).length() - 2 && code.get(i).substring(j, j + 2).equals("//")) {
                     break;
@@ -186,7 +189,7 @@ public class Token {
                         accumulator = c;
                         isSpecial = true;
                     } else if (whites.contains(c)) {
-                        createToken(accumulator, i);
+                        createToken(accumulator, i + 1);
                         accumulator = "";
                         isSpecial = false;
                     } else if(enclosures.contains(c)) {

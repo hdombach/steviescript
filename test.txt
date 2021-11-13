@@ -1,1 +1,8 @@
 import foo
+
+
+int y = 2
+
+y = y + 1
+
+int z = y
