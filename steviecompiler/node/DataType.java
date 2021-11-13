@@ -33,7 +33,7 @@ public class DataType extends Node {
 	public void checkSymbols(SymbolTable scope) {
 		Symbol s = scope.getDataType(name);
 		if (s == null) {
-			throw new Error("Symbol " + name + " does not exist in scope.");
+			throw new Error("Line " + getLine() + ": symbol " + name + " does not exist in scope.");
 		}
 	}
 

@@ -24,7 +24,7 @@ public class VariableName extends Expression {
 	public void checkSymbols(SymbolTable scope) {
 		Symbol s = scope.getValue(name);
 		if (s == null) {
-			throw new Error("Symbol " + name + " does not exist in scope");
+			throw new Error("Line " + getLine() + ": symbol " + name + " does not exist in scope");
 		}
 		evaluatedType = s.dataType;
 	}

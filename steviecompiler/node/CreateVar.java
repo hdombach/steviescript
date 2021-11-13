@@ -44,7 +44,7 @@ public class CreateVar extends Statement {
 			expression.checkSymbols(scope);
 		}
 		if (!expression.evaluatedType.compare(type)) {
-			throw new Error("Cannot set a " + type.getType() + " to a " + expression.evaluatedType.getType() + ".");
+			throw new Error("Line " + getLine() + ": annot set a " + type.getType() + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
 

@@ -34,10 +34,10 @@ public class Set extends Statement {
 		expression.checkSymbols(scope);
 		Symbol s = scope.getValue(name);
 		if (s == null) {
-			throw new Error("Symbol " + name + " does not exist in scope.");
+			throw new Error("Line " + getLine() + ": symbol " + name + " does not exist in scope.");
 		}
 		if (!expression.evaluatedType.compare(s.dataType)) {
-			throw new Error("Cannot set a " + s.dataType.getType() + " to a " + expression.evaluatedType.getType() + ".");
+			throw new Error("Line " + getLine() + ": cannot set a " + s.dataType.getType() + " to a " + expression.evaluatedType.getType() + ".");
 		}
 	}
 	public int getReqMemory() {

@@ -16,6 +16,11 @@ abstract public class Node {
 	private static String printIndentChar = "⦙ ";
 	protected boolean isValid = false;
 	protected static TokenType expectedToken;
+	private int line;
+
+	Node() {
+		line = currentToken().getLine();
+	}
 		
 	protected static String indentStr() {
 		var result = "";
@@ -65,6 +70,9 @@ abstract public class Node {
 
 	public static void getAllReqMemory() {
 		block.getReqMemory();
+	}
+	public int getLine() {
+		return line;
 	}
 
 }

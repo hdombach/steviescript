@@ -94,7 +94,7 @@ public class Operation extends Expression {
         right.checkSymbols(scope);
         OperatorSymbol s = scope.getOperator(operator, left.evaluatedType, right.evaluatedType);
         if (s == null) {
-            throw new Error("Operation does not exist. Recieved: " + left.evaluatedType.getType() + " " + this.operator + " " + right.evaluatedType.getType());
+            throw new Error("Line " + getLine() + ": operation does not exist. Recieved: " + left.evaluatedType.getType() + " " + this.operator + " " + right.evaluatedType.getType());
         }
         evaluatedType = s.dataType;
     }

@@ -36,7 +36,7 @@ public class FunctionCall extends Expression {
 
 		FunctionSymbol s = scope.getFunction(name, param.getParamTypes());
 		if (s == null) {
-			throw new Error("Symbol " + name + " does not exist");
+			throw new Error("Line " + getLine() + ": symbol " + name + " does not exist");
 		} else {
 			evaluatedType = s.dataType;
 		}
