@@ -85,6 +85,14 @@ public abstract class Statement extends Node {
 			return null;
 		}
 
+		temp = new Include();
+		if (temp.isValid) {
+			return temp;
+		}
+		else if (temp.unexpectedToken) {
+			return null;
+		}
+
 		temp = Expression.expect();
 		if (temp.isValid) {
 			return temp;

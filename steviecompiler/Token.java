@@ -30,6 +30,7 @@ public class Token {
         BREAK,
         VAR,
         IMPORT,
+        INCLUDE,
         CONDITIONAL,
         MATH,
         EQUALS,
@@ -262,6 +263,9 @@ public class Token {
                 break;
             case "import":
                 new Token(TokenType.IMPORT, line);
+                break;
+            case "include":
+                new Token(TokenType.INCLUDE, line);
                 break;
             case "int":
             case "float":
