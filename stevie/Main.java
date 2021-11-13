@@ -11,7 +11,6 @@ public class Main {
 	private static int programCounter;
 	private static Boolean shouldExit;
 
-
 	//deafult field size is 4
 	public static int getField(int offset) {
 		return getInstruction(offset, 4);

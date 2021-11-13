@@ -1,6 +1,7 @@
 package steviecompiler;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
@@ -12,12 +13,11 @@ import steviecompiler.symbol.SymbolTable;
 import steviecompiler.commands.Command;
 import steviecompiler.error.ErrorHandler;
  
-
 public class Main{   
     public static String filePath;
     public static ArrayList<String> files = new ArrayList<String>();
     public static String outputPath = "";
-    public static HashMap<String, ArrayList<String>> codeText = new HashMap<String, ArrayList<String>>();
+    public static ArrayList<String> codeText = new ArrayList<String>();
     public static ArrayList<Command> commands;
 
     public static void main(String[] args) {
@@ -29,8 +29,12 @@ public class Main{
         /*for(String s : files) {
             readFile(s);
         }*/
-        System.out.println(Token.getTokenList());
-         Node.parse(Token.getTokenList());
+        for(String f : files) {
+            Token.tokenize(codeText);
+            System.out.println(Token.getTokenList());
+            Node.parse(Token.getTokenList());
+            Token.clear();
+        }
         Node.checkScope();
         Node.getAllReqMemory();
         System.out.println(Node.getCode());
@@ -43,16 +47,17 @@ public class Main{
     }
 
     public static void parseArgs(String[] args) {
-        boolean filesComplete = false;
-        for(int i = 0; i < args.length; i++) {
-            if(!filesComplete) {
-                if(args[i].contains("-")) {
-                    filesComplete = true;
-                }
-                else {
-                    files.add(args[i]);
-                }
-            }
+        if(args[0].contains(".sh")) {
+            parseHeader(args[0]);
+        }
+        else if(args[0].contains(".stv")) {
+            readFile(args[0]);
+        }
+        else {
+            ErrorHandler.generate(004); //invalid input error
+        }
+
+        for(int i = 1; i < args.length; i++) {
             if(args[i].equals("-o")) {
                 outputPath = args[i + 1];
                 i++;
@@ -63,15 +68,25 @@ public class Main{
         }
     }
 
+    public static void parseHeader(String path) {
+        try {
+        Scanner scan = new Scanner(new File(path));
+        while (scan.hasNextLine()) {
+                readFile(scan.nextLine());
+            }
+        }
+        catch (FileNotFoundException e) {
+            ErrorHandler.generate(004);
+        }
+    }
+
     public static void readFile(String path) {
       try {
         Scanner reader = new Scanner(new File(path));
-        codeText.put(path, new ArrayList<String>());
         int line = 1;
         while(reader.hasNextLine()) {
           String thisLine = reader.nextLine();
-          codeText.get(path).add(thisLine);
-          Token.tokenize(thisLine, line);
+          codeText.add(thisLine);
           line++;
         }
         reader.close();
@@ -98,7 +113,7 @@ public class Main{
     }
 
     public static String getLine(int line) {
-      return codeText.get(filePath).get(line - 1);
+      return codeText.get(line - 1);
     }
 }
 
