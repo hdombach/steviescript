@@ -17,37 +17,33 @@ public abstract class ErrorHandler {
     public ErrorHandler() {
         errors.add(this);
         filePath = Main.filePath;
-        errorLine = Node.currentToken().getLine();
+        if(Node.currentToken() != null) {
+            errorLine = Node.currentToken().getLine();
+        }
     }
 
     public static void generate(int key) {
         switch(key) {
             case 1:
-                generateUnexpectedTokenError();
+                new UnexpectedTokenError();
                 break;
             case 2:
-                generateInvalidStatementError();
+                new InvalidStatementError();
                 break;
             case 3:
-                generateInvalidExpressionError();
+                new InvalidExpressionError();
+                break;
+            case 4:
+                new NoInputError();
+                break;
+            case 5:
+                new InvalidFileError();
                 break;
             default:
         }
 
     }
-
-    private static void generateUnexpectedTokenError() {
-        new UnexpectedTokenError();
-    }
-
-    private static void generateInvalidStatementError() {
-        new InvalidStatementError();
-    }
-
-    private static void generateInvalidExpressionError() {
-        new InvalidExpressionError();
-    }
-
+    
     /*GenerateXYZError(param p) {
         new XYZError(p);
     }*/

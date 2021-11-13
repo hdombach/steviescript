@@ -72,7 +72,8 @@ public class Main{
         try {
         Scanner scan = new Scanner(new File(path));
         while (scan.hasNextLine()) {
-                readFile(scan.nextLine());
+                filePath = scan.nextLine();
+                readFile(filePath);
             }
         }
         catch (FileNotFoundException e) {
@@ -81,20 +82,19 @@ public class Main{
     }
 
     public static void readFile(String path) {
-      try {
-        Scanner reader = new Scanner(new File(path));
-        int line = 1;
-        while(reader.hasNextLine()) {
-          String thisLine = reader.nextLine();
-          codeText.add(thisLine);
-          line++;
+        try {
+            Scanner reader = new Scanner(new File(path));
+            int line = 1;
+            while(reader.hasNextLine()) {
+                String thisLine = reader.nextLine();
+                codeText.add(thisLine);
+                line++;
+            }
+            reader.close();
         }
-        reader.close();
-      }
-      catch (Exception e) {
-        e.printStackTrace();
-        System.exit(1);
-      }
+        catch (Exception e) {
+            ErrorHandler.generate(005);
+        }
     }
 
     public static void write(String path) {
