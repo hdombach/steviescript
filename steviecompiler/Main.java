@@ -75,8 +75,7 @@ public class Main{
         try {
         Scanner scan = new Scanner(new File(path));
         while (scan.hasNextLine()) {
-                filePath = scan.nextLine();
-                readFile(filePath);
+                files.add(scan.nextLine());
             }
         }
         catch (FileNotFoundException e) {
