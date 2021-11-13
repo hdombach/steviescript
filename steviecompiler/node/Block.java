@@ -2,6 +2,7 @@ package steviecompiler.node;
 
 import java.util.ArrayList;
 
+import steviecompiler.commands.Command;
 import steviecompiler.symbol.SymbolTable;
  
 
@@ -10,6 +11,7 @@ public class Block extends Node {
 	protected SymbolTable symbols;
 	private static Block currentParent;
 	private Block parent;
+	private ArrayList<Command> commands = new ArrayList<Command>();
 
 	public Block(){
 		parent = currentParent;
@@ -72,5 +74,13 @@ public class Block extends Node {
 		result += Node.indentStr() + "]\n";
 		Node.indent--;
 		return result;
+	}
+
+	public void addCommand(Command command) {
+		commands.add(command);
+	}
+	//used for allowing other blocks to reference the start of this block.
+	public Command getFirstCommand() {
+		return commands.get(0);
 	}
 }

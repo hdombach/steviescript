@@ -68,8 +68,16 @@ abstract public class Node {
 	//Gets the temp memory required to evalute things
 	public abstract int getReqMemory();
 
+	public int makeCommands(Block block) {
+		//TODO: change this to abstract once later on.
+		throw new Error("makeCommands is not implimented. Line: " + line);
+	};
+
 	public static void getAllReqMemory() {
 		block.getReqMemory();
+	}
+	public static void makeAllCommands() {
+		block.makeCommands(null);
 	}
 	public int getLine() {
 		return line;

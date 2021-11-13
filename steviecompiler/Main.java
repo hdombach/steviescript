@@ -35,6 +35,7 @@ public class Main{
         Node.checkScope();
         Node.getAllReqMemory();
         System.out.println(Node.getCode());
+        Node.getCode().makeAllCommands();
         //commands = Command.generate();
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);
