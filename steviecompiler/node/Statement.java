@@ -90,6 +90,11 @@ public abstract class Statement extends Node {
 			return temp;
 		}
 		
+		temp = new Break();
+		if(temp.isValid) {
+			return temp;
+		}
+		
 		temp = new End();
 		if (temp.isValid) {
 			return temp;

@@ -26,12 +26,13 @@ public class Token {
         STRUCT,
         FALSE,
         TRUE,
+        RETURN,
+        BREAK,
         VAR,
         IMPORT,
         CONDITIONAL,
         MATH,
         EQUALS,
-        RETURN,
         OPENCURLY,
         CLOSECURLY,
         OPENPARAN,
@@ -255,6 +256,9 @@ public class Token {
                 break;
             case "return":
                 new Token(TokenType.RETURN, line);
+                break;
+            case "break":
+                new Token(TokenType.BREAK, line);
                 break;
             case "import":
                 new Token(TokenType.IMPORT, line);
