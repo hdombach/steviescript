@@ -42,7 +42,7 @@ public class While extends Statement {
 			}
 		}
 
-		loop = new Block();
+		loop = new Block(null);
 
 		i = 4;
 		if (Node.currentToken().getType() != tokenSequence[i]) {
