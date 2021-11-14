@@ -41,6 +41,7 @@ abstract public class Node {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
 		}
+		index = 0;
 	}
 
 	public static void checkScope() {

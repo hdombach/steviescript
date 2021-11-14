@@ -23,8 +23,8 @@ public class Main{
     public static void main(String[] args) {        
 
         parseArgs(args);
-        if(files.size() == 0) {
-            files.add("test.txt");
+        if(args.length == 0) {
+            parseHeader("test.sh"); //default
         }
         System.out.println("Files: " + files + "\n\n\n");
         for(String f : files) {
@@ -49,6 +49,9 @@ public class Main{
     }
 
     public static void parseArgs(String[] args) {
+        if(args.length == 0) {
+            return;
+        }
         if(args[0].contains(".sh")) {
             parseHeader(args[0]);
         }
