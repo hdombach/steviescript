@@ -1,0 +1,7 @@
+import test
+include steviecore
+
+function main() {
+    i = pow(input(), 2)
+    print(i)
+}

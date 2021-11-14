@@ -36,7 +36,7 @@ public class Include extends Statement {
 
     public String toString() {
         String result = "";
-        result += Node.indentStr() + "Import statement: \n";
+        result += Node.indentStr() + "Include statement: \n";
         Node.indent++;
         result += Node.indentStr() + "package: " + iPackage + "\n";
         Node.indent--;

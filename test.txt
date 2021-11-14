@@ -1,8 +1,8 @@
-import foo
 
-
-int y = 2
-
-y = y + 1
-
-int z = y
+function pow(int a, int x) -> int {
+    int r = 1
+    for(int i = 0, i < x, i = i + 1) {
+        r = r * a
+    }
+    return r
+}

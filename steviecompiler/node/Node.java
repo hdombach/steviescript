@@ -18,7 +18,7 @@ abstract public class Node {
 	protected static TokenType expectedToken;
 	private int line;
 
-	Node() {
+	public Node() {
 		line = currentToken().getLine();
 	}
 		

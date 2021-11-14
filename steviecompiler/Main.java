@@ -20,23 +20,22 @@ public class Main{
     public static ArrayList<String> codeText = new ArrayList<String>();
     public static ArrayList<Command> commands;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) {        
 
-        filePath = "test.txt";
-        files.add(filePath);
-        
-
-        //parseArgs(args);
-        /*for(String s : files) {
-            readFile(s);
-        }*/
+        parseArgs(args);
+        if(files.size() == 0) {
+            files.add("test.txt");
+        }
+        System.out.println("Files: " + files + "\n\n\n");
         for(String f : files) {
             filePath = f;
             readFile(f);
             Token.tokenize(codeText);
-            System.out.println(Token.getTokenList());
+            System.out.println(Token.getTokenList() + "\n\n\n");
             Node.parse(Token.getTokenList());
+            System.out.println(Node.getCode());
             Token.clear();
+            codeText.clear();
         }
         Node.checkScope();
         Node.getAllReqMemory();
@@ -74,8 +73,12 @@ public class Main{
     public static void parseHeader(String path) {
         try {
         Scanner scan = new Scanner(new File(path));
+        String temp;
         while (scan.hasNextLine()) {
-                files.add(scan.nextLine());
+                temp = scan.nextLine();
+                if(temp.length() != 0) {
+                    files.add(temp);
+                }
             }
         }
         catch (FileNotFoundException e) {

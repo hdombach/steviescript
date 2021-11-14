@@ -154,10 +154,9 @@ public class Token {
         String accumulator = "";
         boolean isString = false;
         boolean isBackSlash = false;
-        for(int i = 0; i < code.size(); i++) {
-            if(code.get(i).length() == 0) {
-                accumulator = "";
-            }
+        int line = 1;
+        for(int i = 0; i < code.size(); i++, line++) {
+            accumulator = "";
             for(int j = 0; j < code.get(i).length(); j++) {
                 if(j < code.get(i).length() - 2 && code.get(i).substring(j, j + 2).equals("//")) {
                     break;
@@ -170,7 +169,7 @@ public class Token {
                     } else {
                         if (c.equals("\"")) {
                             isString = false;
-                            createString(accumulator, i++);
+                            createString(accumulator, line);
                             accumulator = "";
                         } else if (c.equals("\\")) { //doesn't properly recognize "\n", "\t"
                             isBackSlash = true;
@@ -182,26 +181,26 @@ public class Token {
                     if (c.equals("\"")) {
                         isString = true;
                         isBackSlash = false;
-                        createToken(accumulator, i++);
+                        createToken(accumulator, line);
                         accumulator = "";
                     } else if (specs.contains(c) && !isSpecial) {
-                        createToken(accumulator, i++);
+                        createToken(accumulator, line);
                         accumulator = c;
                         isSpecial = true;
                     } else if (whites.contains(c)) {
-                        createToken(accumulator, i++);
+                        createToken(accumulator, line);
                         accumulator = "";
                         isSpecial = false;
                     } else if(enclosures.contains(c)) {
-                        createToken(accumulator, i++);
-                        createToken(c, i++);
+                        createToken(accumulator, line);
+                        createToken(c, line);
                         accumulator = "";
                         isSpecial = false;
                     } else {
                         if(specs.contains(c)) {
                             accumulator += c;
                         } else if (isSpecial) {
-                            createToken(accumulator, i++);
+                            createToken(accumulator, line);
                             accumulator = c;
                             isSpecial = false;
                         } else {
@@ -211,7 +210,7 @@ public class Token {
                 }
             }
             if (!accumulator.equals("")) {
-                createToken(accumulator, i++);
+                createToken(accumulator, line);
             }
         }
     }
