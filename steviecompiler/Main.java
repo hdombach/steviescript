@@ -33,14 +33,13 @@ public class Main{
             Token.tokenize(codeText);
             System.out.println(Token.getTokenList() + "\n\n\n");
             Node.parse(Token.getTokenList());
-            System.out.println(Node.getCode());
+            System.out.println(Node.getCode(f));
             Token.clear();
             codeText.clear();
         }
         Node.checkScope();
         Node.getAllReqMemory();
-        System.out.println(Node.getCode());
-        Node.getCode().makeAllCommands();
+        Node.makeAllCommands();
         commands = Command.generate();
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);

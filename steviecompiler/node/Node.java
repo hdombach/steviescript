@@ -1,7 +1,9 @@
 package steviecompiler.node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import steviecompiler.Main;
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
@@ -11,7 +13,7 @@ abstract public class Node {
 	protected boolean unexpectedToken = false;
 	protected static int index = 0;
 	protected static ArrayList<Token> tokens;
-	private static Block block;
+	private static HashMap<String, Block> blocks = new HashMap<String, Block>();
 	protected static Integer indent = 0;
 	private static String printIndentChar = "⦙ ";
 	protected boolean isValid = false;
@@ -36,7 +38,7 @@ abstract public class Node {
 	public static void parse(ArrayList<Token> tokensIn) {
 		tokens = tokensIn;
 		try {
-			block = new Block(null);
+			blocks.put(Main.filePath, new Block(null));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();
@@ -45,10 +47,14 @@ abstract public class Node {
 	}
 
 	public static void checkScope() {
-		block.checkSymbols(null);
+		for(Block b : blocks.values()) {
+			b.checkSymbols(null);
+		}
 	}
 	
-	public static Block getCode() {return block;};
+	public static Block getCode(String key) {	return blocks.get(key);	};
+
+	public static HashMap<String, Block> getCode() {	return blocks;	};
 	
 	public static Token currentToken() {
 		if (tokens.size() > index) {
@@ -75,11 +81,16 @@ abstract public class Node {
 	};
 
 	public static void getAllReqMemory() {
-		block.getReqMemory();
+		for(Block b : blocks.values()) {
+			b.getReqMemory();
+		} 
 	}
 	public static void makeAllCommands() {
-		block.makeCommands(null);
+		for(Block b : blocks.values()) {
+			b.makeCommands(null);
+		}
 	}
+
 	public int getLine() {
 		return line;
 	}
