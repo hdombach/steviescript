@@ -14,6 +14,7 @@ public class Block extends Node {
 	private static Block currentParent;
 	private Block parent;
 	private ArrayList<Command> commands = new ArrayList<Command>();
+	public DataType returnType;
 
 	public Block(HashMap<String, ArrayList<Symbol>> shared){
 		parent = currentParent;
@@ -57,7 +58,16 @@ public class Block extends Node {
 				biggest = temp;
 			}
 		}
+		int sum = 0;
+		for (Symbol s : symbols.getLocalVariables()) {
+			sum += s.getMemSize();
+		}
+		if (returnType != null) {
+			sum += returnType.getReqMemory();
+			sum += new DataType("pointer").getReqMemory();
+		}
 		symbols.requiredTempMemory = biggest;
+		symbols.stackSize = biggest + sum;
 		return 0;
 	}
 

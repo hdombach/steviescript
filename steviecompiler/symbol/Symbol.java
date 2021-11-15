@@ -14,10 +14,9 @@ public class Symbol {
         OPERATOR
     }
 
+    //Addresses are handeled by SymbolTable.getValueAdress(name)
     public DataType dataType;
-    private static int index = 0; //mabye ahve blocks do this
     private int size;
-    protected int address;
     protected SymbolType type;
 
     public Symbol(DefParam p) {
@@ -27,8 +26,6 @@ public class Symbol {
 
     public Symbol(CreateVar c) {
         dataType = c.type;
-        address = index;
-        index++;
         //memLoad();
         type = SymbolType.VALUE;
     }
@@ -55,10 +52,6 @@ public class Symbol {
     public void malloc(int n) {
         size = n;
     }
-
-    public int getAddress() {
-        return address;
-    }
     
     public int getMemSize() {
         return size;
@@ -72,7 +65,7 @@ public class Symbol {
         if (dataType == null) {
             return "[null]";
         }
-        return"[" + dataType.getType() + ", " + address + ", " + size + "]";
+        return"[" + dataType.getType() + ", " + size + "]";
     }
     
 }

@@ -26,6 +26,7 @@ public class SymbolTable {
     public SymbolTable parent;
 
 	public int requiredTempMemory;
+    public int stackSize;
 
     public SymbolTable(SymbolTable parent) {
         this(parent, null);
@@ -160,10 +161,25 @@ public class SymbolTable {
         return null;
     }
 
+    public ArrayList<Symbol> getLocalVariables() {
+        ArrayList<Symbol> result = new ArrayList<Symbol>();
+        for (ArrayList<Symbol> list : table.values()) {
+            for (Symbol s : list) {
+                if (s.type == SymbolType.VALUE) {
+                    result.add(s);
+                }
+            }
+        }
+        return result;
+    }
+
     //TODO: need to test this still later on (can prob test when stuff is set up for code generation)
+    //Need to figure how this works with global variabls and shared modules.
     public int getValueAddress(String name) {
+
         //dedicated variables appear beneath the temp memory in the stack
         
+        //make sure order of variables is always the same
         Object[] localKeys = table.keySet().toArray();
         Arrays.sort(localKeys);
 
@@ -182,7 +198,7 @@ public class SymbolTable {
         }
 
         if (parent != null) {
-            return currentAddress - parent.getValueAddress(name);
+            return 0 - stackSize - parent.getValueAddress(name);
         }
 
         //theoretically this should neve happen since all the names would be tested in checkSymbols.
