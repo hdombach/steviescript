@@ -7,6 +7,7 @@ import steviecompiler.Main;
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
 abstract public class Node {
@@ -14,6 +15,7 @@ abstract public class Node {
 	protected static int index = 0;
 	protected static ArrayList<Token> tokens;
 	private static HashMap<String, Block> blocks = new HashMap<String, Block>();
+	private static HashMap<String, ArrayList<Symbol>> sharedSymbolTable = new HashMap<String, ArrayList<Symbol>>();
 	protected static Integer indent = 0;
 	private static String printIndentChar = "⦙ ";
 	protected boolean isValid = false;
@@ -38,7 +40,7 @@ abstract public class Node {
 	public static void parse(ArrayList<Token> tokensIn) {
 		tokens = tokensIn;
 		try {
-			blocks.put(Main.filePath, new Block(null));
+			blocks.put(Main.filePath, new Block(sharedSymbolTable));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			e.printStackTrace();

@@ -1,8 +1,10 @@
 package steviecompiler.node;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import steviecompiler.commands.Command;
+import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
  
 
@@ -13,17 +15,13 @@ public class Block extends Node {
 	private Block parent;
 	private ArrayList<Command> commands = new ArrayList<Command>();
 
-	public Block(SymbolTable shared){
+	public Block(HashMap<String, ArrayList<Symbol>> shared){
 		parent = currentParent;
 		currentParent = this;
 		if (parent == null) {
-			if (shared == null) {
-				symbols = new SymbolTable(null);
-			} else {
-				symbols = shared;
-			}
+			symbols = new SymbolTable(null, shared);
 		} else {
-			symbols = new SymbolTable(parent.symbols);
+			symbols = new SymbolTable(parent.symbols, shared);
 		}
 		while (true){
 			if (Node.tokens.size() <= Node.index)
