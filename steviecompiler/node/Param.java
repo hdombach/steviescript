@@ -67,6 +67,9 @@ public class Param extends Node {
 	public static boolean compare(ArrayList<DataType> p1, ArrayList<DataType> p2) {
 		if(p1.size() == p2.size()) {
 			for(int i = 0; i < p1.size(); i++) {
+				if (p1.get(i) == null || p2.get(i) == null) {
+					return false;
+				}
 				if(!p1.get(i).getType().equals(p2.get(i).getType())) {
 					return false;
 				}

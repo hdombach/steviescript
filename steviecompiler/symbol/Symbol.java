@@ -3,6 +3,7 @@ package steviecompiler.symbol;
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 import steviecompiler.node.DefFunction;
+import steviecompiler.node.DefParam;
 
 
 public class Symbol {
@@ -18,6 +19,11 @@ public class Symbol {
     private int size;
     protected int address;
     protected SymbolType type;
+
+    public Symbol(DefParam p) {
+        dataType = p.type;
+        type = SymbolType.VALUE;
+    }
 
     public Symbol(CreateVar c) {
         dataType = c.type;
@@ -63,6 +69,9 @@ public class Symbol {
      * @return A string representation of the flag
      */
     public String toString() {
+        if (dataType == null) {
+            return "[null]";
+        }
         return"[" + dataType.getType() + ", " + address + ", " + size + "]";
     }
     

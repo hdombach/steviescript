@@ -10,6 +10,7 @@ import javax.xml.crypto.Data;
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 import steviecompiler.node.DefFunction;
+import steviecompiler.node.DefParam;
 import steviecompiler.node.Param;
 import steviecompiler.node.expression.FunctionCall;
 import steviecompiler.symbol.Symbol.SymbolType;
@@ -35,7 +36,7 @@ public class SymbolTable {
         table = new HashMap<String, ArrayList<Symbol>>();
         this.parent = parent;
         //if root node the add default data types
-        if (parent == null) {
+        if (parent == null && sharedTable.size() == 0) {
             symbolize(new DataType("int"));
             symbolize(new DataType("pointer"));
             symbolize(new DataType("char"));
@@ -84,7 +85,7 @@ public class SymbolTable {
                 sharedList = table.get(name);
             } else {
                 sharedList = new ArrayList<Symbol>();
-                table.put(name, sharedList);
+                sharedTable.put(name, sharedList);
             }
 
             sharedList.add(s);
@@ -117,6 +118,15 @@ public class SymbolTable {
             throw new Error("Symbol " + name + " already exists in current scope.");
         }
         addSymbol(new OperatorSymbol(l, r, type), name);
+    }
+
+    public void symbolize(ArrayList<DefParam> params) {
+        for (DefParam param : params) {
+            if (getValue(param.name) != null) {
+                throw new Error("Symbol " + param.name + "already exists in current scope. ");
+            }
+            addSymbol(new Symbol(param), param.name);
+        }
     }
 
     //symobls in current close will be at beggining.

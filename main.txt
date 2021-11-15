@@ -1,7 +1,16 @@
 import test
 include steviecore
 
+function input() -> int {
+
+}
+
+function print(int v) {
+    
+}
+
 function main() {
+    int i
     i = pow(input(), 2)
     print(i)
 }
