@@ -19,12 +19,19 @@ public class SymbolTable {
 
     public HashMap<String, ArrayList<Symbol>> table;
 
+    public HashMap<String, ArrayList<Symbol>> sharedTable;
+
     //can be null
     public SymbolTable parent;
 
 	public int requiredTempMemory;
 
     public SymbolTable(SymbolTable parent) {
+        this(parent, null);
+    }
+
+    public SymbolTable(SymbolTable parent, HashMap<String, ArrayList<Symbol>> shared) {
+        this.sharedTable = shared;
         table = new HashMap<String, ArrayList<Symbol>>();
         this.parent = parent;
         //if root node the add default data types
@@ -69,6 +76,19 @@ public class SymbolTable {
         }
 
         list.add(s);
+
+        //this shared list allows files to know about data types in other files.
+        if (sharedTable != null) {
+            ArrayList<Symbol> sharedList;
+            if (sharedTable.containsKey(name)) {
+                sharedList = table.get(name);
+            } else {
+                sharedList = new ArrayList<Symbol>();
+                table.put(name, sharedList);
+            }
+
+            sharedList.add(s);
+        }
     }
 
     public void symbolize(CreateVar make) {
@@ -104,8 +124,14 @@ public class SymbolTable {
     private ArrayList<Symbol> getList(String name) {
         ArrayList<Symbol> result = new ArrayList<Symbol>();
 
-        if (table.containsKey(name)) {
-            result.addAll(table.get(name));
+        if (sharedTable == null) {
+            if (table.containsKey(name)) {
+                result.addAll(table.get(name));
+            }
+        } else {
+            if (sharedTable.containsKey(name)) {
+                result.addAll(sharedTable.get(name));
+            }
         }
 
         if (parent != null) {
