@@ -1,8 +1,7 @@
 package steviecompiler.node.expression;
 
-import javax.naming.spi.DirStateFactory.Result;
-
 import steviecompiler.Token.TokenType;
+import steviecompiler.node.Block;
 import steviecompiler.node.Node;
 import steviecompiler.node.Param;
 import steviecompiler.symbol.FunctionSymbol;
@@ -55,6 +54,11 @@ public class FunctionCall extends Expression {
 			}
 		}
 		return result + big;
+	}
+
+	//NOTE: rn paramaters are scattered in with the rest of the local variables.
+	public void makeCommands(Block block) {
+
 	}
 
 	public String toString() {
