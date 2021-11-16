@@ -71,6 +71,12 @@ public class Block extends Node {
 		return 0;
 	}
 
+	public void makeCommands(Block block) {
+		for (Statement statement : statements) {
+			statement.makeCommands(this);
+		}
+	}
+
 	public String toString() {
 		String result = "";
 		result += Node.indentStr() + "Block:\n";
