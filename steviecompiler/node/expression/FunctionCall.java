@@ -1,6 +1,9 @@
 package steviecompiler.node.expression;
 
+import java.util.ArrayList;
+
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
 import steviecompiler.node.Block;
 import steviecompiler.node.Node;
 import steviecompiler.node.Param;
@@ -57,8 +60,8 @@ public class FunctionCall extends Expression {
 	}
 
 	//NOTE: rn paramaters are scattered in with the rest of the local variables.
-	public void makeCommands(Block block) {
-
+	public ArrayList<Command> makeCommands(Block block) {
+		return null;
 	}
 
 	public String toString() {
