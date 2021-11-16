@@ -3,7 +3,7 @@ package steviecompiler.node;
 import steviecompiler.Token.TokenType;
 import steviecompiler.node.expression.Expression;
 import steviecompiler.symbol.Symbol;
-import steviecompiler.symbol.SymbolTable;;
+import steviecompiler.symbol.SymbolTable;
 
 public class Set extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.WORD, TokenType.EQUALS};
@@ -42,6 +42,10 @@ public class Set extends Statement {
 	}
 	public int getReqMemory() {
 		return expression.evaluatedType.getReqMemory() + expression.getReqMemory();
+	}
+
+	public void makeCommands(Block block) {
+		
 	}
 
 	public String toString() {
