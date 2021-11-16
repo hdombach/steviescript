@@ -22,6 +22,7 @@ public class SymbolTable {
     public SymbolTable parent;
 
 	public int requiredTempMemory;
+    private int currentTempAddress;
     public int stackSize;
 
     public SymbolTable(SymbolTable parent) {
@@ -206,6 +207,21 @@ public class SymbolTable {
     }
     public int getReturnGotoAddress() {
         return 0 - stackSize;
+    }
+    public int getCurrentTempAddress() {
+        return currentTempAddress - requiredTempMemory;
+    }
+    public void popTemp(int size) {
+        currentTempAddress -= size;
+        if (0 > currentTempAddress) {
+            throw new Error("Tried to use more temp memory than was allocated");
+        }
+    }
+    public void pushTemp(int size) {
+        currentTempAddress += size;
+        if (currentTempAddress >= requiredTempMemory) {
+            throw new Error("Tried to use more temp memory than was allocated");
+        }
     }
 
     public FunctionSymbol getFunction(String name, ArrayList<DataType> params) {
