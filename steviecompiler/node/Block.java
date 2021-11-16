@@ -20,9 +20,9 @@ public class Block extends Node {
 		parent = currentParent;
 		currentParent = this;
 		if (parent == null) {
-			symbols = new SymbolTable(null, shared);
+			symbols = new SymbolTable(null, this, shared);
 		} else {
-			symbols = new SymbolTable(parent.symbols, shared);
+			symbols = new SymbolTable(parent.symbols, this, shared);
 		}
 		while (true){
 			if (Node.tokens.size() <= Node.index)

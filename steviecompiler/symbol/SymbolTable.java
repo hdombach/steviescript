@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import steviecompiler.node.Block;
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 import steviecompiler.node.DefFunction;
@@ -21,18 +22,21 @@ public class SymbolTable {
     //can be null
     public SymbolTable parent;
 
+    private Block block;
+
 	public int requiredTempMemory;
     private int currentTempAddress;
     public int stackSize;
 
-    public SymbolTable(SymbolTable parent) {
-        this(parent, null);
+    public SymbolTable(SymbolTable parent, Block block) {
+        this(parent, block, null);
     }
 
-    public SymbolTable(SymbolTable parent, HashMap<String, ArrayList<Symbol>> shared) {
+    public SymbolTable(SymbolTable parent, Block block, HashMap<String, ArrayList<Symbol>> shared) {
         this.sharedTable = shared;
         table = new HashMap<String, ArrayList<Symbol>>();
         this.parent = parent;
+        this.block = block;
         //if root node the add default data types
         if (parent == null && sharedTable.size() == 0) {
             symbolize(new DataType("int"));
@@ -203,10 +207,10 @@ public class SymbolTable {
         throw new Error("Value " + name + " could not be found when looking for an address");
     }
     public int getReturnAddress() {
-        return 0 - stackSize + new DataType("pointer").getReqMemory();
+        return 0 - stackSize;
     }
     public int getReturnGotoAddress() {
-        return 0 - stackSize;
+        return 0 - stackSize + block.returnType.getReqMemory();
     }
     public int getCurrentTempAddress() {
         return currentTempAddress - requiredTempMemory;
