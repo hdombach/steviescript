@@ -205,6 +205,12 @@ public class SymbolTable {
         //In other words, if this happens, something is terribly wrong.
         throw new Error("Value " + name + " could not be found when looking for an address");
     }
+    public int getReturnAddress() {
+        return 0 - stackSize + new DataType("pointer").getReqMemory();
+    }
+    public int getReturnGotoAddress() {
+        return 0 - stackSize;
+    }
 
     public FunctionSymbol getFunction(String name, ArrayList<DataType> params) {
         ArrayList<Symbol> symbols = getList(name);
