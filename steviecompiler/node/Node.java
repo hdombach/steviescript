@@ -6,6 +6,7 @@ import java.util.HashMap;
 import steviecompiler.Main;
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
@@ -76,7 +77,7 @@ abstract public class Node {
 	//Gets the temp memory required to evalute things
 	public abstract int getReqMemory();
 
-	public void makeCommands(Block block) {
+	public ArrayList<Command> makeCommands(Block block) {
 		//TODO: change this to abstract once later on.
 		throw new Error("makeCommands is not implimented. Line: " + line);
 	};

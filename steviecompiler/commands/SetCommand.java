@@ -5,6 +5,12 @@ public class SetCommand extends Command{
     int value;
     int length;
 
+    public SetCommand(int result, int value, int length) {
+        this.result = result;
+        this.value = value;
+        this.length = length;
+    }
+
     public String toAssembly() {
         return getAssembly(result, value, length);
     }

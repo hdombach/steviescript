@@ -71,10 +71,12 @@ public class Block extends Node {
 		return 0;
 	}
 
-	public void makeCommands(Block block) {
+	public ArrayList<Command> makeCommands(Block block) {
+		ArrayList<Command> result = new ArrayList<Command>();
 		for (Statement statement : statements) {
-			statement.makeCommands(this);
+			result.addAll(statement.makeCommands(this));
 		}
+		return result;
 	}
 
 	public String toString() {
@@ -92,10 +94,6 @@ public class Block extends Node {
 		result += Node.indentStr() + "]\n";
 		Node.indent--;
 		return result;
-	}
-
-	public void addCommand(Command command) {
-		commands.add(command);
 	}
 	//used for allowing other blocks to reference the start of this block.
 	public Command getFirstCommand() {

@@ -1,6 +1,10 @@
 package steviecompiler.node;
 
+import java.util.ArrayList;
+
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
+import steviecompiler.commands.SetCommand;
 import steviecompiler.node.expression.Expression;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
@@ -44,8 +48,18 @@ public class Set extends Statement {
 		return expression.evaluatedType.getReqMemory() + expression.getReqMemory();
 	}
 
-	public void makeCommands(Block block) {
-		
+	public ArrayList<Command> makeCommands(Block block) {
+		ArrayList<Command> c = new ArrayList<Command>();
+
+		block.symbols.pushTemp(expression.evaluatedType.getReqMemory());
+		c.addAll(expression.makeCommands(block));
+		c.add(new SetCommand(block.symbols.getValueAddress(name),
+		                     block.symbols.getCurrentTempAddress(),
+							 expression.evaluatedType.getReqMemory()));
+							 
+		block.symbols.popTemp(expression.evaluatedType.getReqMemory());
+
+		return c;
 	}
 
 	public String toString() {
