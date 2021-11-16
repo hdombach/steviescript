@@ -7,7 +7,7 @@ public class DefParam extends Node {
     public DataType type;
     public String name;
 
-    public DefParam(){
+    public DefParam() {
 
         type = new DataType();
         if (!type.isValid){
