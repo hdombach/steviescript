@@ -6,15 +6,15 @@ import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
 public class LoadCommand extends Command {
-    Symbol a;
+    int a;
     int ivalue;
     String svalue;
 
     public String toAssembly() {
         if (svalue != null) {
-            return getAssembly(a.getAddress(), svalue);
+            return getAssembly(a, svalue);
         } else {
-            return getAssembly(a.getAddress(), ivalue);
+            return getAssembly(a, ivalue);
         }
     }
 

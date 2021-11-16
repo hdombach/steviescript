@@ -3,11 +3,11 @@ package steviecompiler.commands;
 import steviecompiler.symbol.Symbol;
 
 public class IfCommand extends Command {
-    Symbol a;
+    int a;
     Command command;
 
     public String toAssembly() {
-        return getAssembly(a.getAddress(), command.location);
+        return getAssembly(a, command.location);
     }
 
     public static String getAssembly(int a, int line) {

@@ -3,12 +3,12 @@ package steviecompiler.commands;
 import steviecompiler.symbol.Symbol;
 
 public class SetCommand extends Command{
-    Symbol result;
-    Symbol value;
-    Symbol length;
+    int result;
+    int value;
+    int length;
 
     public String toAssembly() {
-        return getAssembly(result.getAddress(), value.getAddress(), length.getAddress());
+        return getAssembly(result, value, length);
     }
 
     public static String getAssembly(int resultAddress, int valueAdress, int lengthAdress) {

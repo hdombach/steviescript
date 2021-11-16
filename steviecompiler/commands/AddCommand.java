@@ -1,14 +1,12 @@
 package steviecompiler.commands;
 
-import steviecompiler.symbol.Symbol;
-
 public class AddCommand extends Command {
-    Symbol result;
-    Symbol a;
-    Symbol b;
+    int result;
+    int a;
+    int b;
 
     public String toAssembly() {
-        return getAssembly(result.getAddress(), a.getAddress(), b.getAddress());
+        return getAssembly(result, a, b);
     }
 
     public static String getAssembly(int resultAddress, int aAddress, int bAddress) {
