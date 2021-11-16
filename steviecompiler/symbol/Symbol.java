@@ -2,7 +2,6 @@ package steviecompiler.symbol;
 
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
-import steviecompiler.node.DefFunction;
 import steviecompiler.node.DefParam;
 
 

@@ -1,6 +1,5 @@
 package steviecompiler.node;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import steviecompiler.Token;

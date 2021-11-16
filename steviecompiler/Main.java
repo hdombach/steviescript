@@ -5,11 +5,9 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
-import java.util.HashMap;
 import java.util.ArrayList;
 
 import steviecompiler.node.Node;
-import steviecompiler.symbol.SymbolTable;
 import steviecompiler.commands.Command;
 import steviecompiler.error.ErrorHandler;
  

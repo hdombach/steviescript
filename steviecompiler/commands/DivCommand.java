@@ -1,7 +1,5 @@
 package steviecompiler.commands;
 
-import steviecompiler.symbol.Symbol;
-
 public class DivCommand extends Command {
     int result;
     int a;

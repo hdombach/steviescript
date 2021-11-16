@@ -6,7 +6,6 @@ import java.util.HashMap;
 import steviecompiler.Main;
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
-import steviecompiler.node.expression.Expression;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
@@ -66,10 +65,10 @@ abstract public class Node {
 		}
 	}
 
-	private static Expression expectExpression() {
+	/*private static Expression expectExpression() {
 		//index++;
 		return Expression.expect();
-	}
+	}*/
 
 	//Checks if symbols exist in current scope and if the data types are interchagable
 	public abstract void checkSymbols(SymbolTable scope);

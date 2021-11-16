@@ -1,18 +1,14 @@
 package steviecompiler.symbol;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
-import javax.xml.crypto.Data;
 
 import steviecompiler.node.CreateVar;
 import steviecompiler.node.DataType;
 import steviecompiler.node.DefFunction;
 import steviecompiler.node.DefParam;
 import steviecompiler.node.Param;
-import steviecompiler.node.expression.FunctionCall;
 import steviecompiler.symbol.Symbol.SymbolType;
 
 public class SymbolTable {

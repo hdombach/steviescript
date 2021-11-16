@@ -1,7 +1,5 @@
 package steviecompiler.commands;
 
-import steviecompiler.symbol.Symbol;
-
 public class ModCommand extends Command {
     int result;
     int a;

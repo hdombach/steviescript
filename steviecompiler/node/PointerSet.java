@@ -36,7 +36,7 @@ public class PointerSet extends Statement{
         if (expression.isValid) {
             isValid = true;
         } else {
-            expression.invalid();
+            Expression.invalid();
         }
     }
 

@@ -3,7 +3,6 @@ package steviecompiler.node.expression;
 import steviecompiler.error.*;
 
 import steviecompiler.node.Node;
-import steviecompiler.node.expression.Expression;
 import steviecompiler.symbol.SymbolTable;
 import steviecompiler.node.Param;
 import steviecompiler.Token.TokenType;
@@ -15,7 +14,6 @@ public class CallMethod extends Expression {
 
 
 	public CallMethod(Expression body) {
-		int beginIndex = Node.index;
 
 		if (Node.currentToken().getType() == TokenType.PERIOD) {
 			Node.index++;

@@ -8,7 +8,6 @@ public class Return extends Statement {
     public Expression expression;
 
     public Return() {
-        int beginIndex = Node.index;
         isValid = true;
         
         if(Node.currentToken().getType() != TokenType.RETURN) {

@@ -1,11 +1,8 @@
 package steviecompiler.node;
 
-import steviecompiler.node.expression.*;
 import steviecompiler.symbol.SymbolTable;
 
 import java.util.ArrayList;
-
-import javax.xml.crypto.Data;
 
 import steviecompiler.Token.TokenType;
 
@@ -27,7 +24,7 @@ public class DefFunction extends Statement{
 
     public ArrayList<DefParam> params = new ArrayList<DefParam>();
 
-    private boolean hasReturn = false;
+   // private boolean hasReturn = false;
     public DataType returnType;
 
     private Block code;
@@ -80,7 +77,7 @@ public class DefFunction extends Statement{
         Node.index++;
 
         if (Node.currentToken().getType() == TokenType.ARROW){
-            hasReturn = true;
+            //hasReturn = true;
             Node.index++;
 
             returnType = new DataType();

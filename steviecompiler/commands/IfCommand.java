@@ -1,7 +1,5 @@
 package steviecompiler.commands;
 
-import steviecompiler.symbol.Symbol;
-
 public class IfCommand extends Command {
     int a;
     Command command;

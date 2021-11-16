@@ -1,6 +1,5 @@
 package steviecompiler.error;
 
-import steviecompiler.node.Statement;
 import steviecompiler.Main;
 
 public class InvalidStatementError extends ErrorHandler{

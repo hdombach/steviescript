@@ -1,10 +1,5 @@
 package steviecompiler.commands;
 
-import java.math.BigInteger;
-
-import steviecompiler.symbol.Symbol;
-import steviecompiler.symbol.SymbolTable;
-
 public class LoadCommand extends Command {
     int a;
     int ivalue;

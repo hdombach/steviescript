@@ -1,16 +1,13 @@
 package steviecompiler.node;
 
-import steviecompiler.node.expression.*;
 import steviecompiler.symbol.SymbolTable;
 import steviecompiler.Token.TokenType;
-import steviecompiler.error.ErrorHandler;
 
 public class DefParam extends Node {
     public DataType type;
     public String name;
 
     public DefParam(){
-        int beginIndex = Node.index;
 
         type = new DataType();
         if (!type.isValid){

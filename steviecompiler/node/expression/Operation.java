@@ -2,10 +2,7 @@ package steviecompiler.node.expression;
 
 import java.util.ArrayList;
 
-import javax.xml.crypto.Data;
-
 import steviecompiler.Token.TokenType;
-import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 import steviecompiler.symbol.OperatorSymbol;
 import steviecompiler.symbol.SymbolTable;

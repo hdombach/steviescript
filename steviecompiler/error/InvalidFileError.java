@@ -1,7 +1,5 @@
 package steviecompiler.error;
 
-import steviecompiler.node.Node;
-
 public class InvalidFileError extends ErrorHandler {
 
     public InvalidFileError() { 

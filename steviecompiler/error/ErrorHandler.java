@@ -3,7 +3,6 @@ package steviecompiler.error;
 import java.util.ArrayList;
 
 import steviecompiler.Main;
-import steviecompiler.Token;
 import steviecompiler.node.Node;
 
 public abstract class ErrorHandler {
