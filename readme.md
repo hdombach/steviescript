@@ -16,4 +16,4 @@ jar cvf steviecompiler.jar out/steviecompiler
 java -jar steviecompiler.jar
 
 **Create EXE file**
-jpackage -i . -n steviecompiler --main-jar  steviecompiler.jar --main-class stevie.steviecompiler.Main --win-console
+jpackage -i . -n steviecompiler --main-jar  steviecompiler.jar --main-class out.steviecompiler.Main --win-console
