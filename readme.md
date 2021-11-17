@@ -9,11 +9,9 @@ javac steviecompiler/*.java steviecompiler/node/*.java steviecompiler/node/expre
 java -cp out steviecompiler/Main <files to compile>
 
 
-**Create JAR file**
-jar cvf steviecompiler.jar out/steviecompiler
-
-**Run JAR file**
-java -jar steviecompiler.jar
+__NOTE: JAR FILE AND EXE SHOULD BE COMPILED IN A NON-VSCODE TERMINAL__
+**Create JAR file** (move to directory out/steviecompiler after creating)
+jar cf steviecompiler.jar out/steviecompiler
 
 **Create EXE file**
-jpackage -i . -n steviecompiler --main-jar  steviecompiler.jar --main-class out.steviecompiler.Main --win-console
+jpackage -i . -n steviecompiler --main-jar  steviecompiler.jar --main-class steviecompiler.Main --win-console
