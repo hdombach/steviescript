@@ -9,9 +9,21 @@ Format is as follows
 [local varialbes]
 [...]
 [local variables]
+[passed params]
+[...]
+[pased params]
+[frame pointers]
+[...]
+[frame pointers]
 [goto address]
 [return value]
 
 
 temp memory is used for calulating equations.
 The symbol table has a popTemp, pushTemp, getTemp and getCurrentTempAddress to interact with temp variables
+
+The main memory will start with
+
+[...]
+[heap memory]
+[current frame pointer]
