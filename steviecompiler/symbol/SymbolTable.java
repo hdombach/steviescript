@@ -15,6 +15,9 @@ import steviecompiler.symbol.Symbol.SymbolType;
 public class SymbolTable {
    // public static HashMap<String, Symbol> globalTable = new HashMap<String, Symbol>();
 
+   
+    private ArrayList<String> paramOrder;
+
     public HashMap<String, ArrayList<Symbol>> table;
 
     public HashMap<String, ArrayList<Symbol>> sharedTable;
@@ -24,9 +27,7 @@ public class SymbolTable {
 
     private Block block;
 
-	public int requiredTempMemory;
-    private int currentTempAddress;
-    public int stackSize;
+    private int framePointersSize;
 
     public SymbolTable(SymbolTable parent, Block block) {
         this(parent, block, null);
@@ -35,6 +36,7 @@ public class SymbolTable {
     public SymbolTable(SymbolTable parent, Block block, HashMap<String, ArrayList<Symbol>> shared) {
         this.sharedTable = shared;
         table = new HashMap<String, ArrayList<Symbol>>();
+        paramOrder = new ArrayList<String>();
         this.parent = parent;
         this.block = block;
         //if root node the add default data types
@@ -66,6 +68,8 @@ public class SymbolTable {
             symbolize("^^", new DataType("int"), new DataType("int"), new DataType("boolean"));
             symbolize("==", new DataType("int"), new DataType("int"), new DataType("boolean"));
         }
+
+        framePointersSize = (getParents() - 1) * new DataType("pointer").getReqMemory();
     }
 
     private void addSymbol(Symbol s, String name) {
@@ -127,7 +131,16 @@ public class SymbolTable {
             if (getValue(param.name) != null) {
                 throw new Error("Symbol " + param.name + "already exists in current scope. ");
             }
+            this.paramOrder.add(param.name);
             addSymbol(new Symbol(param), param.name);
+        }
+    }
+
+    private int getParents() {
+        if (parent == null) {
+            return 1;
+        } else {
+            return parent.getParents() + 1;
         }
     }
 
@@ -162,7 +175,7 @@ public class SymbolTable {
         return null;
     }
 
-    public ArrayList<Symbol> getLocalVariables() {
+    /*public ArrayList<Symbol> getLocalVariables() {
         ArrayList<Symbol> result = new ArrayList<Symbol>();
         for (ArrayList<Symbol> list : table.values()) {
             for (Symbol s : list) {
@@ -172,60 +185,73 @@ public class SymbolTable {
             }
         }
         return result;
-    }
+    }*/
 
     //TODO: need to test this still later on (can prob test when stuff is set up for code generation)
     //Need to figure how this works with global variabls and shared modules.
-    public int getValueAddress(String name) {
+    public LocalAddress getValueAddress(String name) {
+
+        int currentOffset = localOffset();
+
+        if (paramOrder.contains(name)) {
+            for (String param : paramOrder) {
+                if (param == name) {
+                    return new LocalAddress(0, currentOffset)
+                }
+                currentOffset += getValue(name).getMemSize();
+            }
+        }
 
         //dedicated variables appear beneath the temp memory in the stack
         
         //make sure order of variables is always the same
-        Object[] localKeys = table.keySet().toArray();
+        Set<String> localSet = table.keySet();
+        for (String param : paramOrder) {
+            localSet.remove(param);
+        }
+        Object[] localKeys = localSet.toArray();
         Arrays.sort(localKeys);
-
-        int currentAddress = 0 - requiredTempMemory;
 
         for (Object key : localKeys) {
             ArrayList<Symbol> symbols = table.get(key);
             for (Symbol symbol : symbols) {
                 if (symbol.type == SymbolType.VALUE) {
-                    currentAddress -= symbol.dataType.getReqMemory();
-                }
-                if ((String) key == name) {
-                    return currentAddress;
+                    if ((String) key == name) {
+                        return new LocalAddress(0, currentOffset);
+                    }
+                    currentOffset += symbol.dataType.getReqMemory();
                 }
             }
         }
 
         if (parent != null) {
-            return 0 - stackSize - parent.getValueAddress(name);
+            return parent.getValueAddress(name).increased();
         }
 
         //theoretically this should neve happen since all the names would be tested in checkSymbols.
         //In other words, if this happens, something is terribly wrong.
         throw new Error("Value " + name + " could not be found when looking for an address");
     }
-    public int getReturnAddress() {
-        return 0 - stackSize;
-    }
-    public int getReturnGotoAddress() {
-        return 0 - stackSize + block.returnType.getReqMemory();
-    }
-    public int getCurrentTempAddress() {
-        return currentTempAddress - requiredTempMemory;
-    }
-    public void popTemp(int size) {
-        currentTempAddress -= size;
-        if (0 > currentTempAddress) {
-            throw new Error("Tried to use more temp memory than was allocated");
+
+    public int localOffset() {
+        int sum = 0;
+        for (String param : paramOrder) {
+            sum += getValue(param).getMemSize();
         }
+        return sum + paramOffset();
     }
-    public void pushTemp(int size) {
-        currentTempAddress += size;
-        if (currentTempAddress >= requiredTempMemory) {
-            throw new Error("Tried to use more temp memory than was allocated");
-        }
+    public int paramOffset() {
+        //getParents() counts itself as well. Therefore, subtract 1 because the current frame poitner is already kept track of.
+        return framePointerOffset() + (getParents() - 1) * new DataType("pointer");
+    }
+    public int framePointerOffset() {
+        return gotoOffset() + new DataType("pointer");
+    }
+    public int returnOffset() {
+        return 0;
+    }
+    public int gotoOffset() {
+        return block.returnType.getReqMemory();
     }
 
     public FunctionSymbol getFunction(String name, ArrayList<DataType> params) {

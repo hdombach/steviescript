@@ -50,7 +50,7 @@ public class Block extends Node {
 	}
 
 	public int getReqMemory() {
-		int biggest = 0;
+		/*int biggest = 0;
 		int temp;
 		for (Statement statement : statements) {
 			temp = statement.getReqMemory();
@@ -67,7 +67,7 @@ public class Block extends Node {
 			sum += new DataType("pointer").getReqMemory();
 		}
 		symbols.requiredTempMemory = biggest;
-		symbols.stackSize = biggest + sum;
+		symbols.stackSize = biggest + sum;*/
 		return 0;
 	}
 
@@ -83,7 +83,6 @@ public class Block extends Node {
 		String result = "";
 		result += Node.indentStr() + "Block:\n";
 		Node.indent++;
-		result += Node.indentStr() + "temp meory: " + symbols.requiredTempMemory + "\n";
 		result += Node.indentStr() + "statements: [\n";
 		Node.indent++;
 
