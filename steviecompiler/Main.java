@@ -18,7 +18,7 @@ public class Main{
     public static ArrayList<String> codeText = new ArrayList<String>();
     public static ArrayList<Command> commands;
 
-    public static void main(String[] args) {        
+    public static void main(String[] args) {         
 
         parseArgs(args);
         if(args.length == 0) {
