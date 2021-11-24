@@ -8,4 +8,8 @@ public class ExitCommand extends Command {
     public static String getAssembly() {
         return "99\n";
     }
+
+    public int getLength() {
+        return 4;
+    }
 }

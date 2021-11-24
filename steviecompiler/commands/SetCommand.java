@@ -24,4 +24,8 @@ public class SetCommand extends Command{
         result += parseInt(lengthAdress);
         return result;
     }
+
+    public int getLength() {
+        return 16;
+    }
 }

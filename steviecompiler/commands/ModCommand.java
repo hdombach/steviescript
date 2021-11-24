@@ -16,4 +16,8 @@ public class ModCommand extends Command {
         result += parseInt(bAddress);
         return result;
     }
+
+    public int getLength() {
+        return 16;
+    }
 }

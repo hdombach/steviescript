@@ -17,4 +17,8 @@ public class MulCommand extends Command {
 
         return result;
     }
+
+    public int getLength() {
+        return 16;
+    }
 }

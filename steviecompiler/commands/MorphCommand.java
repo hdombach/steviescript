@@ -21,4 +21,8 @@ public class MorphCommand extends Command {
     public static String getAssembly(int address, int value) {
         return SetCommand.getAssembly(address, value, 4);
     }
+
+    public int getLength() {
+        return 16;
+    }
 }

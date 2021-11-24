@@ -17,4 +17,8 @@ public class PushCommand extends Command {
         result += parseInt(length);
         return result;
     }
+
+    public int getLength() {
+        return 8;
+    }
 }

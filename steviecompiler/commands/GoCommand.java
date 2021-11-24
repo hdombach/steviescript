@@ -12,5 +12,9 @@ public class GoCommand extends Command {
         result += parseInt(line);
         return result;
     }
+
+    public int getLength() {
+        return 8;
+    }
 }
   

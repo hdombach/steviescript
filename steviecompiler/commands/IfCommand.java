@@ -15,4 +15,8 @@ public class IfCommand extends Command {
 
         return result;
     }
+
+    public int getLength() {
+        return 12;
+    }
 }

@@ -37,8 +37,8 @@ public class Main{
         } 
         Node.checkScope();
         Node.getAllReqMemory();
-        Node.makeAllCommands();
-        commands = Command.generate();
+        commands = Node.makeAllCommands();
+        setCommandPositions();
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);
         }
@@ -117,6 +117,15 @@ public class Main{
 
     public static String getLine(int line) {
       return codeText.get(line - 1);
+    }
+
+    static private void setCommandPositions() {
+        //variables like current frame pointer are stored at address 0
+        int c = 4;
+        for (Command command : commands) {
+            command.setLocation(c);
+            c += command.getLength();
+        }
     }
 }
 

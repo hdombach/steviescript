@@ -33,4 +33,13 @@ public class LoadCommand extends Command {
         result += parseBytes(data);
         return result;
     }
+
+    public int getLength() {
+        if (svalue == null) {
+            return 16;
+        } else {
+            byte[] data = svalue.getBytes();
+            return 12 + data.length;
+        }
+    }
 }

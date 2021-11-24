@@ -12,4 +12,8 @@ public class OutCommand extends Command {
         result += parseInt(length);
         return result;
     }
+
+    public int getLength() {
+        return 12;
+    }
 }

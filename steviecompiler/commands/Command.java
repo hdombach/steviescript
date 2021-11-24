@@ -36,6 +36,14 @@ public abstract class Command {
         return result;
     }
 
+    abstract public int getLength() {
+
+    }
+
+    public void setLocation(int l) {
+        this.location = l;
+    }
+
     public static ArrayList<Command> generate() {
        return null; //TODO: final generation of commands
     }

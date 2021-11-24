@@ -89,10 +89,12 @@ abstract public class Node {
 			b.getReqMemory();
 		} 
 	}
-	public static void makeAllCommands() {
+	public static ArrayList<Command> makeAllCommands() {
+		ArrayList<Command> c = new ArrayList<Command>();
 		for(Block b : blocks.values()) {
-			b.makeCommands(null);
+			c.addAll(b.makeCommands(null));
 		}
+		return c;
 	}
 
 	public int getLine() {
