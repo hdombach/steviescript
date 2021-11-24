@@ -39,6 +39,7 @@ public class Main{
         Node.getAllReqMemory();
         commands = Node.makeAllCommands();
         setCommandPositions();
+        System.out.println(getAssembly());
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);
         }
@@ -126,6 +127,13 @@ public class Main{
             command.setLocation(c);
             c += command.getLength();
         }
+    }
+    static private String getAssembly() {
+        String result = "";
+        for (Command command : commands){
+            result += command.toAssembly();
+        }
+        return result;
     }
 }
 
