@@ -19,9 +19,9 @@ public class SetCommand extends Command{
 
     public static String getAssembly(int resultAddress, int valueAdress, int lengthAdress) {
         String result = "13\n";
-        result += parseInt(resultAddress);
-        result += parseInt(valueAdress);
-        result += parseInt(lengthAdress);
+        result += parseInt(resultAddress) + "\n";
+        result += parseInt(valueAdress) + "\n";
+        result += parseInt(lengthAdress) + "\n";
         return result;
     }
 

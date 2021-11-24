@@ -9,7 +9,7 @@ public class GoCommand extends Command {
 
     public static String getAssembly(int line) {
         String result = "11\n";
-        result += parseInt(line);
+        result += parseInt(line) + "\n";
         return result;
     }
 
