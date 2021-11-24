@@ -32,7 +32,7 @@ public class LocalAddress {
         if (this.frame == 0) {
             c.add(new SetCommand(-4, 0, 4));
         } else {
-            c.add(new LoadCommand(-4, offset - 1));
+            c.add(new LoadCommand(-4, offset));
             c.add(new AddCommand(-4, 0, -4));
         }
         return c;

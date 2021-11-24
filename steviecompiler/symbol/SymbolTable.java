@@ -247,8 +247,8 @@ public class SymbolTable {
         return sum + paramOffset();
     }
     public int paramOffset() {
-        //getParents() counts itself as well. Therefore, subtract 1 because the current frame poitner is already kept track of.
-        return framePointerOffset() + (getParents() - 1) * new DataType("pointer").getReqMemory();
+        //the current frame pointer is stored elsewhere so it doesn't need to be in the frame pointer. Instead, store the previous frame pointer
+        return framePointerOffset() + (getParents()) * new DataType("pointer").getReqMemory();
     }
     public int framePointerOffset() {
         return gotoOffset() + new DataType("pointer").getReqMemory();

@@ -15,6 +15,7 @@ Format is as follows
 [frame pointers]
 [...]
 [frame pointers]
+[previus frame pointer]
 [goto address]
 [return value]
 
