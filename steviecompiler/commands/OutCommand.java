@@ -8,8 +8,8 @@ public class OutCommand extends Command {
 
     public static String getAssembly(int a, int length) {
         String result = "8\n";
-        result += parseInt(a) + "\n";
-        result += parseInt(length) + "\n";
+        result += parseInt(a);
+        result += parseInt(length);
         return result;
     }
 

@@ -20,17 +20,17 @@ public class LoadCommand extends Command {
 
     public static String getAssembly(int resultAddress, int value) {
         String result = "12\n";
-        result += parseInt(resultAddress) + "\n";
-        result += parseInt(4) + "\n";
-        result += parseInt(value) + "\n";
+        result += parseInt(resultAddress);
+        result += parseInt(4);
+        result += parseInt(value);
         return result;
     } 
     public static String getAssembly(int resultAddress, String value) {
         byte[] data = value.getBytes();
         String result = "12\n";
-        result += parseInt(resultAddress) + "\n";
-        result += parseInt(data.length) + "\n";
-        result += parseBytes(data) + "\n";
+        result += parseInt(resultAddress);
+        result += parseInt(data.length);
+        result += parseBytes(data);
         return result;
     }
 

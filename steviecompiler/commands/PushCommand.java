@@ -14,7 +14,7 @@ public class PushCommand extends Command {
     public static String getAssembly(int length) {
         String result = "";
         result += "0\n";
-        result += parseInt(length) + "\n";
+        result += parseInt(length);
         return result;
     }
 

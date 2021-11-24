@@ -14,7 +14,7 @@ public class PopCommand extends Command {
     public static String getAssembly(int length) {
         String result = "";
         result += "1\0";
-        result += parseInt(length) + "\n";
+        result += parseInt(length);
         return result;
     }
 

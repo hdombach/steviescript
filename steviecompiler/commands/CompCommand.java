@@ -11,9 +11,9 @@ public class CompCommand extends Command{
 
     public static String getAssembly(int resultAddress, int aAddress, int bAddress) {
         String result = "7\n";
-        result += parseInt(resultAddress) + "\n";
-        result += parseInt(aAddress) + "\n";
-        result += parseInt(bAddress) + "\n";
+        result += parseInt(resultAddress);
+        result += parseInt(aAddress);
+        result += parseInt(bAddress);
         return result;
     }
 
