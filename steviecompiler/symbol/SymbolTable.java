@@ -3,6 +3,7 @@ package steviecompiler.symbol;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Set;
 
 import steviecompiler.node.Block;
 import steviecompiler.node.CreateVar;
@@ -196,7 +197,7 @@ public class SymbolTable {
         if (paramOrder.contains(name)) {
             for (String param : paramOrder) {
                 if (param == name) {
-                    return new LocalAddress(0, currentOffset)
+                    return new LocalAddress(0, currentOffset);
                 }
                 currentOffset += getValue(name).getMemSize();
             }
@@ -205,9 +206,14 @@ public class SymbolTable {
         //dedicated variables appear beneath the temp memory in the stack
         
         //make sure order of variables is always the same
-        Set<String> localSet = table.keySet();
-        for (String param : paramOrder) {
-            localSet.remove(param);
+        Set<String> localSet;
+        if (sharedTable == null) {
+            localSet = table.keySet();
+            for (String param : paramOrder) {
+                localSet.remove(param);
+            }
+        } else {
+            localSet = sharedTable.keySet();
         }
         Object[] localKeys = localSet.toArray();
         Arrays.sort(localKeys);
@@ -216,7 +222,7 @@ public class SymbolTable {
             ArrayList<Symbol> symbols = table.get(key);
             for (Symbol symbol : symbols) {
                 if (symbol.type == SymbolType.VALUE) {
-                    if ((String) key == name) {
+                    if (key.equals(name)) {
                         return new LocalAddress(0, currentOffset);
                     }
                     currentOffset += symbol.dataType.getReqMemory();
@@ -242,15 +248,18 @@ public class SymbolTable {
     }
     public int paramOffset() {
         //getParents() counts itself as well. Therefore, subtract 1 because the current frame poitner is already kept track of.
-        return framePointerOffset() + (getParents() - 1) * new DataType("pointer");
+        return framePointerOffset() + (getParents() - 1) * new DataType("pointer").getReqMemory();
     }
     public int framePointerOffset() {
-        return gotoOffset() + new DataType("pointer");
+        return gotoOffset() + new DataType("pointer").getReqMemory();
     }
     public int returnOffset() {
         return 0;
     }
     public int gotoOffset() {
+        if (block.returnType == null) {
+            return 0;
+        }
         return block.returnType.getReqMemory();
     }
 

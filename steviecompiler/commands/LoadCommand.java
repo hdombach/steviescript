@@ -5,6 +5,11 @@ public class LoadCommand extends Command {
     int ivalue;
     String svalue;
 
+    public LoadCommand(int address, int value) {
+        this.a = address
+        this.ivalue = value;
+    }
+
     public String toAssembly() {
         if (svalue != null) {
             return getAssembly(a, svalue);

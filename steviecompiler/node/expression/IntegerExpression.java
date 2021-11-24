@@ -2,7 +2,13 @@ package steviecompiler.node.expression;
 
 import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
+
+import java.util.ArrayList;
+
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
+import steviecompiler.commands.LoadCommand;
+import steviecompiler.commands.PopCommand;
 
 public class IntegerExpression extends NumericExpression {
     private static TokenType[] tokenSequence = {TokenType.NUMBER};
@@ -30,6 +36,16 @@ public class IntegerExpression extends NumericExpression {
             Node.index = beginIndex;
             isValid = false;
         }
+    }
+
+    public ArrayList<Command> makeCommands(Block block) {
+        ArrayList<Command> c = new ArrayList<Command>();
+
+        c.add(new PopCommand(4));
+
+        c.add(new LoadCommand(-4, value));
+
+        return c;
     }
 
     public int value() {

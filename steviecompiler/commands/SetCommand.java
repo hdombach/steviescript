@@ -1,5 +1,7 @@
 package steviecompiler.commands;
 
+import java.util.ArrayList;
+
 public class SetCommand extends Command{
     int result;
     int value;

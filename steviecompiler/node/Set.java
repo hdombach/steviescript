@@ -4,8 +4,12 @@ import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.commands.Command;
+import steviecompiler.commands.MorphCommand;
+import steviecompiler.commands.PopCommand;
+import steviecompiler.commands.PushCommand;
 import steviecompiler.commands.SetCommand;
 import steviecompiler.node.expression.Expression;
+import steviecompiler.symbol.LocalAddress;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
@@ -49,15 +53,27 @@ public class Set extends Statement {
 	}
 
 	public ArrayList<Command> makeCommands(Block block) {
-		ArrayList<Command> c = new ArrayList<Command>();
 
-		block.symbols.pushTemp(expression.evaluatedType.getReqMemory());
-		c.addAll(expression.makeCommands(block));
-		c.add(new SetCommand(block.symbols.getValueAddress(name),
-		                     block.symbols.getCurrentTempAddress(),
-							 expression.evaluatedType.getReqMemory()));
+		int length = expression.evaluatedType.getReqMemory();
+
+		LocalAddress address = block.symbols.getValueAddress(name);
+
+		ArrayList<Command> c = new ArrayList<Command>();
+		
+		c.addAll(expression.makeCommands(block)); //return value is added onto stack
+
+		c.addAll(address.getCommands()); //address for variable is added onto stack
+		
+		Command set = new SetCommand(0, -length, length); //once this gets called, variable address will have been removed
+
+		c.add(new MorphCommand(set, 0, -4)); //changes the SetCommand
+
+		c.add(new PopCommand(4)); //pops the value address
+
+		c.add(set);
+		
+		c.add(new PopCommand(length)); //pop the return value
 							 
-		block.symbols.popTemp(expression.evaluatedType.getReqMemory());
 
 		return c;
 	}

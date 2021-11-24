@@ -62,7 +62,7 @@ abstract public class Node {
 		if (tokens.size() > index) {
 			return tokens.get(index);
 		} else {
-			return new Token(TokenType.END, tokens.get(tokens.size() - 1).getLine());
+			return new Token(TokenType.END, tokens.size());
 		}
 	}
 
@@ -79,7 +79,9 @@ abstract public class Node {
 
 	public ArrayList<Command> makeCommands(Block block) {
 		//TODO: change this to abstract once later on.
-		throw new Error("makeCommands is not implimented. Line: " + line);
+		System.out.println(this);
+		System.out.println("makeCommands is not implimented. Line: " + line);
+		return new ArrayList<Command>();
 	};
 
 	public static void getAllReqMemory() {

@@ -3,6 +3,10 @@ package steviecompiler.commands;
 public class PushCommand extends Command {
     int length;
 
+    public PushCommand(int length) {
+        this.length = length;
+    }
+
     public String toAssembly() {
         return getAssembly(length);
     }

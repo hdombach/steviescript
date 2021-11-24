@@ -3,6 +3,10 @@ package steviecompiler.commands;
 public class PopCommand extends Command {
     int length;
 
+    public PopCommand(int length) {
+        this.length = length;
+    }
+
     public String toAssembly() {
         return getAssembly(length);
     }

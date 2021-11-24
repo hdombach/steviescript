@@ -1,6 +1,9 @@
 package steviecompiler.node;
 
+import java.util.ArrayList;
+
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
 import steviecompiler.symbol.SymbolTable;
 
 public class End extends Statement {
@@ -23,5 +26,8 @@ public class End extends Statement {
         String result = "";
 		result += Node.indentStr() + "END\n";
         return result;
+    }
+    public ArrayList<Command> makeCommands(Block block) {
+        return new ArrayList<Command>();
     }
 }

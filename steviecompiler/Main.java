@@ -34,7 +34,7 @@ public class Main{
             System.out.println(Node.getCode(f));
             Token.clear();
             codeText.clear();
-        }
+        } 
         Node.checkScope();
         Node.getAllReqMemory();
         Node.makeAllCommands();

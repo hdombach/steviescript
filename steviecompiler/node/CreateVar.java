@@ -1,5 +1,8 @@
 package steviecompiler.node;
 
+import java.util.ArrayList;
+
+import steviecompiler.commands.Command;
 import steviecompiler.node.expression.*;
 import steviecompiler.symbol.SymbolTable;
 
@@ -53,5 +56,8 @@ public class CreateVar extends Statement {
 			return 0;
 		}
 		return expression.getReqMemory() + expression.evaluatedType.getReqMemory();
+	}
+	public ArrayList<Command> makeCommands(Block block) {
+		return new ArrayList<Command>();
 	}
 }
