@@ -36,6 +36,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		Memory.init(128, 128);
+
+		Memory.alloc(4);
 		
 		shouldExit = false;
 		programCounter = 0;

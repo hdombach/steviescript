@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import steviecompiler.commands.Command;
+import steviecompiler.commands.PushCommand;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
  
@@ -73,6 +74,9 @@ public class Block extends Node {
 
 	public ArrayList<Command> makeCommands(Block block) {
 		ArrayList<Command> result = new ArrayList<Command>();
+		
+		result.add(new PushCommand(symbols.getStackSize()));
+
 		for (Statement statement : statements) {
 			result.addAll(statement.makeCommands(this));
 		}

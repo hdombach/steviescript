@@ -239,6 +239,18 @@ public class SymbolTable {
         throw new Error("Value " + name + " could not be found when looking for an address");
     }
 
+    public int getStackSize() {
+        int sum = localOffset();
+        for (ArrayList<Symbol> symbols : table.values()) {
+            for (Symbol symbol : symbols) {
+                if (symbol.type == SymbolType.VALUE) {
+                    sum += symbol.getMemSize();
+                }
+            }
+        }
+        return sum;
+    }
+
     public int localOffset() {
         int sum = 0;
         for (String param : paramOrder) {

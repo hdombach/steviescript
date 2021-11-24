@@ -6,6 +6,7 @@ import steviecompiler.Token.TokenType;
 import steviecompiler.node.DataType;
 import steviecompiler.node.Node;
 import steviecompiler.node.Statement;
+import steviecompiler.node.expression.functionCall.FunctionCall;
 
 public abstract class Expression extends Statement {
 	public Node content;
@@ -54,6 +55,8 @@ public abstract class Expression extends Statement {
 		Node.index = beginIndex;
 		e = new BooleanExpression();
 		if (e.isValid) { return loadMethods(e); }
+
+		
 
 		Node.index = beginIndex;
 		e = new FunctionCall();

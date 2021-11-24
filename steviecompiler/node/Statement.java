@@ -93,6 +93,11 @@ public abstract class Statement extends Node {
 			return null;
 		}
 
+		temp = new PrintInt();
+		if (temp.isValid) {
+			return temp;
+		}
+
 		temp = Expression.expect();
 		if (temp.isValid) {
 			return temp;
