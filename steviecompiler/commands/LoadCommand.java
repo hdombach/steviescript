@@ -6,7 +6,7 @@ public class LoadCommand extends Command {
     String svalue;
 
     public LoadCommand(int address, int value) {
-        this.a = address
+        this.a = address;
         this.ivalue = value;
     }
 
@@ -36,10 +36,18 @@ public class LoadCommand extends Command {
 
     public int getLength() {
         if (svalue == null) {
-            return 16;
+            return 13;
         } else {
             byte[] data = svalue.getBytes();
-            return 12 + data.length;
+            return 9 + data.length;
+        }
+    }
+
+    public String toString() {
+        if (svalue == null) {
+            return "Load Command " + a + " value: " + ivalue;
+        } else {
+            return "Load Command " + a + " value: " + svalue;
         }
     }
 }

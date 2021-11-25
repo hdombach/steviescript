@@ -4,25 +4,29 @@ package steviecompiler.commands;
 //This is how pointers will be handled.
 
 public class MorphCommand extends Command {
-    Command commnad;
+    Command command;
     int offset;
     int value;
 
     public MorphCommand(Command command, int offset, int value) {
-        this.commnad = command;
+        this.command = command;
         this.offset = offset;
         this.value = value;
     }
 
     public String toAssembly() {
-        return getAssembly(commnad.location + offset, value);
+        return getAssembly(command.location + offset, value);
     }
 
     public static String getAssembly(int address, int value) {
-        return SetCommand.getAssembly(address, value, 4);
+        return SetCommand .getAssembly(address, value, 4);
     }
 
     public int getLength() {
-        return 16;
+        return 13;
+    }
+
+    public String toString() {
+        return "Morph [" + command + "] offset: " + offset + " value: " + value;
     }
 }

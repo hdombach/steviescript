@@ -24,6 +24,10 @@ public class AddCommand extends Command {
     }
 
     public int getLength() {
-        return 16;
+        return 13;
+    }
+
+    public String toString() {
+        return "Add " + result + " = " + a + " + " + b;
     }
 }

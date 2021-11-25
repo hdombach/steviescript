@@ -34,26 +34,8 @@ public class Symbol {
         type = SymbolType.DATATYPE;
     }
 
-    /*public void memLoad() {
-        switch(dataType.getType()) {
-            case "int":
-            case "float":
-            case "pointer":
-                size = 4;
-                break;
-            case "char":
-            case "boolean":
-            default:
-                size = 1;
-        }
-    }*/ //moving to DataType
-
-    public void malloc(int n) {
-        size = n;
-    }
-    
     public int getMemSize() {
-        return size;
+        return dataType.getReqMemory();
     }
 
     /**

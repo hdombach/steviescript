@@ -13,12 +13,16 @@ public class PopCommand extends Command {
 
     public static String getAssembly(int length) {
         String result = "";
-        result += "1\0";
+        result += "1\n";
         result += parseInt(length);
         return result;
     }
 
     public int getLength() {
-        return 8;
+        return 5;
+    }
+
+    public String toString() {
+        return "Pop " + length;
     }
 }

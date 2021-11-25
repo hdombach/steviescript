@@ -42,7 +42,7 @@ public class Memory {
 	public static void init(int startingHeapSize, int startingStackSize) {
 		heapSize = startingHeapSize;
 		maxStackSize = startingStackSize;
-		heapSize = 0;
+		stackSize = 0;
 		bytes = ByteBuffer.allocate(heapSize + maxStackSize);
 		metaData = new ArrayList<MetaData>();
 		metaData.add(new MetaData(0, startingHeapSize));
@@ -65,7 +65,7 @@ public class Memory {
 		while (stackSize + data.length > bytes.capacity()) {
 			increaseStack();
 		}
-		bytes.position(stackSize);
+		bytes.position(heapSize + stackSize);
 		bytes.put(data);
 		stackSize += data.length;
 	}
@@ -131,9 +131,15 @@ public class Memory {
 	}
 
 	
-	public static void set(int address, byte[] value) {
+	public static void load(int address, byte[] value) {
+		//System.out.println(normAdd(address));
 		bytes.position(normAdd(address));
 		bytes.put(value);
+	}
+
+	public static void set(int address, int value, int length) {
+		byte[] v = Memory.get(value, length);
+		Memory.load(address, v);
 	}
 
 	//Normalizes the adress
@@ -163,7 +169,7 @@ public class Memory {
 		while (c < metaData.size()) {
 			MetaData d = metaData.get(c);
 			System.out.println(d);
-			int add = 0;
+			int add = d.start;
 			while (d.length > add) {
 				byte thing = get(add, 1)[0];
 				System.out.println((int) thing);
@@ -173,10 +179,7 @@ public class Memory {
 		}
 
 		int add = 0;
-		System.out.println(add);
-		if (true) {
-			return;
-		}
+		System.out.println("Stack. start: " + heapSize + ", length: " + stackSize);
 		while (stackSize > add) {
 			System.out.println((int) get(heapSize + add, 1)[0]);
 			add += 1;
@@ -184,6 +187,10 @@ public class Memory {
 	}
 	public static void printMetData() {
 		System.out.println(metaData);
+	}
+
+	public static int getHeapSize() {
+		return heapSize;
 	}
 }
 

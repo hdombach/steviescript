@@ -11,6 +11,8 @@ public class Main {
 	private static int programCounter;
 	private static Boolean shouldExit;
 
+	private static int programStart = 4;
+
 	//deafult field size is 4
 	public static int getField(int offset) {
 		return getInstruction(offset, 4);
@@ -23,7 +25,6 @@ public class Main {
 	//commands are one byte long
 	public static int getInstruction(int offset, int length) {
 		BigInteger big = new BigInteger(Memory.get(programCounter + offset, length));
-
 		return big.intValue();
 	}
 
@@ -35,28 +36,33 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Memory.init(128, 128);
+		Memory.init(256, 256);
 
 		Memory.alloc(4);
 		
 		shouldExit = false;
-		programCounter = 0;
+		programCounter = programStart;
 		filePath = "test.s";
 		if (args.length > 0) {
 			filePath = args[0];
 		}
 		readFile(filePath);
 
+		Memory.load(0, ByteBuffer.allocate(4).putInt(Memory.getHeapSize()).array());
 
-		//Memory.printContents();
 
 		//atually run code
 		while (!shouldExit) {
-			//System.out.println(getCommand() + ", " + programCounter);
-			if (programCounter > 100) {
+			if (programCounter > 1000) {
 				shouldExit = true;
 			}
-			programCounter += Commands.run(getInstruction(0, 1));
+			try {
+				programCounter += Commands.run(getInstruction(0, 1));
+			} catch(Exception e) {
+				Memory.printContents();
+				e.printStackTrace();
+				shouldExit = true;
+			}
 		}
 
 		//Memory.printContents();
@@ -65,14 +71,15 @@ public class Main {
 	//assumes that memory is empty so will start writing at 0
 	public static void readFile(String path){
 		try {
+			System.out.println("read file");
 			Scanner reader = new Scanner(new File(path));
 			ArrayList<Byte> commands = new ArrayList<Byte>();
-			int add = 0;
+			int add = programStart;
 			byte[] bytes = new byte[1];
 			while (reader.hasNextLine()) {
 				String thisLine = reader.nextLine();
 				bytes[0] = (byte) Integer.parseInt(thisLine);
-				Memory.set(add, bytes);
+				Memory.load(add, bytes);
 				add += 1;
 			}
 			Memory.alloc(add);

@@ -10,6 +10,10 @@ public class ExitCommand extends Command {
     }
 
     public int getLength() {
-        return 4;
+        return 1;
+    }
+
+    public String toString() {
+        return "Exit";
     }
 }

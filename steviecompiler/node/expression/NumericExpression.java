@@ -1,5 +1,9 @@
 package steviecompiler.node.expression;
 
+import java.util.ArrayList;
+
+import steviecompiler.commands.Command;
+import steviecompiler.node.Block;
 import steviecompiler.symbol.SymbolTable;
 
 public abstract class NumericExpression extends Expression {

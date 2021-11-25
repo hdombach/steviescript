@@ -66,7 +66,7 @@ public class Set extends Statement {
 		
 		Command set = new SetCommand(0, -length, length); //once this gets called, variable address will have been removed
 
-		c.add(new MorphCommand(set, 0, -4)); //changes the SetCommand
+		c.add(new MorphCommand(set, 1, -4)); //changes the SetCommand
 
 		c.add(new PopCommand(4)); //pops the value address
 

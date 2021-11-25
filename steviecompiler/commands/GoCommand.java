@@ -14,7 +14,11 @@ public class GoCommand extends Command {
     }
 
     public int getLength() {
-        return 8;
+        return 5;
+    }
+
+    public String toString() {
+        return "Goto " + command;
     }
 }
   

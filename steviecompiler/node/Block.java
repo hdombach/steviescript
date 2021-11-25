@@ -11,7 +11,7 @@ import steviecompiler.symbol.SymbolTable;
 
 public class Block extends Node {
 	public ArrayList<Statement> statements = new ArrayList<Statement>();
-	protected SymbolTable symbols;
+	public SymbolTable symbols;
 	private static Block currentParent;
 	private Block parent;
 	private ArrayList<Command> commands = new ArrayList<Command>();

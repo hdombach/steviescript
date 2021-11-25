@@ -39,6 +39,7 @@ public class Main{
         Node.getAllReqMemory();
         commands = Node.makeAllCommands();
         setCommandPositions();
+        printCommandDescriptions();
         System.out.println(getAssembly());
         if(ErrorHandler.errorCount() == 0) {
             //write(outputPath);
@@ -134,6 +135,12 @@ public class Main{
             result += command.toAssembly();
         }
         return result;
+    }
+
+    static private void printCommandDescriptions() {
+        for (Command command : commands) {
+            System.out.println(command);
+        }
     }
 }
 

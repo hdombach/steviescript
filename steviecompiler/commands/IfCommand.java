@@ -17,6 +17,10 @@ public class IfCommand extends Command {
     }
 
     public int getLength() {
-        return 12;
+        return 9;
+    }
+
+    public String toString() {
+        return "If " + a + " then goto " + command;
     }
 }

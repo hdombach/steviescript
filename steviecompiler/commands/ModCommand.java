@@ -18,6 +18,10 @@ public class ModCommand extends Command {
     }
 
     public int getLength() {
-        return 16;
+        return 13;
+    }
+
+    public String toString() {
+        return "Mod " + result + " = " + a + " % " + b;
     }
 }

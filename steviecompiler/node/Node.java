@@ -7,6 +7,7 @@ import steviecompiler.Main;
 import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
 import steviecompiler.commands.Command;
+import steviecompiler.commands.ExitCommand;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
@@ -94,6 +95,7 @@ abstract public class Node {
 		for(Block b : blocks.values()) {
 			c.addAll(b.makeCommands(null));
 		}
+		c.add(new ExitCommand());
 		return c;
 	}
 

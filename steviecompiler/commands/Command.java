@@ -8,7 +8,7 @@ public abstract class Command {
     int location;
     
     public String toAssembly() {
-        return "You should not be seeing this message";
+        return "Error: toAssembly not implimented: " + this;
     }
 
     //converts int to 4 byte long list of ints

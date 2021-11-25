@@ -26,6 +26,10 @@ public class SetCommand extends Command{
     }
 
     public int getLength() {
-        return 16;
+        return 13;
+    }
+
+    public String toString() {
+        return "Set " + result + " = " + value + " length: " + length;
     }
 }

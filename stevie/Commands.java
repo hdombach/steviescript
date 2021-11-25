@@ -33,7 +33,7 @@ public class Commands {
 				bInt = ByteBuffer.wrap(b).getInt();
 				cInt = aInt + bInt;
 				c = ByteBuffer.allocate(4).putInt(cInt).array();
-				Memory.set(Main.getField(1), c);
+				Memory.load(Main.getField(1), c);
 				return 13;
 			case 3: //sub
 				a = Memory.get(Main.getField(5), 4);
@@ -42,7 +42,7 @@ public class Commands {
 				bInt = ByteBuffer.wrap(b).getInt();
 				cInt = aInt - bInt;
 				c = ByteBuffer.allocate(4).putInt(cInt).array();
-				Memory.set(Main.getField(1), c);
+				Memory.load(Main.getField(1), c);
 				return 13;
 			case 4: //divide
 				a = Memory.get(Main.getField(5), 4);
@@ -51,7 +51,7 @@ public class Commands {
 				bInt = ByteBuffer.wrap(b).getInt();
 				cInt = aInt / bInt;
 				c = ByteBuffer.allocate(4).putInt(cInt).array();
-				Memory.set(Main.getField(1), c);
+				Memory.load(Main.getField(1), c);
 				return 13;
 			case 5: //multiply
 				a = Memory.get(Main.getField(5), 4);
@@ -60,7 +60,7 @@ public class Commands {
 				bInt = ByteBuffer.wrap(b).getInt();
 				cInt = aInt * bInt;
 				c = ByteBuffer.allocate(4).putInt(cInt).array();
-				Memory.set(Main.getField(1), c);
+				Memory.load(Main.getField(1), c);
 				return 13;
 			case 6: //mod
 				a = Memory.get(Main.getField(5), 4);
@@ -69,7 +69,7 @@ public class Commands {
 				bInt = ByteBuffer.wrap(b).getInt();
 				cInt = aInt % bInt;
 				c = ByteBuffer.allocate(4).putInt(cInt).array();
-				Memory.set(Main.getField(1), c);
+				Memory.load(Main.getField(1), c);
 				return 13;
 			case 7: //compare
 				a = Memory.get(Main.getField(5), 4);
@@ -78,7 +78,7 @@ public class Commands {
 				bInt = ByteBuffer.wrap(b).getInt();
 				cInt = aInt - bInt;
 				c = ByteBuffer.allocate(4).putInt(cInt).array();
-				Memory.set(Main.getField(1), c);
+				Memory.load(Main.getField(1), c);
 				return 13;
 			case 8: //out
 				a = Memory.get(Main.getField(1), Main.getField(5));
@@ -107,11 +107,11 @@ public class Commands {
 					a[i] = Integer.valueOf(Main.getInstruction(9 + i, 1)).byteValue();
 					i += 1;
 				}
-				Memory.set(Main.getField(1), a);
+				Memory.load(Main.getField(1), a);
 				return 9 + length;
 			case 13: //set
-				size = Memory.getInt(Main.getField(9));
-				Memory.set(Main.getField(1), Memory.get(Main.getField(5), size));
+				size = Main.getField(9);
+				Memory.set(Main.getField(1), Main.getField(5), size);
 				return 13;
 			case 14: //appends stuff
 				/*a = Memory.get(Main.getInstruction(2));
@@ -127,7 +127,7 @@ public class Commands {
 			case 16: //alloc
 				size = Memory.getInt(Main.getField(5));
 				int address = Memory.alloc(size);
-				Memory.set(Main.getField(1), ByteBuffer.allocate(4).putInt(address).array());
+				Memory.load(Main.getField(1), ByteBuffer.allocate(4).putInt(address).array());
 				return 9;
 			case 17: //free
 				Memory.free(Main.getField(1));

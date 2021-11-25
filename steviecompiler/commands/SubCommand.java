@@ -18,6 +18,10 @@ public class SubCommand extends Command {
     }
 
     public int getLength() {
-        return 16;
+        return 13;
+    }
+
+    public String toString() {
+        return "Subtract " + result + " = " + a + " - " + b;
     }
 }
