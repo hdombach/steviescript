@@ -248,15 +248,20 @@ public class SymbolTable {
                 }
             }
         }
+        sum -= getParamSize(); //params are stored in local variables.
         return sum;
     }
 
-    public int localOffset() {
+    public int getParamSize() {
         int sum = 0;
         for (String param : paramOrder) {
             sum += getValue(param).getMemSize();
         }
-        return sum + paramOffset();
+        return sum;
+    }
+
+    public int localOffset() {
+        return getParamSize() + paramOffset();
     }
     public int paramOffset() {
         //the current frame pointer is stored elsewhere so it doesn't need to be in the frame pointer. Instead, store the previous frame pointer

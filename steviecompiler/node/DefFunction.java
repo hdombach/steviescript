@@ -5,6 +5,7 @@ import steviecompiler.symbol.SymbolTable;
 import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
 
 public class DefFunction extends Statement{
     /*
@@ -128,5 +129,15 @@ public class DefFunction extends Statement{
         result += code;
         Node.indent -= 2;
         return result;
+    }
+
+    //Asumes that the stack up to the local varialbes is already created. (the params and old frame pointers need to be defined by whatever is calling it).
+    //the block will also automatically add the local varialbes so there is isn't much to actually do here.
+    public ArrayList<Command> makeCommands(Block block) {
+        ArrayList<Command> c = new ArrayList<Command>();
+
+        c.addAll(code.makeCommands(block));
+
+        return c;
     }
 }
