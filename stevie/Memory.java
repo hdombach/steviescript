@@ -48,6 +48,33 @@ public class Memory {
 		metaData.add(new MetaData(0, startingHeapSize));
 	}
 
+	private static void increaseHeap() {
+		bytes.position(0);
+		byte[] heapSegment = new byte[heapSize];
+		byte[] stackSegment = new byte[maxStackSize];
+		bytes.position(0);
+		bytes.get(heapSegment);
+		bytes.position(heapSize);
+		bytes.get(stackSegment);
+
+		int oldHeapSize = heapSize;
+		heapSize *= 2;
+		ByteBuffer bigger = ByteBuffer.allocate(heapSize + maxStackSize);
+		bigger.position(0);
+		bigger.put(heapSegment);
+		bigger.position(heapSize);
+		bigger.put(stackSegment);
+
+		MetaData last = metaData.get(metaData.size() - 1);
+		if (last.used) {
+			
+			metaData.add(new MetaData(last.start + last.length, oldHeapSize));
+		} else {
+			last.length += oldHeapSize;
+		}
+		bytes = bigger;
+	}
+
 	private static void increaseStack() {
 		maxStackSize *= 2;
 		ByteBuffer bigger = ByteBuffer.allocate(heapSize + maxStackSize);
@@ -62,7 +89,7 @@ public class Memory {
 	}
 	//adds to end of stack
 	public static void push(byte[] data) {
-		while (stackSize + data.length > bytes.capacity()) {
+		while (stackSize + data.length > maxStackSize) {
 			increaseStack();
 		}
 		bytes.position(heapSize + stackSize);
@@ -94,8 +121,8 @@ public class Memory {
 			}
 			c += 1;
 		}
-		throw new Error("Not enough memory");
-		//TODO: allocated more memory
+		increaseHeap();
+		return alloc(length);
 	}
 
 	//frees memory in heap and simplifies the metadata
