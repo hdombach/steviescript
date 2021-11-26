@@ -1,0 +1,25 @@
+Push 8
+Push 12
+Push 4
+Load Command -4 value: 7224
+Push 4
+Load Command -4 value: 8
+Add -4 = 0 + -4
+Morph [Set 0 = -4 length: 4] offset: 1 value: -4
+Pop 4
+Set 0 = -4 length: 4
+Pop 4
+Push 4
+Load Command -4 value: 5
+Output -4length: 4
+Pop 4
+Push 4
+Push 4
+Load Command -4 value: 8
+Add -4 = 0 + -4
+Morph [Set -4 = 0 length: 4] offset: 5 value: -4
+Pop 4
+Set -4 = 0 length: 4
+Output -4length: 4
+Pop 4
+Exit
