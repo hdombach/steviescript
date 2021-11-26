@@ -3,6 +3,11 @@ package steviecompiler.node.expression;
 import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.AddCommand;
+import steviecompiler.commands.Command;
+import steviecompiler.commands.PopCommand;
+import steviecompiler.commands.PushCommand;
+import steviecompiler.node.Block;
 import steviecompiler.node.Node;
 import steviecompiler.symbol.OperatorSymbol;
 import steviecompiler.symbol.SymbolTable;
@@ -70,6 +75,24 @@ public class Operation extends Expression {
         this.operator = operator;
         this.left = left;
         this.right = right;
+    }
+
+    public ArrayList<Command> makeCommands(Block block) {
+        ArrayList<Command> c = new ArrayList<Command>();
+        c.add(new PushCommand(evaluatedType.getReqMemory()));
+        c.addAll(left.makeCommands(block));
+        c.addAll(right.makeCommands(block));
+        switch (operator) {
+            case "+":
+                c.add(new AddCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
+            default:
+                System.out.println("Making Commands for " + operator + " not implimented yet");
+                break;
+                //For some reason, throwing the error creates an error
+                //throw new Error("Making Commands for " + operator + " not implimented yet");
+        }
+        c.add(new PopCommand(8));
+        return c;
     }
 
     public String toString() {

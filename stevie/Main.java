@@ -36,7 +36,7 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		Memory.init(256, 256);
+		Memory.init(512, 512);
 
 		Memory.alloc(4);
 		

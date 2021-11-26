@@ -1,4 +1,4 @@
 int test
-test = 7224
+test = 7
 printInt(5)
-printInt(test)
+printInt(test + 200)
