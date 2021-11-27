@@ -132,6 +132,9 @@ public class Commands {
 			case 17: //free
 				Memory.free(Main.getField(1));
 				return 5;
+			case 19: //normalize
+				aInt = Memory.get(Main.getField(5), 4);
+				Memory.set(Main.getField(1), Memory.normAdd(aInt), 4);
 			case 99: //exit
 				Main.stop();
 				return 0;

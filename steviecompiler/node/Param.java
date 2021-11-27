@@ -53,6 +53,14 @@ public class Param extends Node {
 		isValid = true;
 	}
 
+	ArrayList<DataType> getTypes() {
+		ArrayList<DataType> result = new ArrayList<DataType>();
+		for (Expression expression : expressions) {
+			result.add(expression.evaluatedType);
+		}
+		return result;
+	}
+
 	public void checkSymbols(SymbolTable scope) {
 		for (Expression exp : expressions) {
 			exp.checkSymbols(scope);

@@ -137,7 +137,7 @@ public class SymbolTable {
         }
     }
 
-    private int getParents() {
+    public int getParents() {
         if (parent == null) {
             return 1;
         } else {
@@ -285,7 +285,7 @@ public class SymbolTable {
         for (Symbol symbol : symbols) {
             if (symbol.type == SymbolType.FUNCTION) {
                 FunctionSymbol fSymbol = (FunctionSymbol) symbol;
-                if (Param.compare(params, fSymbol.params)) { //TODO make a function to compare lists of params
+                if (Param.compare(params, fSymbol.params)) {
                     return fSymbol;
                 } 
             }

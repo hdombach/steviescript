@@ -3,7 +3,14 @@ package steviecompiler.node.expression.functionCall;
 import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.AddCommand;
 import steviecompiler.commands.Command;
+import steviecompiler.commands.LoadCommand;
+import steviecompiler.commands.MorphCommand;
+import steviecompiler.commands.NormalizeCommand;
+import steviecompiler.commands.PopCommand;
+import steviecompiler.commands.PushCommand;
+import steviecompiler.commands.SetCommand;
 import steviecompiler.node.Block;
 import steviecompiler.node.Node;
 import steviecompiler.node.Param;
@@ -60,9 +67,45 @@ public class FunctionCall extends Expression {
 		return result + big;
 	}
 
-	//NOTE: rn paramaters are scattered in with the rest of the local variables.
+	
+	//needs to set up the stack up till the local variables.
 	public ArrayList<Command> makeCommands(Block block) {
-		return null;
+		ArrayList<Command> c = new ArrayList<Command>();
+
+		FunctionSymbol symbol = block.symbols.getFunction(name, param.getParamTypes());
+
+		c.add(new PushCommand(evaluatedType.getReqMemory())); //return value
+		LoadCommand loadReturnAddress = LoadCommand(-4, 0); //return frame pointer
+		c.add(new PushCommand(4));
+		c.add(loadReturnAddress);
+
+		c.add(new NormalizeCommand(0, - code)); //update the new frame pointer
+		
+		c.add(new PushCommand(4));
+		c.add(new SetCommand(-4, 0, 4)); //setup previous frame pointer
+		
+		int c = 1;
+		while (symbol.block.symbols.getParents() > c) { //set up the rest of the frame pointers
+			c.add(new PushCommand(4));
+			if (block.symbols.getParents() > c) {
+				c.add(new PushCommand(4)); //temp value to calculate correct address for frame pointer
+				c.add(new LoadCommand(-4, c));
+				c.add(new AddCommand(-4, 0, -4));
+				Command set = new SetCommand(-4, 0, 4);
+				c.add(new MorphCommand(set, 5, -4));
+				c.add(new PopCommand(4));
+				c.add(set);
+			} else {
+				c.add(new SetCommand(-4, 0, 4));
+			}
+		}
+
+		for (Expression expression : param.expressions) {
+			c.addAll(expression.makeCommands(block));
+		}
+
+		return c;
+		
 	}
 
 	public String toString() {

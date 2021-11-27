@@ -1,11 +1,17 @@
 package steviecompiler.node.expression;
 
 import steviecompiler.error.*;
-
+import steviecompiler.node.Block;
 import steviecompiler.node.Node;
 import steviecompiler.symbol.SymbolTable;
 import steviecompiler.node.Param;
+
+import java.util.ArrayList;
+
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
+import steviecompiler.commands.LoadCommand;
+import steviecompiler.commands.PushCommand;
 
 public class CallMethod extends Expression {
 	Expression body;

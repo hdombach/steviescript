@@ -28,7 +28,7 @@ public class DefFunction extends Statement{
    // private boolean hasReturn = false;
     public DataType returnType;
 
-    private Block code;
+    public Block code;
 
     public ArrayList<DataType> getParamsTypes() {
         ArrayList<DataType> result = new ArrayList<DataType>();
@@ -137,6 +137,8 @@ public class DefFunction extends Statement{
         ArrayList<Command> c = new ArrayList<Command>();
 
         c.addAll(code.makeCommands(block));
+
+        //TODO: make sure you pop stuff and update the frame pointer
 
         return c;
     }

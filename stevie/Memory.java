@@ -171,7 +171,7 @@ public class Memory {
 
 	//Normalizes the adress
 	//takes into account negative numbers
-	private static int normAdd(int address) {
+	public static int normAdd(int address) {
 		if (address < 0) {
 			return heapSize + stackSize + address;
 		} else {
