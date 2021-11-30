@@ -21,7 +21,7 @@ if <1 @a> <5 line> //jumps if negative. a is always 1 byte
 go <1 @line>
 load <1 @result> <5 length> "raw" //needs to be list of byte long numbers
 set <1 @result> <5 @value> <9 length>
-__  join <result> <beggining> <end> //deprecated
+__  join <result> <beginning> <end> //deprecated
 __ get <result> <value> <start> <length> //deprecated
 alloc <1 @result> <5 @length>
 free <1 @address>

@@ -1,12 +1,4 @@
-int test
-test = 7
-printInt(5)
-printInt(test + 200)
-
-function doThing() {
-    printInt(56)
-}
-
-doThing()
-
-printInt(test)
+printInt(12 - 3)
+printInt(12 * 3)
+printInt(12 / 3)
+printInt(12 % 5)

@@ -4,7 +4,12 @@ import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.commands.AddCommand;
+import steviecompiler.commands.SubCommand;
+import steviecompiler.commands.DivCommand;
+import steviecompiler.commands.MulCommand;
+import steviecompiler.commands.ModCommand;
 import steviecompiler.commands.Command;
+import steviecompiler.commands.ModCommand;
 import steviecompiler.commands.PopCommand;
 import steviecompiler.commands.PushCommand;
 import steviecompiler.node.Block;
@@ -85,6 +90,18 @@ public class Operation extends Expression {
         switch (operator) {
             case "+":
                 c.add(new AddCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
+                break; 
+            case "-":
+                c.add(new SubCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
+                break;
+            case "*":
+                c.add(new MulCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
+                break;
+            case "%":
+                c.add(new ModCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
+                break;
+            case "/":
+                c.add(new DivCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
                 break;
             default:
                 throw new Error("Making Commands for " + operator + " not implimented yet");
@@ -122,6 +139,7 @@ public class Operation extends Expression {
         switch (operation) {
             case "*":
             case "/":
+            case "%":
                 return 4;
             case "+":
             case "-":

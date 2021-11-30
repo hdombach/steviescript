@@ -54,11 +54,13 @@ public class SymbolTable {
             symbolize("-", new DataType("int"), new DataType("int"), new DataType("int"));
             symbolize("*", new DataType("int"), new DataType("int"), new DataType("int"));
             symbolize("/", new DataType("int"), new DataType("int"), new DataType("int"));
+            symbolize("%", new DataType("int"), new DataType("int"), new DataType("int"));
 
             symbolize("+", new DataType("char"), new DataType("char"), new DataType("char"));
             symbolize("-", new DataType("char"), new DataType("char"), new DataType("char"));
             symbolize("*", new DataType("char"), new DataType("char"), new DataType("char"));
             symbolize("/", new DataType("char"), new DataType("char"), new DataType("char"));
+            symbolize("%", new DataType("char"), new DataType("char"), new DataType("char"));
 
             symbolize(">", new DataType("int"), new DataType("int"), new DataType("boolean"));
             symbolize("<", new DataType("int"), new DataType("int"), new DataType("boolean"));

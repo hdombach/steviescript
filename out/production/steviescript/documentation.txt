@@ -1,0 +1,24 @@
+RESERVED WORDS:
+
+import  include  function
+int  char  boolean   float
+if  else  while  for  true
+false  var  struct  return
+
+
+FILE TYPES:
+
+~.sh - Header file, used to compile multiple files at once
+    - By convention, main.stv should be listed first
+
+~.stv - StevieScript code file
+
+~.st - Compiled code, run by Stevie command
+
+Compile instructions:
+
+java -cp out steviecompiler/Main <file to compile or header file>
+Other command-line args (to be placed after file/header):
+    -o: signifies output directory
+
+Note: steviecompiler can only compile one file or header at a time. If you are compiling multiple files, use a header file.

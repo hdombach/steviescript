@@ -1,9 +1,12 @@
 package steviecompiler.node;
 
 import steviecompiler.Token.TokenType;
+import steviecompiler.commands.*;
 import steviecompiler.error.ErrorHandler;
 import steviecompiler.node.expression.Expression;
 import steviecompiler.symbol.SymbolTable;
+
+import java.util.ArrayList;
 
 public class While extends Statement {
 	private static TokenType[] tokenSequence = {TokenType.WHILE, TokenType.OPENPARAN, TokenType.CLOSEPARAN, TokenType.OPENCURLY, TokenType.CLOSECURLY};
@@ -63,7 +66,25 @@ public class While extends Statement {
 		loop.getReqMemory();
 		return condition.evaluatedType.getReqMemory() + condition.getReqMemory();
 	}
-	
+
+	@Override
+	public ArrayList<Command> makeCommands(Block block) {
+		ArrayList<Command> c = new ArrayList<Command>();
+
+		c.addAll(condition.makeCommands(block)); //conditional
+
+		IfCommand dummy = new IfCommand(0, c.get(0)); //dummy, will eventually be "if conditional false jump to end"
+		c.add(dummy);
+
+		c.addAll(loop.makeCommands(loop)); //loop
+
+		c.add(new GoCommand(c.get(0))); //return to conditional
+
+		dummy.reset(0 /*TODO conditional*/, new GoCommand(c.get(c.size() - 1).getLength(), c.get(c.size() - 1)));
+
+		return c;
+	}
+
 	public String toString() {
 		String result = "";
 		result += Node.indentStr() + "While: \n";

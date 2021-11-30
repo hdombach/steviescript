@@ -16,6 +16,10 @@ public class GoCommand extends Command {
     public GoCommand() {
         this.command = null;
     }
+    public GoCommand(int offset, Command command) {
+        this(command);
+        this.offset = offset;
+    }
 
     private int getLocationValue() {
         if (block != null) {
@@ -46,8 +50,8 @@ public class GoCommand extends Command {
         return 5;
     }
 
-    public void addCommand(Command commnad, int offset) {
-        this.command = commnad;
+    public void addCommand(Command command, int offset) {
+        this.command = command;
         this.offset = offset;
     }
 

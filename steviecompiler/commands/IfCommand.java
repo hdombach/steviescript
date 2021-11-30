@@ -4,6 +4,14 @@ public class IfCommand extends Command {
     int a;
     Command command;
 
+    public IfCommand(int a, Command c) {
+        //TODO
+    }
+
+    public void reset(int a, Command c) {
+
+    }
+
     public String toAssembly() {
         return getAssembly(a, command.location);
     }

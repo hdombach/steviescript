@@ -59,7 +59,7 @@ public class PrintInt extends Statement{
     }
 
     public int getReqMemory() {
-        return exp.getReqMemory()
+        return exp.getReqMemory();
     }
 
     public String toString() {
