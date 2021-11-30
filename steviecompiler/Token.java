@@ -292,6 +292,7 @@ public class Token {
             case "-":
             case "*":
             case "/":
+            case "%":
                 new Token(TokenType.MATH, tokenText, line);
                 break;
             case "=":

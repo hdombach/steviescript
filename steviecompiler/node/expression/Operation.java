@@ -139,6 +139,7 @@ public class Operation extends Expression {
         switch (operation) {
             case "*":
             case "/":
+            case "%":
                 return 4;
             case "+":
             case "-":
