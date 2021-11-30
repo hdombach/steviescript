@@ -5,6 +5,12 @@ public class MulCommand extends Command {
     int a;
     int b;
 
+    public MulCommand(int result, int a, int b){
+        this.result = result;
+        this.a = a;
+        this.b = b;
+    }
+
     public String toAssembly() {
         return getAssembly(result, a, b);
     }

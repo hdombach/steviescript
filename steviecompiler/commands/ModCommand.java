@@ -5,6 +5,12 @@ public class ModCommand extends Command {
     int a;
     int b;
 
+    public ModCommand(int result, int a, int b){
+        this.result = result;
+        this.a = a;
+        this.b =b;
+    }
+
     public String toAssembly() {
         return getAssembly(result, a, b);
     }
