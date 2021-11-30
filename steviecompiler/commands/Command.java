@@ -40,6 +40,10 @@ public abstract class Command {
 
     }
 
+    public int getLocation() {
+        return location;
+    }
+
     public void setLocation(int l) {
         this.location = l;
     }

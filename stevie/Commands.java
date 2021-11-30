@@ -16,6 +16,7 @@ public class Commands {
 		byte[] b;
 		byte[] c;
 		int size;
+		//System.out.println(command + ", " + Main.getField(1));
 		switch (command) {
 			case 0: //push
 				size = Main.getField(1);
@@ -110,6 +111,7 @@ public class Commands {
 				Memory.load(Main.getField(1), a);
 				return 9 + length;
 			case 13: //set
+				//System.out.println("set: " + Main.getField(1) + ", " + Main.getField(5) + " value: " + Memory.getInt(Main.getField(5)));
 				size = Main.getField(9);
 				Memory.set(Main.getField(1), Main.getField(5), size);
 				return 13;
@@ -133,8 +135,10 @@ public class Commands {
 				Memory.free(Main.getField(1));
 				return 5;
 			case 19: //normalize
-				aInt = Memory.get(Main.getField(5), 4);
-				Memory.set(Main.getField(1), Memory.normAdd(aInt), 4);
+				aInt = Main.getField(5);
+				aInt = Memory.normAdd(aInt);
+				Memory.load(Main.getField(1), ByteBuffer.allocate(4).putInt(aInt).array());
+				return 9;
 			case 99: //exit
 				Main.stop();
 				return 0;

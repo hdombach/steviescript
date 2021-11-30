@@ -3,6 +3,7 @@ package steviecompiler.symbol;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 import steviecompiler.node.Block;
@@ -89,7 +90,7 @@ public class SymbolTable {
         if (sharedTable != null) {
             ArrayList<Symbol> sharedList;
             if (sharedTable.containsKey(name)) {
-                sharedList = table.get(name);
+                sharedList = sharedTable.get(name);
             } else {
                 sharedList = new ArrayList<Symbol>();
                 sharedTable.put(name, sharedList);
@@ -206,17 +207,21 @@ public class SymbolTable {
         //dedicated variables appear beneath the temp memory in the stack
         
         //make sure order of variables is always the same
-        Set<String> localSet;
+        Set<String> localSet = new HashSet<String>();
         if (sharedTable == null) {
-            localSet = table.keySet();
+            localSet.addAll(table.keySet());
             for (String param : paramOrder) {
                 localSet.remove(param);
             }
         } else {
-            localSet = sharedTable.keySet();
+            localSet.addAll(sharedTable.keySet());
         }
-        Object[] localKeys = localSet.toArray();
-        Arrays.sort(localKeys);
+        String[] sortedKeys = localSet.toArray(new String[0]);
+        Arrays.sort(sortedKeys);
+
+        ArrayList<String> localKeys = new ArrayList<String>();
+        localKeys.addAll(paramOrder);
+        localKeys.addAll(Arrays.asList(sortedKeys));
 
         for (Object key : localKeys) {
             ArrayList<Symbol> symbols = table.get(key);

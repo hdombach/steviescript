@@ -17,6 +17,6 @@ public class FunctionSymbol extends Symbol {
             params.add(param.type);
         }
         type = SymbolType.FUNCTION;
-        block = f.code
+        block = f.code;
     }
 }

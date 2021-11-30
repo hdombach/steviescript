@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import steviecompiler.Token.TokenType;
 import steviecompiler.commands.AddCommand;
 import steviecompiler.commands.Command;
+import steviecompiler.commands.GoCommand;
 import steviecompiler.commands.LoadCommand;
 import steviecompiler.commands.MorphCommand;
 import steviecompiler.commands.NormalizeCommand;
@@ -73,23 +74,28 @@ public class FunctionCall extends Expression {
 		ArrayList<Command> c = new ArrayList<Command>();
 
 		FunctionSymbol symbol = block.symbols.getFunction(name, param.getParamTypes());
-
-		c.add(new PushCommand(evaluatedType.getReqMemory())); //return value
-		LoadCommand loadReturnAddress = LoadCommand(-4, 0); //return frame pointer
+		int currentSize = 0;
+		if (this.evaluatedType != null) {
+			c.add(new PushCommand(evaluatedType.getReqMemory())); //return value
+			currentSize += evaluatedType.getReqMemory();
+		}
+		LoadCommand loadReturnAddress = new LoadCommand(-4, 0);
 		c.add(new PushCommand(4));
 		c.add(loadReturnAddress);
-
-		c.add(new NormalizeCommand(0, - code)); //update the new frame pointer
 		
 		c.add(new PushCommand(4));
 		c.add(new SetCommand(-4, 0, 4)); //setup previous frame pointer
+
+		currentSize += 8;
+
+		c.add(new NormalizeCommand(0, -currentSize)); //update the new frame pointer
 		
-		int c = 1;
-		while (symbol.block.symbols.getParents() > c) { //set up the rest of the frame pointers
+		int i = 1;
+		while (symbol.block.symbols.getParents() > i) { //set up the rest of the frame pointers
 			c.add(new PushCommand(4));
-			if (block.symbols.getParents() > c) {
+			if (block.symbols.getParents() > i) {
 				c.add(new PushCommand(4)); //temp value to calculate correct address for frame pointer
-				c.add(new LoadCommand(-4, c));
+				c.add(new LoadCommand(-4, i * 4));
 				c.add(new AddCommand(-4, 0, -4));
 				Command set = new SetCommand(-4, 0, 4);
 				c.add(new MorphCommand(set, 5, -4));
@@ -98,11 +104,17 @@ public class FunctionCall extends Expression {
 			} else {
 				c.add(new SetCommand(-4, 0, 4));
 			}
+			i++;
 		}
 
-		for (Expression expression : param.expressions) {
+		for (Expression expression : param.expressions) { //add info for params
 			c.addAll(expression.makeCommands(block));
 		}
+
+		Command goCommand = new GoCommand(symbol.block); //goto
+		c.add(goCommand);
+
+		loadReturnAddress.addGotoCommand(goCommand); //set the return address.
 
 		return c;
 		

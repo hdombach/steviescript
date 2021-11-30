@@ -8,6 +8,8 @@ import steviecompiler.Token;
 import steviecompiler.Token.TokenType;
 import steviecompiler.commands.Command;
 import steviecompiler.commands.ExitCommand;
+import steviecompiler.commands.NormalizeCommand;
+import steviecompiler.commands.PushCommand;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
 
@@ -93,6 +95,8 @@ abstract public class Node {
 	public static ArrayList<Command> makeAllCommands() {
 		ArrayList<Command> c = new ArrayList<Command>();
 		for(Block b : blocks.values()) {
+			c.add(new PushCommand(8)); //set up satck
+			c.add(new NormalizeCommand(0, -8));
 			c.addAll(b.makeCommands(null));
 		}
 		c.add(new ExitCommand());

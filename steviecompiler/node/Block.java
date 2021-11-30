@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import steviecompiler.commands.Command;
+import steviecompiler.commands.GoCommand;
+import steviecompiler.commands.MorphCommand;
+import steviecompiler.commands.PopCommand;
 import steviecompiler.commands.PushCommand;
+import steviecompiler.commands.SetCommand;
 import steviecompiler.symbol.Symbol;
 import steviecompiler.symbol.SymbolTable;
  
@@ -80,6 +84,19 @@ public class Block extends Node {
 		for (Statement statement : statements) {
 			result.addAll(statement.makeCommands(this));
 		}
+
+		result.add(new PopCommand(symbols.getStackSize() + symbols.getParamSize() + new DataType("pointer").getReqMemory() * (symbols.getParents() - 1)));//pop until the previous frame pointer
+		result.add(new SetCommand(0, -4, 4)); //update the current fram pointer
+		result.add(new SetCommand(4, -8, 4)); 
+		result.add(new PopCommand(8));
+		if (parent != null) {
+			Command go = new GoCommand();
+			result.add(new MorphCommand(go, 1, 4));
+			result.add(go);
+		}
+
+		commands = result;
+
 		return result;
 	}
 
@@ -100,6 +117,10 @@ public class Block extends Node {
 	}
 	//used for allowing other blocks to reference the start of this block.
 	public Command getFirstCommand() {
-		return commands.get(0);
+		if (commands.size() > 0) {
+			return commands.get(0);
+		} else {
+			return null;
+		}
 	}
 }

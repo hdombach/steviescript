@@ -3,6 +3,7 @@ package stevie;
 import java.io.File;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -11,7 +12,7 @@ public class Main {
 	private static int programCounter;
 	private static Boolean shouldExit;
 
-	private static int programStart = 4;
+	private static int programStart = 8;
 
 	//deafult field size is 4
 	public static int getField(int offset) {
@@ -54,15 +55,20 @@ public class Main {
 		//atually run code
 		while (!shouldExit) {
 			if (programCounter > 1000) {
+				System.out.println("Program counter overflow");
 				shouldExit = true;
 			}
-			try {
+			//System.out.print(programCounter + " ");
+			int length = Commands.run(getInstruction(0, 1));
+			programCounter += length;
+			/*try {
 				programCounter += Commands.run(getInstruction(0, 1));
 			} catch(Exception e) {
-				Memory.printContents();
+				//Memory.printContents();
 				e.printStackTrace();
 				shouldExit = true;
-			}
+				System.out.println("line number " + (programCounter - programStart + 1) + " of .sh file");
+			}*/
 		}
 
 		//Memory.printContents();
@@ -71,23 +77,32 @@ public class Main {
 	//assumes that memory is empty so will start writing at 0
 	public static void readFile(String path){
 		try {
-			System.out.println("read file");
 			Scanner reader = new Scanner(new File(path));
 			ArrayList<Byte> commands = new ArrayList<Byte>();
 			int add = programStart;
 			byte[] bytes = new byte[1];
+			int size = 0;
+			while (reader.hasNextLine()) {
+				size += 1;
+				reader.nextLine();
+			}
+			Memory.alloc(size);
+			reader = new Scanner(new File(path));
 			while (reader.hasNextLine()) {
 				String thisLine = reader.nextLine();
 				bytes[0] = (byte) Integer.parseInt(thisLine);
 				Memory.load(add, bytes);
 				add += 1;
 			}
-			Memory.alloc(add);
 			reader.close();
 		} catch (Exception e) {
 			System.out.println(e);
 			e.printStackTrace();
 			System.exit(1);
 		}
+	}
+
+	public static int getProgramStar() {
+		return programStart;
 	}
 }

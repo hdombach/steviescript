@@ -33,7 +33,7 @@ public class CreateVar extends Statement {
 
 	public String toString() {
 		String result = "";
-		result += Node.indentStr() + "Statement " + name + ": \n";
+		result += Node.indentStr() + "Create var statement " + name + ": \n";
 		Node.indent++;
 		result += Node.indentStr() + "type: " + type.getType() + "\n";
 		Node.indent--;

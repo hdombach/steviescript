@@ -4,23 +4,23 @@ public class LoadCommand extends Command {
     int a;
     int ivalue;
     String svalue;
-    Command commandAddress;
+    Command gotoCommand;
 
     public LoadCommand(int address, int value) {
         this.a = address;
         this.ivalue = value;
     }
 
-    public LoadCommand(int address, Command commandAddress) {
+    public LoadCommand(int address, Command gotoCommand) {
         this.a = address;
-        this.commandAddress = commandAddress;
+        this.gotoCommand = gotoCommand;
     }
 
     public String toAssembly() {
         if (svalue != null) {
             return getAssembly(a, svalue);
-        } else if (commandAddress != null) {
-            return getAssembly(a, commandAddress.location);
+        } else if (gotoCommand != null) {
+            return getAssembly(a, gotoCommand.location + gotoCommand.getLength());
         } else {
             return getAssembly(a, ivalue);
         }
@@ -52,15 +52,20 @@ public class LoadCommand extends Command {
     }
 
     public String toString() {
-        if (svalue == null) {
-            return "Load Command " + a + " value: " + ivalue;
-        } else {
+        if (svalue != null) {
             return "Load Command " + a + " value: " + svalue;
+        } else if (gotoCommand != null) {
+            return "Load Command " + a + " value: " + (gotoCommand.location + gotoCommand.getLength());
+        } else {
+            return "Load Command " + a + " value: " + ivalue;
         }
     }
 
-    public addCommand(Command c) {
-        commandAddress = c;
-        ivalue = null;
+    /**
+     * Adds the last command involved when calling a functtion
+     * @param c
+     */
+    public void addGotoCommand(Command c) {
+        gotoCommand = c;
     }
 }

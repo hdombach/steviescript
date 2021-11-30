@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import steviecompiler.Token.TokenType;
 import steviecompiler.commands.Command;
+import steviecompiler.commands.GoCommand;
 
 public class DefFunction extends Statement{
     /*
@@ -136,9 +137,14 @@ public class DefFunction extends Statement{
     public ArrayList<Command> makeCommands(Block block) {
         ArrayList<Command> c = new ArrayList<Command>();
 
+        GoCommand go = new GoCommand(); //skip the actual code when defining the function
+        c.add(go);
+
         c.addAll(code.makeCommands(block));
 
-        //TODO: make sure you pop stuff and update the frame pointer
+        Command last = c.get(c.size() - 1);
+
+        go.addCommand(last, last.getLength()); 
 
         return c;
     }

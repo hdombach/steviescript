@@ -85,11 +85,9 @@ public class Operation extends Expression {
         switch (operator) {
             case "+":
                 c.add(new AddCommand(-8 - evaluatedType.getReqMemory(), -8, -4));
-            default:
-                System.out.println("Making Commands for " + operator + " not implimented yet");
                 break;
-                //For some reason, throwing the error creates an error
-                //throw new Error("Making Commands for " + operator + " not implimented yet");
+            default:
+                throw new Error("Making Commands for " + operator + " not implimented yet");
         }
         c.add(new PopCommand(8));
         return c;

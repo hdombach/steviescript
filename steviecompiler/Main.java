@@ -39,10 +39,9 @@ public class Main{
         Node.getAllReqMemory();
         commands = Node.makeAllCommands();
         setCommandPositions();
-        printCommandDescriptions();
-        System.out.println(getAssembly());
         if(ErrorHandler.errorCount() == 0) {
-            //write(outputPath);
+            write("./test.s");
+            writeRaw("./raw.txt");
         }
         ErrorHandler.throwErrors();
     }
@@ -107,9 +106,20 @@ public class Main{
             File out = new File(path);
             out.createNewFile();
             FileWriter writer = new FileWriter(path);
-            for(Command c : commands) {
-                writer.write(c.toString()); //TODO: toString for Command that prints out a command
-            }
+            writer.write(getAssembly());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeRaw(String path) {
+        try {
+            File out = new File(path);
+            out.createNewFile();
+            FileWriter writer = new FileWriter(path);
+            writer.write(getCommandDescriptions());
             writer.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
@@ -123,7 +133,7 @@ public class Main{
 
     static private void setCommandPositions() {
         //variables like current frame pointer are stored at address 0
-        int c = 4;
+        int c = 8;
         for (Command command : commands) {
             command.setLocation(c);
             c += command.getLength();
@@ -131,16 +141,23 @@ public class Main{
     }
     static private String getAssembly() {
         String result = "";
+        String temp;
         for (Command command : commands){
+            temp = command.toAssembly();
+            if (temp.lines().count() != command.getLength()) {
+                throw new Error("Command " + command + " said it would be " + command.getLength() + " bytes long instead of " + temp.lines().count());
+            }
             result += command.toAssembly();
         }
         return result;
     }
 
-    static private void printCommandDescriptions() {
+    static private String getCommandDescriptions() {
+        String r = "";
         for (Command command : commands) {
-            System.out.println(command);
+            r += command.getLocation() + ": " + command + "\n";
         }
+        return r;
     }
 }
 
