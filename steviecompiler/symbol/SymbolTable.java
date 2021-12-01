@@ -195,11 +195,11 @@ public class SymbolTable {
     //Need to figure how this works with global variabls and shared modules.
     public LocalAddress getValueAddress(String name) {
 
-        int currentOffset = localOffset();
+        int currentOffset = paramOffset();
 
         if (paramOrder.contains(name)) {
             for (String param : paramOrder) {
-                if (param == name) {
+                if (param.equals(name)) {
                     return new LocalAddress(0, currentOffset);
                 }
                 currentOffset += getValue(name).getMemSize();
@@ -218,12 +218,8 @@ public class SymbolTable {
         } else {
             localSet.addAll(sharedTable.keySet());
         }
-        String[] sortedKeys = localSet.toArray(new String[0]);
-        Arrays.sort(sortedKeys);
-
-        ArrayList<String> localKeys = new ArrayList<String>();
-        localKeys.addAll(paramOrder);
-        localKeys.addAll(Arrays.asList(sortedKeys));
+        String[] localKeys = localSet.toArray(new String[0]);
+        Arrays.sort(localKeys);
 
         for (Object key : localKeys) {
             ArrayList<Symbol> symbols = table.get(key);

@@ -84,6 +84,8 @@ public class Commands {
 			case 8: //out
 				a = Memory.get(Main.getField(1), Main.getField(5));
 				System.out.println(new BigInteger(a));
+				//System.out.println(Memory.getInt(0));
+				//Memory.printContents();
 				return 9;
 			case 9: //in
 				//TODO: i don't know how i wanna do this yet

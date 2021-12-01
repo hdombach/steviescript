@@ -1,4 +1,5 @@
-printInt(12 - 3)
-printInt(12 * 3)
-printInt(12 / 3)
-printInt(12 % 5)
+function doThing(int value) {
+    printInt(value)
+}
+
+doThing(2)

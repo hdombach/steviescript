@@ -8,44 +8,35 @@
 63: Push 8
 68: Normalize 0 -8
 77: Push 8
-82: Push 4
-87: Push 4
-92: Load Command -4 value: 12
-105: Push 4
-110: Load Command -4 value: 3
-123: Subtract -12 = -8 - -4
-136: Pop 8
-141: Output -4length: 4
-150: Pop 4
-155: Push 4
-160: Push 4
-165: Load Command -4 value: 12
-178: Push 4
-183: Load Command -4 value: 3
-196: Multiply -12 = -8 * -4
-209: Pop 8
-214: Output -4length: 4
-223: Pop 4
-228: Push 4
-233: Push 4
-238: Load Command -4 value: 12
-251: Push 4
-256: Load Command -4 value: 3
-269: Divide -12 = -8 / -4
-282: Pop 8
-287: Output -4length: 4
-296: Pop 4
-301: Push 4
-306: Push 4
-311: Load Command -4 value: 12
-324: Push 4
-329: Load Command -4 value: 5
-342: Mod -12 = -8 % -4
-355: Pop 8
-360: Output -4length: 4
-369: Pop 4
-374: Pop 8
-379: Set 0 = -4 length: 4
-392: Set 4 = -8 length: 4
-405: Pop 8
-410: Exit
+82: Goto Goto null (0) (227)
+87: Push 16
+92: Push 4
+97: Push 4
+102: Load Command -4 value: 12
+115: Add -4 = 0 + -4
+128: Morph [Set -4 = 0 length: 4] offset: 5 value: -4
+141: Pop 4
+146: Set -4 = 0 length: 4
+159: Output -4length: 4
+168: Pop 4
+173: Pop 24
+178: Set 0 = -4 length: 4
+191: Set 4 = -8 length: 4
+204: Pop 8
+209: Morph [Goto null (0)] offset: 1 value: 4
+222: Goto null (0)
+227: Push 4
+232: Load Command -4 value: 313
+245: Push 4
+250: Set -4 = 0 length: 4
+263: Normalize 0 -8
+272: Push 4
+277: Set -4 = 0 length: 4
+290: Push 4
+295: Load Command -4 value: 2
+308: Goto null (87)
+313: Pop 8
+318: Set 0 = -4 length: 4
+331: Set 4 = -8 length: 4
+344: Pop 8
+349: Exit

@@ -23,6 +23,10 @@ public class LocalAddress {
         return this;
     }
 
+    public String toString() {
+        return "Frame: " + frame + ", offset: " + offset + "\n";
+    }
+
     
     /**
      * Generates insturctions that will append correct address onto the stack.

@@ -39,7 +39,7 @@ public class Main {
 	public static void main(String[] args) {
 		Memory.init(256, 256);
 
-		Memory.alloc(4);
+		Memory.alloc(programStart);
 		
 		shouldExit = false;
 		programCounter = programStart;

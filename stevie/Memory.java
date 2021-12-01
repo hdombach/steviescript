@@ -199,7 +199,7 @@ public class Memory {
 			int add = d.start;
 			while (d.length > add) {
 				byte thing = get(add, 1)[0];
-				System.out.println((int) thing);
+				System.out.println(add + ": " + (int) thing);
 				add += 1;
 			}
 			c += 1;
@@ -208,7 +208,7 @@ public class Memory {
 		int add = 0;
 		System.out.println("Stack. start: " + heapSize + ", length: " + stackSize);
 		while (stackSize > add) {
-			System.out.println((int) get(heapSize + add, 1)[0]);
+			System.out.println((heapSize + add) + ": " + (int) get(heapSize + add, 1)[0]);
 			add += 1;
 		}
 	}
