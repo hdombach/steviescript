@@ -51,7 +51,7 @@ public class VariableName extends Expression {
 		int length = symbol.getMemSize();
 		LocalAddress address = block.symbols.getValueAddress(name);
 
-		System.out.println(address);
+		//System.out.println(address);
 
 		c.add(new PushCommand(length));
 

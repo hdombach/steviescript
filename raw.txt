@@ -7,36 +7,70 @@
 58: Pop 8
 63: Push 8
 68: Normalize 0 -8
-77: Push 8
-82: Goto Goto null (0) (227)
-87: Push 16
-92: Push 4
-97: Push 4
-102: Load Command -4 value: 12
-115: Add -4 = 0 + -4
-128: Morph [Set -4 = 0 length: 4] offset: 5 value: -4
-141: Pop 4
-146: Set -4 = 0 length: 4
-159: Output -4length: 4
-168: Pop 4
-173: Pop 24
-178: Set 0 = -4 length: 4
-191: Set 4 = -8 length: 4
-204: Pop 8
-209: Morph [Goto null (0)] offset: 1 value: 4
-222: Goto null (0)
-227: Push 4
-232: Load Command -4 value: 313
-245: Push 4
-250: Set -4 = 0 length: 4
-263: Normalize 0 -8
-272: Push 4
-277: Set -4 = 0 length: 4
-290: Push 4
-295: Load Command -4 value: 2
-308: Goto null (87)
-313: Pop 8
-318: Set 0 = -4 length: 4
-331: Set 4 = -8 length: 4
-344: Pop 8
-349: Exit
+77: Push 16
+82: Push 4
+87: Push 4
+92: Load Command -4 value: 5
+105: Push 4
+110: Load Command -4 value: 11
+123: Multiply -12 = -8 * -4
+136: Pop 8
+141: Push 4
+146: Load Command -4 value: 8
+159: Add -4 = 0 + -4
+172: Morph [Set 0 = -4 length: 4] offset: 1 value: -4
+185: Pop 4
+190: Set 0 = -4 length: 4
+203: Pop 4
+208: Push 4
+213: Load Command -4 value: 100
+226: Push 4
+231: Load Command -4 value: 12
+244: Add -4 = 0 + -4
+257: Morph [Set 0 = -4 length: 4] offset: 1 value: -4
+270: Pop 4
+275: Set 0 = -4 length: 4
+288: Pop 4
+293: Push 4
+298: Push 4
+303: Push 4
+308: Load Command -4 value: 8
+321: Add -4 = 0 + -4
+334: Morph [Set -4 = 0 length: 4] offset: 5 value: -4
+347: Pop 4
+352: Set -4 = 0 length: 4
+365: Push 4
+370: Push 4
+375: Load Command -4 value: 12
+388: Add -4 = 0 + -4
+401: Morph [Set -4 = 0 length: 4] offset: 5 value: -4
+414: Pop 4
+419: Set -4 = 0 length: 4
+432: Subtract -12 = -8 - -4
+445: Pop 8
+450: Output -4length: 4
+459: Pop 4
+464: Push 4
+469: Push 4
+474: Push 4
+479: Load Command -4 value: 12
+492: Add -4 = 0 + -4
+505: Morph [Set -4 = 0 length: 4] offset: 5 value: -4
+518: Pop 4
+523: Set -4 = 0 length: 4
+536: Push 4
+541: Push 4
+546: Load Command -4 value: 8
+559: Add -4 = 0 + -4
+572: Morph [Set -4 = 0 length: 4] offset: 5 value: -4
+585: Pop 4
+590: Set -4 = 0 length: 4
+603: Divide -12 = -8 / -4
+616: Pop 8
+621: Output -4length: 4
+630: Pop 4
+635: Pop 16
+640: Set 0 = -4 length: 4
+653: Set 4 = -8 length: 4
+666: Pop 8
+671: Exit

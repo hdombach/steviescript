@@ -1,5 +1,6 @@
-function doThing(int value) {
-    printInt(value)
-}
+int value = 5 * 11
+int value2 = 100
 
-doThing(2)
+printInt(value - value2)
+
+printInt(value2 / value)
