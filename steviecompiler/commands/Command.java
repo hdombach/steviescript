@@ -36,9 +36,7 @@ public abstract class Command {
         return result;
     }
 
-    abstract public int getLength() {
-
-    }
+    abstract public int getLength();
 
     public int getLocation() {
         return location;
