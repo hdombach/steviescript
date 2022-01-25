@@ -1,0 +1,110 @@
+package steviecompiler.node;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import steviecompiler.Main;
+import steviecompiler.Token;
+import steviecompiler.Token.TokenType;
+import steviecompiler.commands.Command;
+import steviecompiler.commands.ExitCommand;
+import steviecompiler.commands.NormalizeCommand;
+import steviecompiler.commands.PushCommand;
+import steviecompiler.symbol.Symbol;
+import steviecompiler.symbol.SymbolTable;
+
+abstract public class Node {
+	protected boolean unexpectedToken = false;
+	protected static int index = 0;
+	protected static ArrayList<Token> tokens;
+	private static HashMap<String, Block> blocks = new HashMap<String, Block>();
+	private static HashMap<String, ArrayList<Symbol>> sharedSymbolTable = new HashMap<String, ArrayList<Symbol>>();
+	protected static Integer indent = 0;
+	private static String printIndentChar = "⦙ ";
+	protected boolean isValid = false;
+	protected static TokenType expectedToken;
+	private int line;
+
+	public Node() {
+		line = currentToken().getLine();
+	}
+		
+	protected static String indentStr() {
+		var result = "";
+		for (Integer c = 0; indent > c; c++) {
+			result += printIndentChar;
+		}
+		return result;
+	}
+
+	public boolean isValid() { return isValid; }
+	public static Token expectedToken() { return new Token(expectedToken, currentToken().getLine()); }
+	
+	public static void parse(ArrayList<Token> tokensIn) {
+		tokens = tokensIn;
+		try {
+			blocks.put(Main.filePath, new Block(sharedSymbolTable));
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			e.printStackTrace();
+		}
+		index = 0;
+	}
+
+	public static void checkScope() {
+		for(Block b : blocks.values()) {
+			b.checkSymbols(null);
+		}
+	}
+	
+	public static Block getCode(String key) {	return blocks.get(key);	};
+
+	public static HashMap<String, Block> getCode() {	return blocks;	};
+	
+	public static Token currentToken() {
+		if (tokens.size() > index) {
+			return tokens.get(index);
+		} else {
+			return new Token(TokenType.END, tokens.size());
+		}
+	}
+
+	/*private static Expression expectExpression() {
+		//index++;
+		return Expression.expect();
+	}*/
+
+	//Checks if symbols exist in current scope and if the data types are interchagable
+	public abstract void checkSymbols(SymbolTable scope);
+
+	//Gets the temp memory required to evalute things
+	public abstract int getReqMemory();
+
+	public ArrayList<Command> makeCommands(Block block) {
+		//TODO: change this to abstract once later on.
+		System.out.println(this);
+		System.out.println("makeCommands is not implimented. Line: " + line);
+		return new ArrayList<Command>();
+	};
+
+	public static void getAllReqMemory() {
+		for(Block b : blocks.values()) {
+			b.getReqMemory();
+		} 
+	}
+	public static ArrayList<Command> makeAllCommands() {
+		ArrayList<Command> c = new ArrayList<Command>();
+		for(Block b : blocks.values()) {
+			c.add(new PushCommand(8)); //set up satck
+			c.add(new NormalizeCommand(0, -8));
+			c.addAll(b.makeCommands(null));
+		}
+		c.add(new ExitCommand());
+		return c;
+	}
+
+	public int getLine() {
+		return line;
+	}
+
+}

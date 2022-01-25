@@ -1,0 +1,6 @@
+int value = 5 * 11
+int value2 = 100
+
+printInt(value - value2)
+
+printInt(value2 / value)

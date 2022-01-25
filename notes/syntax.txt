@@ -1,12 +1,26 @@
 CODE = BLOCK
 BLOCK = [STATEMENT]
-STATEMENT = IF | SET | WHILE | FOR | DEFFUNC | CALLFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT |
+STATEMENT = EPXRESSION | IF | SET | POINTERSET | WHILE | FOR | DEFFUNC | CREATEVAR | CREATECONST | DEFSTRUCT | CREATESTRUCT | CALLSTRUCT
+
+EXPRESSION = OPERATION | '(' + EXPRESSION +')' | value | CREATESTRUCT | VARIABLENAME | CALLFUNC | CALLMETHOD
+/*
+    
+*/
+
+POINTERSET = "@" + EXPRESSION + "=" + EXPRESSION
+
+CALLMETHOD = EXPRESSION + "." + name + PARAMS
+
+PARAMS = "(" + ?EXPRESSION + ?["," + EXPRESSION] + ")"
 
 DEFFUNC = "function" + functionName + "(" + [dataType + variableName] + ")" + ?("->" + dataType) + "{" + BLOCK + "}"
 /*	
     function exampleFunction(type name, type name) -> returnType {
 		<code>
 	}
+	function exampleFunction(type name, type name) {
+    		<code>
+    }
 */
  
 IF = "if" + "(" + expression +  ")" + "{" + BLOCK + "}"
@@ -26,21 +40,19 @@ WHILE = "while" + "(" + expression + ")" + "{" + BLOCK + "}"
     while (boolean expression) {}
 */
 
-FOR = "for" + "(" + CREATEVAR + "," + EXPRESSION + "," + STATEMENT + ")" + "(" + BLOCK + ")"
+FOR = "for" + "(" + CREATEVAR + "," + EXPRESSION + "," + SET + ")" + "(" + BLOCK + ")"
 /*
-    for(CREATEVAR, EXPRESSION, statement) {}
+    for(CREATEVAR, EXPRESSION, SET) {}
 */
 
 
-CALLFUNC = functionName + "(" + [dataType + variableName] + ")"
+CALLFUNC = functionName + PARAM
 /*
     myFunction(a, b, c)
 */
 
-EXPRESSION = variableName | EXPRESSION + operator + EXPRESSION + ?[operator + EXPRESSION] | '(' + EXPRESSION +')' | value | CREATESTRUCT
-/*
-    
-*/
+
+OPERATION = EXPRESSION + operator + EXPRESSION
 
 CREATEVAR = DATATYPE + variableName + "=" + expression
 /*
@@ -66,3 +78,6 @@ CREATESTRUCT = DATATYPE + "(" + [EXPRESSION] + ")"
 /*
     StructName(property: value)
 */
+
+
+VALUE = NUMBER | BOOLEAN | 

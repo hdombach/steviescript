@@ -1,0 +1,30 @@
+How the stack works:
+
+Each block will add a onto the stack.
+Format is as follows
+
+[temp memory]
+[...]
+[temp memory]
+[local varialbes]
+[...]
+[local variables]
+[passed params]
+[...]
+[pased params]
+[frame pointers]
+[...]
+[frame pointers]
+[previus frame pointer]
+[goto address]
+[return value]
+
+
+temp memory is used for calulating equations.
+The symbol table has a popTemp, pushTemp, getTemp and getCurrentTempAddress to interact with temp variables
+
+The main memory will start with
+
+[...]
+[heap memory]
+[current frame pointer]

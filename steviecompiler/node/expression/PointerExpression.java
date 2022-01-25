@@ -1,0 +1,40 @@
+package steviecompiler.node.expression;
+
+import steviecompiler.Token.TokenType;
+import steviecompiler.Token;
+import steviecompiler.node.DataType;
+import steviecompiler.node.Node;
+import steviecompiler.symbol.Symbol;
+import steviecompiler.symbol.SymbolTable;
+
+public class PointerExpression extends Expression {
+    private String name;
+    private static TokenType[] tokenSequence = { TokenType.POINTER, TokenType.WORD };
+
+    public PointerExpression() {
+        Token token = null;
+		for(int i = 0; i < 2; i++, Node.index++) {
+            token = Node.currentToken();
+            if(token.getType() != tokenSequence[i]) {
+                return;
+            }
+        }
+        name = token.getContent();
+        isValid = true;
+	}
+
+    public void checkSymbols(SymbolTable scope) {
+        Symbol s = scope.getValue(name);
+        if (s == null) {
+            throw new Error("Line " + getLine() + ": symbol " + name + " does not exist in scope");
+        }
+        evaluatedType = new DataType("pointer");
+    }
+
+    public String toString() {
+        return Node.indentStr() + "Pointer: " + name + "\n";
+    }
+    public int getReqMemory() {
+        return 0;
+    }
+}
